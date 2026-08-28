@@ -2,6 +2,4 @@
     import { m } from "$lib/paraglide/messages";
 </script>
 
-<svelte:head>
-    <title>{m.hexablue()}</title>
-</svelte:head>
+<p>{m.placeholder()}</p>

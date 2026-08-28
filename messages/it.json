@@ -1,4 +1,10 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from it!"
+	
+	"hexablue": "HexaBlue",
+
+	"nav_projects": "Progetti",
+	"nav_news": "Notizie",
+
+	"placeholder": "Lavori in corso..."
 }
