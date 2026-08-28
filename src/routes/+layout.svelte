@@ -1,15 +1,18 @@
 <script lang="ts">
-	import type { Pathname } from '$app/types';
-	import { resolve } from '$app/paths';
-	import { page } from '$app/state';
-	import { locales, localizeHref } from '$lib/paraglide/runtime';
-	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import type { Pathname } from "$app/types";
+	import { resolve } from "$app/paths";
+	import { page } from "$app/state";
+	import { locales, localizeHref } from "$lib/paraglide/runtime";
+	import "./layout.css";
+	import favicon from "$lib/assets/favicon.svg";
+
+	import Navigation from "$lib/components/navigation.svelte";
 
 	let { children } = $props();
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<Navigation />
 {@render children()}
 
 <div style="display:none">
