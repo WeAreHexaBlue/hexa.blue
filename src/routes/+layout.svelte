@@ -13,11 +13,13 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<Navigation />
-<div class="pt-65 md:pt-40">
-	{@render children()}
+<div class="min-h-screen flex flex-col">
+	<Navigation />
+	<div class="flex-1 pt-65 md:pt-40">
+		{@render children()}
+	</div>
+	<Footer />
 </div>
-<Footer />
 
 <div style="display:none">
 	{#each locales as locale (locale)}
