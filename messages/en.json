@@ -3,19 +3,32 @@
 
 	"hexablue": "HexaBlue",
 
-	"nav_projects": "Projects",
-	"nav_news": "News",
+	"nav": {
+		"projects": "Projects",
+		"news": "News"
+	},
 
 	"placeholder": "Work in progress...",
 
-	"hero_is": "is",
-	"hero_cycle_open": "open",
-	"hero_cycle_revol": "revolutionary",
-	"hero_cycle_future": "the future",
-	"hero_cycle_foryou": "for you",
+	"home": {
+		"hero": {
+			"is": "is",
+			"cycle": {
+				"open": "open",
+				"revol": "revolutionary",
+				"future": "the future",
+				"foryou": "for you"
+			},
+			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories."
+		},
+		"about": {
+			"title": "About HexaBlue",
+			"desc": "<b>HexaBlue</b> is an <b>organization</b> founded by <b>Flamey</b> with the goal of <b>providing quality free and open source software solutions</b> to any problem.<br /><b>Flamey</b> is the <i>only member</i> at the moment, but we are <b>always looking for more volunteers</b>."
+		}
+	},
 
-	"hero_desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories.",
-
-	"footer_desc": "<b>All software</b> is licensed under the <i>GNU General Public License 3.0</i>",
-	"footer_joindc": "If you want to <b>stay up to date</b>, consider <a href={href} class=\"gradtxt underline\">joining our Discord server</a>!"
+	"footer": {
+		"desc": "<b>All software</b> is licensed under the <i>GNU General Public License 3.0</i>",
+		"joindc": "If you want to <b>stay up to date</b>, consider <a href={href} class=\"gradtxt underline\">joining our Discord server</a>!"
+	}
 }

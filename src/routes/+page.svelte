@@ -4,7 +4,7 @@
 
     import logo from "$lib/assets/hexablue.svg";
 
-    const heroCycle = [m.hero_cycle_open(), m.hero_cycle_revol(), m.hero_cycle_future(), m.hero_cycle_foryou()]
+    const heroCycle = [m["home.hero.cycle.open"](), m["home.hero.cycle.revol"](), m["home.hero.cycle.future"](), m["home.hero.cycle.foryou"]()]
     let index = $state(0)
 
     $effect(() => {
@@ -20,34 +20,46 @@
     <title>{m.hexablue()}</title>
 </svelte:head>
 <main>
-    <div class="introbg">
-        <img src={logo} id="biglogo" alt="HexaBlue Logo" />
-    </div>
-    <div class="herosect">
-        <span class="hero">
-            <h1 class="gradtxt">{m.hexablue()}</h1>
-            <h1>{m.hero_is()}</h1>
-            <span class="cycle" aria-live="polite">
-                <!-- The invisible words are rendered to consistently wrap text on small screens. -->
-                {#each heroCycle as word (word)}
-                    <span class="invisible select-none pointer-events-none" aria-hidden="true">
-                        {word}
-                    </span>
-                {/each}
+    <section class="intro">
+        <div class="introbg">
+            <img src={logo} id="biglogo" alt="HexaBlue Logo" />
+        </div>
+        <div class="herosect">
+            <span class="hero">
+                <h1 class="gradtxt">{m.hexablue()}</h1>
+                <h1>{m["home.hero.is"]()}</h1>
+                <span class="cycle" aria-live="polite">
+                    <!-- The invisible words are rendered to consistently wrap text on small screens. -->
+                    {#each heroCycle as word (word)}
+                        <span class="invisible select-none pointer-events-none" aria-hidden="true">
+                            {word}
+                        </span>
+                    {/each}
 
-                {#key index}
-                    <h1 class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</h1>
-                {/key}
+                    {#key index}
+                        <h1 class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</h1>
+                    {/key}
+                </span>
             </span>
-        </span>
-        <p class="desc">
-            {@html m.hero_desc()}
-        </p>
-    </div>
+            <p class="desc">
+                {@html m["home.hero.desc"]()}
+            </p>
+        </div>
+    </section>
+    
+    <section class="sect">
+        <h1 class="text-4xl font-semibold">{m["home.about.title"]()}</h1>
+        <p>{@html m["home.about.desc"]()}</p>
+    </section>
 </main>
 
 <style lang="postcss">
     @import "../base.css";
+
+    .intro {
+        @apply relative z-0 w-full min-h-200 flex flex-col justify-start;
+        @apply -mt-65 md:-mt-40 pt-65 md:pt-40;
+    }
 
     .introbg {
         @apply absolute top-0 w-full h-200 -z-50 overflow-hidden;
@@ -85,5 +97,9 @@
 
         @apply xl:left-auto xl:right-40 xl:top-40 xl:bottom-auto;
         @apply xl:translate-x-0 xl:translate-y-0;
+    }
+
+    .sect {
+        @apply grid justify-center my-10 gap-y-3 px-16;
     }
 </style>

@@ -19,8 +19,8 @@
             <h1 class="title">{m.hexablue()}</h1>
         </a>
         <span class="links">
-            <a href={resolve("/projects")}>{m.nav_projects()}</a>
-            <a href={resolve("/news")}>{m.nav_news()}</a>
+            <a href={resolve("/projects")}>{m["nav.projects"]()}</a>
+            <a href={resolve("/news")}>{m["nav.news"]()}</a>
         </span>
     </span>
     <select name="lang" class="rounded-md" onchange={(e) => setLocale(e.currentTarget.value as Locale)}>
