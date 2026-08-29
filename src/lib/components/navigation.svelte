@@ -13,16 +13,16 @@
 </script>
 
 <div class="nav">
-    <div class="main">
+    <span class="main">
         <a href={resolve("/")} class="brand">
             <img src={logo} class="size-15" alt="HexaBlue Logo" />
             <h1 class="title">{m.hexablue()}</h1>
         </a>
-        <div class="links">
+        <span class="links">
             <a href={resolve("/projects")}>{m.nav_projects()}</a>
             <a href={resolve("/news")}>{m.nav_news()}</a>
-        </div>
-    </div>
+        </span>
+    </span>
     <select name="lang" class="rounded-md" onchange={(e) => setLocale(e.currentTarget.value as Locale)}>
         {#each locales as locale (locale)}
             <option value="{locale}" class="bg-neutral-900 text-white" selected="{getLocale() === locale}">
@@ -36,9 +36,10 @@
     @import "../../base.css";
 
     .nav {
+        @apply sticky w-[95] mx-auto inset-x-0 z-50;
         @apply grid md:flex md:justify-between justify-items-center gap-5 items-center origin-center;
         @apply m-8 p-4 rounded-xl border-gray-300 border;
-        @apply bg-rainbow rainbow-dark-50 rainbow-angle-135;
+        @apply bg-sky-900;
 
         @apply transition-all duration-300;
     }
@@ -52,14 +53,14 @@
     }
 
     .nav .title {
-        @apply text-5xl font-black bg-rainbow rainbow-dark-0 bg-clip-text text-transparent;
+        @apply text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
     }
 
     .nav .links {
         @apply flex items-center gap-6 text-2xl font-semibold;
 
         :hover {
-            @apply bg-clip-text bg-rainbow rainbow-dark-0 text-transparent;
+            @apply bg-clip-text bg-hbcol hbcol-dark-0% hbcol-angle-45 text-transparent;
         }
     }
 

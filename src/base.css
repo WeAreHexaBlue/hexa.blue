@@ -2,51 +2,44 @@
 @import "tailwindcss";
 
 :root {
-    --rainbow-angle: 0deg;
-    --rainbow-dark: 0%;
+    --hbcol-angle: 0deg;
+    --hbcol-dark: 0%;
 }
 
 @theme {
     --font-inter: "Inter", sans-serif;
+    --color-mainblue: #006EFF
 }
 
-@utility bg-rainbow {
+@utility bg-hbcol {
     background-image: 
         linear-gradient(
-            rgba(0, 0, 0, var(--rainbow-dark, 0)),
-            rgba(0, 0, 0, var(--rainbow-dark, 0))
+            rgba(0, 0, 0, var(--hbcol-dark, 0)),
+            rgba(0, 0, 0, var(--hbcol-dark, 0))
         ),
         linear-gradient(
-            var(--rainbow-angle),
-            #FF5D5B 0%,
-            #F79455 24%,
-            #FFD95A 47%,
-            #5BFE9E 65%,
-            #4E6AFF 84%,
-            #B061FC 100%
+            var(--hbcol-angle),
+            #006EFF 0%,
+            #00BFFF 100%
         );
 }
 
-@utility rainbow-angle-0   { --rainbow-angle: 0deg; }
-@utility rainbow-angle-45  { --rainbow-angle: 45deg; }
-@utility rainbow-angle-90  { --rainbow-angle: 90deg; }
-@utility rainbow-angle-135 { --rainbow-angle: 135deg; }
-@utility rainbow-angle-180 { --rainbow-angle: 180deg; }
-@utility rainbow-angle-225 { --rainbow-angle: 225deg; }
-@utility rainbow-angle-270 { --rainbow-angle: 270deg; }
-@utility rainbow-angle-315 { --rainbow-angle: 315deg; }
-@utility rainbow-angle-* {
-  --rainbow-angle: --value(integer)deg;
-  --rainbow-angle: --value([*]);
+@utility hbcol-angle-0   { --hbcol-angle: 0deg; }
+@utility hbcol-angle-45  { --hbcol-angle: 45deg; }
+@utility hbcol-angle-90  { --hbcol-angle: 90deg; }
+@utility hbcol-angle-135 { --hbcol-angle: 135deg; }
+@utility hbcol-angle-180 { --hbcol-angle: 180deg; }
+@utility hbcol-angle-225 { --hbcol-angle: 225deg; }
+@utility hbcol-angle-270 { --hbcol-angle: 270deg; }
+@utility hbcol-angle-315 { --hbcol-angle: 315deg; }
+@utility hbcol-angle-* {
+  --hbcol-angle: --value(integer)deg;
+  --hbcol-angle: --value([*]);
 }
 
-@utility rainbow-dark-0   { --rainbow-dark: 0%; }
-@utility rainbow-dark-25  { --rainbow-dark: 25%; }
-@utility rainbow-dark-50  { --rainbow-dark: 50%; }
-@utility rainbow-dark-75  { --rainbow-dark: 75%; }
-@utility rainbow-dark-* {
-    --rainbow-dark: --value(percentage);
-    --rainbow-dark: --value([*]);
+@utility hbcol-dark-* {
+    --hbcol-dark: --value(percentage);
+    --hbcol-dark: --value([*]);
 }
 
 body {

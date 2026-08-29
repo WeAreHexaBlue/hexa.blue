@@ -6,5 +6,13 @@
 	"nav_projects": "Progetti",
 	"nav_news": "Notizie",
 
-	"placeholder": "Lavori in corso..."
+	"placeholder": "Lavori in corso...",
+
+	"hero_is": "è",
+	"hero_cycle_open": "aperta",
+	"hero_cycle_revol": "rivoluzionaria",
+	"hero_cycle_future": "il futuro",
+	"hero_cycle_foryou": "per te",
+
+	"hero_desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> è un'<b>organizzazione</b> dedicata allo sviluppo di <b>software open source</b> di categorie varie."
 }
