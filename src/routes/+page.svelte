@@ -53,19 +53,23 @@
         </div>
     </section>
     
-    <section class="sect">
-        <h1>{m["home.about.title"]()}</h1>
+    <section id="about" class="sect">
+        <h1>
+            <a href={resolve("/#about")}>{m["home.about.title"]()}</a>
+        </h1>
         <p>{@html m["home.about.desc"]()}</p>
     </section>
 
-    <section class="sect">
+    <section id="projects" class="sect">
         {#snippet moreProject(name: string)}
             <a href={resolve(`/projects#${name}`)} class="more">
                 {m["home.project_overview.more"]()}
             </a>
         {/snippet}
 
-        <h1>{m["home.project_overview.title"]()}</h1>
+        <h1>
+            <a href={resolve("/#projects")}>{m["home.project_overview.title"]()}</a>
+        </h1>
         <span>
             <span class="projbrand">
                 <img src={dibsyLogo} alt="dibsy Logo" />
@@ -135,6 +139,8 @@
         @apply grid justify-center;
         @apply mx-16 my-10 gap-y-3 p-16 rounded-3xl;
         @apply bg-mist-800;
+
+        @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
 
         span {
             @apply grid gap-y-1;

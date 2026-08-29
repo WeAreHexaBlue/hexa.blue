@@ -14,7 +14,9 @@
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 <Navigation />
-{@render children()}
+<div class="pt-65 md:pt-40">
+	{@render children()}
+</div>
 <Footer />
 
 <div style="display:none">

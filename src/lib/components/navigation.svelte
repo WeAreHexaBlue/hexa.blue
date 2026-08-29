@@ -8,8 +8,8 @@
 
     let codeToHuman = {
         en: "English",
-        it: "Italiano",
-    }
+        it: "Italiano"
+    };
 </script>
 
 <div class="nav">
@@ -25,7 +25,7 @@
     </span>
     <select name="lang" class="rounded-md" onchange={(e) => setLocale(e.currentTarget.value as Locale)}>
         {#each locales as locale (locale)}
-            <option value="{locale}" class="bg-neutral-900 text-white" selected="{getLocale() === locale}">
+            <option value={locale} class="bg-neutral-900 text-white" selected={getLocale() === locale}>
                 {codeToHuman[locale]}
             </option>
         {/each}
@@ -36,9 +36,9 @@
 	@reference "../../base.css";
 
     .nav {
-        @apply sticky w-[95] mx-auto inset-x-0 z-50;
-        @apply grid md:flex md:justify-between justify-items-center gap-5 items-center origin-center;
-        @apply m-8 p-4 rounded-xl border-gray-300 border;
+        @apply fixed inset-x-0 z-50 mx-auto;
+        @apply grid md:flex origin-center items-center md:justify-between justify-items-center gap-5;
+        @apply m-8 rounded-xl border border-gray-300 p-4;
         @apply bg-sky-900;
 
         @apply transition-all duration-300;
@@ -52,7 +52,7 @@
         @apply flex items-center gap-6 text-2xl font-semibold;
 
         :hover {
-            @apply bg-clip-text bg-hbcol hbcol-dark-0% hbcol-angle-45 text-transparent;
+            @apply bg-hbcol bg-clip-text text-transparent hbcol-angle-45 hbcol-dark-0%;
         }
     }
 
