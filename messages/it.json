@@ -24,6 +24,12 @@
 		"about": {
 			"title": "About HexaBlue",
 			"desc": "<b>HexaBlue</b> is "
+		},
+		"project_overview": {
+			"title": "Progetti Principali",
+			"dibsy": {
+				"desc": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Un concetto mai visto prima in cui <b>non c'è un server</b>: tutti i contenuti vengono <b>condivisi tra gli utenti</b>.<br />Garantisce il livello di <b>privacy</b> e <b>personalizzazione</b> da aspettarsi da una piattaforma aperta."
+			}
 		}
 	},
 
