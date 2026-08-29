@@ -12,10 +12,10 @@
     }
 
     &.proj {
-        @apply flex items-center gap-x-12;
+        @apply flex flex-col md:flex-row justify-center md:justify-start items-center gap-x-12;
 
         span {
-            @apply text-left;
+            @apply justify-items-center md:justify-items-normal md:text-left;
 
             &.more {
                 @apply flex gap-x-4;
