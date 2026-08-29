@@ -33,6 +33,23 @@
 		}
 	},
 
+	"projects": {
+		"title": "Projects - HexaBlue",
+		"dibsy": {
+			"desc": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />All content is <b>shared between users</b> without needing a <b>server</b>. However, sometimes a <b>pseudo-server</b> may be useful, and that's what <b>Pillars</b> are.<br />This architecture guarantees <b>maximum privacy</b>, <b>zero outside control</b>, and <b>self-governance</b>. You can think of it as <i>a blueprint for an ideal real-world society</i>.",
+			"soon": "Coming soon..."
+		},
+		"seggs": {
+			"desc": "<b>Server Eggs</b> is a Discord bot which revolves around <i>user-generated content</i> in the form of \"<b>Egg</b>s\", which are comprised of some <b>text</b>, an <b>attachment</b>, or <b>both</b>.<br />On top of that, it can be used to <b>spread servers around</b> and <b>grow communities</b>.<br/>It also has several <b>extra features</b>, such as <b>collecting Eggs</b> and <b>using them in battle</b>.",
+			"join": "Join Discord",
+			"add": "Add Bot"
+		}
+	},
+
+	"news": {
+		"title": "News - HexaBlue"
+	},
+
 	"footer": {
 		"desc": "<b>All software</b> is licensed under the <i>GNU General Public License 3.0</i>",
 		"joindc": "If you want to <b>stay up to date</b>, consider <a href={href} class=\"gradtxt underline\">joining our Discord server</a>!"

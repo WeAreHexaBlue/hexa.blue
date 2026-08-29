@@ -7,27 +7,55 @@
 
     @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
 
+    .seggs {
+        @apply font-gsans font-extrabold text-4xl;
+    }
+
+    &.proj {
+        @apply flex items-center gap-x-12;
+
+        span {
+            @apply text-left;
+
+            &.more {
+                @apply flex gap-x-4;
+            }
+        }
+
+        .logo {
+            @apply h-64;
+        }
+
+        a.more {
+            @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
+        }
+
+        .seggs {
+            @apply text-5xl;
+        }
+    }
+
     span {
         @apply grid gap-y-1;
 
         .projbrand {
             @apply flex gap-4 justify-center items-center my-2;
-
-            h1 {
-                @apply font-gsans font-extrabold text-4xl;
-            }
         
             img {
                 @apply h-16;
             }
         }
 
-        .more {
+        a.more {
             @apply mx-auto underline hover:gradtxt;
         }
     }
 
     h1 {
         @apply text-4xl font-semibold;
+    }
+
+    p {
+        @apply max-w-prose;
     }
 }

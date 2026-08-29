@@ -81,7 +81,7 @@
         <span>
             <span class="projbrand">
                 <img src={seggsLogo} alt="Server Eggs Logo" />
-                <h1>Server Eggs</h1>
+                <h1 class="seggs">Server Eggs</h1>
             </span>
             <p>{@html m["home.project_overview.seggs"]()}</p>
             {@render moreProject("eggs")}

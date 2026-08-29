@@ -27,8 +27,26 @@
 		},
 		"project_overview": {
 			"title": "Progetti Principali",
-			"dibsy": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Un concetto mai visto prima in cui <b>non c'è un server</b>: tutti i contenuti vengono <b>condivisi tra gli utenti</b>.<br />Garantisce il livello di <b>privacy</b> e <b>personalizzazione</b> da aspettarsi da una piattaforma aperta."
+			"dibsy": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Un concetto mai visto prima in cui <b>non c'è un server</b>: tutti i contenuti vengono <b>condivisi tra gli utenti</b>.<br />Garantisce il livello di <b>privacy</b> e <b>personalizzazione</b> da aspettarsi da una piattaforma aperta.",
+			"seggs": "<b>Server Eggs</b> è un bot di Discord basato sui <i>contenuti generati dagli utenti</i>, progettato come un modo divertente di <b>spargere in giro i server</b> e <b>i media divertenti</b>.<br />Ha anche <b>altre funzioni divertenti</b>, ma <i>l'unico modo di saperle è di provarlo</i>...!"
 		}
+	},
+
+	"projects": {
+		"title": "Progetti - HexaBlue",
+		"dibsy": {
+			"desc": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Tutti i contenuti vengono <b>condvisi tra gli utenti</b> senza bisogno di un <b>server</b>. Però, a volte può essere utile uno <b>pseudo-server</b>, e quel ruolo è svolto dalle <b>Colonne</b>.<br />Questa architettura garantisce <b>privacy massima</b>, <b>zero controllo da fuori</b>, e <b>autogovernabilità</b>. La si può immaginare come <i>un progetto per una società ideale nel mondo reale</i>.",
+			"soon": "Presto disponibile..."
+		},
+		"seggs": {
+			"desc": "<b>Server Eggs</b> è un bot di Discord che sfrutta i <i>contenuti generati dagli utenti</i> sotto forma di \"<b>Uova</b>\", che sono composte da un <b>testo</b>, un <b>allegato</b>, o <b>entrambi</b>.<br />Inoltre, può essere usato per <b>spargere in giro i server</b> e <b>far crescere le comunità</b>.<br/>Contiene diverse <b>funzioni extra</b>, come <b>collezionare Uova</b> e <b>mandarle in battaglia</b>.",
+			"join": "Unisciti al Discord",
+			"add": "Aggiungi Bot"
+		}
+	},
+
+	"news": {
+		"title": "Notizie - HexaBlue"
 	},
 
 	"footer": {
