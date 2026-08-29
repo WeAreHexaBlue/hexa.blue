@@ -24,6 +24,12 @@
 		"about": {
 			"title": "About HexaBlue",
 			"desc": "<b>HexaBlue</b> is an <b>organization</b> founded by <b>Flamey</b> with the goal of <b>providing quality free and open source software solutions</b> to any problem.<br /><b>Flamey</b> is the <i>only member</i> at the moment, but we are <b>always looking for more volunteers</b>."
+		},
+		"project_overview": {
+			"title": "Main Projects",
+			"dibsy": {
+				"desc": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />A never-seen-before concept in which there is <b>no such thing as a server</b>: all the content is <b>shared between users</b>.<br />It grants <b>privacy</b> and <b>customization</b> as freely as an open platform would."
+			}
 		}
 	},
 

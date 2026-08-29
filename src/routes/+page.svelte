@@ -3,6 +3,8 @@
     import { fade } from "svelte/transition";
 
     import logo from "$lib/assets/hexablue.svg";
+    import dibsyLogo from "$lib/assets/dibsy.svg";
+    import dibsyWordmark from "$lib/assets/dibsy_wordmark.svg";
 
     const heroCycle = [m["home.hero.cycle.open"](), m["home.hero.cycle.revol"](), m["home.hero.cycle.future"](), m["home.hero.cycle.foryou"]()]
     let index = $state(0)
@@ -48,8 +50,19 @@
     </section>
     
     <section class="sect">
-        <h1 class="text-4xl font-semibold">{m["home.about.title"]()}</h1>
+        <h1>{m["home.about.title"]()}</h1>
         <p>{@html m["home.about.desc"]()}</p>
+    </section>
+
+    <section class="sect">
+        <h1>{m["home.project_overview.title"]()}</h1>
+        <span>
+            <span class="projbrand">
+                <img src={dibsyLogo} alt="dibsy Logo" />
+                <img src={dibsyWordmark} alt="dibsy" />
+            </span>
+            <p>{@html m["home.project_overview.dibsy.desc"]()}</p>
+        </span>
     </section>
 </main>
 
@@ -100,6 +113,24 @@
     }
 
     .sect {
-        @apply grid justify-center my-10 gap-y-3 px-16;
+        @apply grid justify-center;
+        @apply mx-16 my-10 gap-y-3 p-16 rounded-3xl;
+        @apply bg-mist-800;
+
+        span {
+            @apply grid gap-y-1;
+
+            .projbrand {
+                @apply flex gap-4 justify-center my-2;
+        
+                img {
+                    @apply h-16;
+                }
+            }
+        }
+
+        h1 {
+            @apply text-4xl font-semibold;
+        }
     }
 </style>
