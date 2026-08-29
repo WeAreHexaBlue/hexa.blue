@@ -19,6 +19,6 @@
     .footer {
         @apply absolute grid mx-auto w-full bottom-0;
         @apply justify-items-center gap-y-2;
-        @apply bg-mist-800 py-6 rounded-t-4xl;
+        @apply bg-mist-800 px-6 md:px-0; py-6 rounded-t-4xl;
     }
 </style>
