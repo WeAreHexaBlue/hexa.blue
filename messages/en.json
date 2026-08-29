@@ -16,5 +16,6 @@
 
 	"hero_desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories.",
 
-	"footer_desc": "All software is licensed under the GNU General Public License 3.0"
+	"footer_desc": "<b>All software</b> is licensed under the <i>GNU General Public License 3.0</i>",
+	"footer_joindc": "If you want to <b>stay up to date</b>, consider <a href={href} class=\"gradtxt underline\">joining our Discord server</a>!"
 }

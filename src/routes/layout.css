@@ -1,5 +1,1 @@
 @import "../base.css";
-
-.gradtxt {
-    @apply bg-clip-text bg-hbcol hbcol-angle-45 text-transparent;
-}
