@@ -134,36 +134,4 @@
         @apply xl:left-auto xl:right-40 xl:top-40 xl:bottom-auto;
         @apply xl:translate-x-0 xl:translate-y-0;
     }
-
-    .sect {
-        @apply grid justify-center;
-        @apply mx-16 my-10 gap-y-3 p-16 rounded-3xl;
-        @apply bg-mist-800;
-
-        @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
-
-        span {
-            @apply grid gap-y-1;
-
-            .projbrand {
-                @apply flex gap-4 justify-center items-center my-2;
-
-                h1 {
-                    @apply font-gsans font-extrabold text-4xl;
-                }
-        
-                img {
-                    @apply h-16;
-                }
-            }
-
-            .more {
-                @apply mx-auto underline hover:gradtxt;
-            }
-        }
-
-        h1 {
-            @apply text-4xl font-semibold;
-        }
-    }
 </style>

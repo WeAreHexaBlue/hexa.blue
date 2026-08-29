@@ -12,7 +12,7 @@
     };
 </script>
 
-<div class="nav">
+<nav class="nav">
     <span class="main">
         <a href={resolve("/")} class="brand">
             <img src={logo} class="size-15" alt="HexaBlue Logo" />
@@ -30,7 +30,7 @@
             </option>
         {/each}
     </select>
-</div>
+</nav>
 
 <style lang="postcss">
 	@reference "../../base.css";
