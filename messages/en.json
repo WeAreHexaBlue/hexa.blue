@@ -27,9 +27,9 @@
 		},
 		"project_overview": {
 			"title": "Main Projects",
-			"dibsy": {
-				"desc": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />A never-seen-before concept in which there is <b>no such thing as a server</b>: all the content is <b>shared between users</b>.<br />It grants <b>privacy</b> and <b>customization</b> as freely as an open platform would."
-			}
+			"more": "See more...",
+			"dibsy": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />A never-seen-before concept in which there is <b>no such thing as a server</b>: all the content is <b>shared between users</b>.<br />It grants <b>privacy</b> and <b>customization</b> as freely as an open platform would.",
+			"seggs": "<b>Server Eggs</b> is a Discord bot based on <i>user-generated content</i>, designed as a fun way to <b>spread servers</b> and <b>funny media around</b>.<br />It also has <b>various other fun features</b>, but <i>the only way to know is to try it</i>...!"
 		}
 	},
 

@@ -1,10 +1,14 @@
 <script lang="ts">
+    import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+
     import { fade } from "svelte/transition";
 
     import logo from "$lib/assets/hexablue.svg";
+
     import dibsyLogo from "$lib/assets/dibsy.svg";
     import dibsyWordmark from "$lib/assets/dibsy_wordmark.svg";
+    import seggsLogo from "$lib/assets/seggs.svg";
 
     const heroCycle = [m["home.hero.cycle.open"](), m["home.hero.cycle.revol"](), m["home.hero.cycle.future"](), m["home.hero.cycle.foryou"]()]
     let index = $state(0)
@@ -55,19 +59,34 @@
     </section>
 
     <section class="sect">
+        {#snippet moreProject(name: string)}
+            <a href={resolve(`/projects#${name}`)} class="more">
+                {m["home.project_overview.more"]()}
+            </a>
+        {/snippet}
+
         <h1>{m["home.project_overview.title"]()}</h1>
         <span>
             <span class="projbrand">
                 <img src={dibsyLogo} alt="dibsy Logo" />
                 <img src={dibsyWordmark} alt="dibsy" />
             </span>
-            <p>{@html m["home.project_overview.dibsy.desc"]()}</p>
+            <p>{@html m["home.project_overview.dibsy"]()}</p>
+            {@render moreProject("dibsy")}
+        </span>
+        <span>
+            <span class="projbrand">
+                <img src={seggsLogo} alt="Server Eggs Logo" />
+                <h1>Server Eggs</h1>
+            </span>
+            <p>{@html m["home.project_overview.seggs"]()}</p>
+            {@render moreProject("eggs")}
         </span>
     </section>
 </main>
 
 <style lang="postcss">
-    @import "../base.css";
+	@reference "../base.css";
 
     .intro {
         @apply relative z-0 w-full min-h-200 flex flex-col justify-start;
@@ -121,11 +140,19 @@
             @apply grid gap-y-1;
 
             .projbrand {
-                @apply flex gap-4 justify-center my-2;
+                @apply flex gap-4 justify-center items-center my-2;
+
+                h1 {
+                    @apply font-gsans font-extrabold text-4xl;
+                }
         
                 img {
                     @apply h-16;
                 }
+            }
+
+            .more {
+                @apply mx-auto underline hover:gradtxt;
             }
         }
 

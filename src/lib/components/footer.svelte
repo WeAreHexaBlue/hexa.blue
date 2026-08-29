@@ -15,7 +15,7 @@
 </div>
 
 <style lang="postcss">
-    @import "../../base.css";
+	@reference "../../base.css";
 
     .footer {
         @apply relative grid mx-auto w-full bottom-0;

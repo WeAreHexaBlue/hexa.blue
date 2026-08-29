@@ -33,7 +33,7 @@
 </div>
 
 <style lang="postcss">
-    @import "../../base.css";
+	@reference "../../base.css";
 
     .nav {
         @apply sticky w-[95] mx-auto inset-x-0 z-50;
