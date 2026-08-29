@@ -14,5 +14,7 @@
 	"hero_cycle_future": "the future",
 	"hero_cycle_foryou": "for you",
 
-	"hero_desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories."
+	"hero_desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories.",
+
+	"footer_desc": "All software is licensed under the GNU General Public License 3.0"
 }

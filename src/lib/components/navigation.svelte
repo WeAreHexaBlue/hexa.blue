@@ -48,14 +48,6 @@
         @apply flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8;
     }
 
-    .nav .brand {
-        @apply flex items-center gap-2;
-    }
-
-    .nav .title {
-        @apply text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
-    }
-
     .nav .links {
         @apply flex items-center gap-6 text-2xl font-semibold;
 

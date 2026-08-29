@@ -7,6 +7,7 @@
 	import favicon from "$lib/assets/favicon.svg";
 
 	import Navigation from "$lib/components/navigation.svelte";
+	import Footer from "$lib/components/footer.svelte";
 
 	let { children } = $props();
 </script>
@@ -14,6 +15,7 @@
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 <Navigation />
 {@render children()}
+<Footer />
 
 <div style="display:none">
 	{#each locales as locale (locale)}

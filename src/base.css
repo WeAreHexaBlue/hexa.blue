@@ -46,3 +46,15 @@ body {
     @apply bg-mist-900;
     @apply font-inter text-white text-center;
 }
+
+.brand {
+    @apply flex items-center gap-2;
+}
+
+.title {
+    @apply text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
+
+    &.white {
+        @apply text-white bg-none;
+    }
+}
