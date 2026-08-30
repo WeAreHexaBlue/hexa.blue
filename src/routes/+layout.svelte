@@ -13,9 +13,9 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<div class="min-h-screen flex flex-col">
+<div class="flex flex-col min-h-screen">
 	<Navigation />
-	<div class="flex-1 pt-65 md:pt-40">
+	<div class="flex flex-1 flex-col pt-65 md:pt-40">
 		{@render children()}
 	</div>
 	<Footer />

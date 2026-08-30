@@ -94,3 +94,23 @@ export async function PATCH({ request, platform, url }) {
 
     return json({ ok: true, slug, updated: patchable.filter(f => updates[f] !== undefined) })
 }
+
+export async function DELETE({ request, platform, url }) {
+    checkAuth(request, platform);
+
+    const slug = url.searchParams.get("slug");
+    const locale = url.searchParams.get("locale");
+    if (!slug || !locale)
+        throw error(400, "You need to specify `slug` and `locale` in the URL.");
+
+    const result = await platform!.env.DB
+        .prepare(`DELETE FROM articles WHERE slug = ? AND locale = ?`)
+        .bind(slug, locale)
+        .run();
+
+    if (result.meta.changes === 0) {
+        throw error(404, "No article found for that slug and locale.");
+    }
+
+    return json({ ok: true, slug });
+};

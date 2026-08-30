@@ -9,6 +9,7 @@
 	},
 
 	"placeholder": "Lavori in corso...",
+	"back": "Indietro",
 
 	"home": {
 		"hero": {
@@ -51,8 +52,7 @@
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
 
 		"slug": {
-			"title": "{title} - HexaBlue",
-			"back": "Indietro"
+			"title": "{title} - HexaBlue"
 		}
 	},
 

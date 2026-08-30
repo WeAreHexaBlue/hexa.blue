@@ -3,7 +3,6 @@
     import { m } from "$lib/paraglide/messages";
     import { formatDateTime } from "$lib";
 
-    import snarkdown from "snarkdown";
     import sanitize from "sanitize-html";
 
     const { data } = $props();
@@ -39,7 +38,7 @@
                 </span>
                 <p>
                     {@html sanitize(
-                        snarkdown(article.short ?? article.body),
+                        article.short ?? article.body,
                         {
                             allowedTags: ["b", "i", "u", "em", "strong", "a"],
                             allowedAttributes: {

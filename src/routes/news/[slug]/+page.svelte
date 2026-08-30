@@ -3,7 +3,6 @@
     import { m } from "$lib/paraglide/messages";
     import { formatDateTime } from "$lib";
 
-    import snarkdown from "snarkdown";
     import sanitize from "sanitize-html";
 
     const { data } = $props();
@@ -27,7 +26,7 @@
     </sub>
     <p class="mx-auto my-8 inset-x-0 max-w-prose">
         {@html sanitize(
-            snarkdown(article.body),
+            article.body,
             {
                 allowedTags: ["b", "i", "u", "em", "strong", "a"],
                 allowedAttributes: {
@@ -37,6 +36,6 @@
         )}
     </p>
     <a href={resolve("/news")} class="hover:gradtxt underline text-2xl">
-        {m["news.slug.back"]()}
+        {m.back()}
     </a>
 </main>
