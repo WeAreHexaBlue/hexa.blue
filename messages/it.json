@@ -46,7 +46,9 @@
 	},
 
 	"news": {
-		"title": "Notizie - HexaBlue"
+		"title": "Notizie - HexaBlue",
+		"none": "Non ci sono articoli per ora...",
+		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>"
 	},
 
 	"footer": {
