@@ -1,23 +1,12 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { formatDateTime } from "$lib";
 
     import snarkdown from "snarkdown";
-    import sanitizeHtml from "sanitize-html";
-
-	import { getLocale } from "$lib/paraglide/runtime";
+    import sanitize from "sanitize-html";
 
     const { data } = $props();
-
-    function formatDateTime(dbstr: string) {
-        const date = new Date(dbstr);
-        const loc = getLocale();
-
-        return {
-            date: new Intl.DateTimeFormat(loc, { dateStyle: "long" }).format(date),
-            time: new Intl.DateTimeFormat(loc, { timeStyle: "short" }).format(date)
-        }
-    }
 </script>
 
 <svelte:head>
@@ -38,7 +27,7 @@
                 <span>
                     <h1>{article.title}</h1>
                     <sub>
-                        {@html sanitizeHtml(
+                        {@html sanitize(
                             m["news.published"](
                                 { author: article.author, ...formatDateTime(article.created_at) }
                             ), {
@@ -49,7 +38,7 @@
                     </sub>
                 </span>
                 <p>
-                    {@html sanitizeHtml(
+                    {@html sanitize(
                         snarkdown(article.short ?? article.body),
                         {
                             allowedTags: ["b", "i", "u", "em", "strong", "a"],

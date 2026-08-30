@@ -9,6 +9,7 @@ declare global {
 		interface Platform {
 			env: {
 				DB: D1Database;
+				PUBLISHER_TOKEN: string;
 			};
 		}
 
@@ -21,13 +22,17 @@ declare global {
 			title: string,
 			author: string,
 			body: string,
-			short: string,
+			short?: string,
 
-			created_at: string,
-
-			group_id: number
+			created_at: string
 		}
 	}
+
+	type Modify<
+		T,
+		KOmit extends keyof T = never,
+		KOptional extends Exclude<keyof T, KOmit> = never
+	> = Omit<T, KOmit | KOptional> & { [K in KOptional]?: T[K] };
 }
 
 export {};

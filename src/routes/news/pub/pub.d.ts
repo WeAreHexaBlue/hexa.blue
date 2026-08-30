@@ -1,0 +1,1 @@
+type NewsPubPOST = Modify<App.Article, "id" | "created_at", "author">

@@ -49,7 +49,11 @@
 	"news": {
 		"title": "News - HexaBlue",
 		"none": "No articles yet...",
-		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>"
+		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>",
+
+		"slug": {
+			"title": "{title} - HexaBlue"
+		}
 	},
 
 	"footer": {
