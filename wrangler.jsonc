@@ -1,0 +1,12 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "hexablue",
+    "compatibility_date": "2026-08-30",
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "news",
+            "database_id": "87116df8-fbb8-4363-b86b-9aed25c6e521"
+        }
+    ]
+}

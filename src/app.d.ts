@@ -6,7 +6,27 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		// interface Platform {}
+		interface Platform {
+			env: {
+				DB: D1Database;
+			};
+		}
+
+		interface Article {
+			id: number,
+
+			slug: string,
+			locale: string,
+
+			title: string,
+			author: string,
+			body: string,
+			short: string,
+
+			created_at: string,
+
+			group_id: number
+		}
 	}
 }
 

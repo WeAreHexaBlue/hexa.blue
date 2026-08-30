@@ -12,7 +12,7 @@
     }
 
     &.proj {
-        @apply flex flex-col md:flex-row justify-center md:justify-start items-center gap-x-12;
+        @apply flex flex-col md:flex-row justify-center items-center gap-x-12;
 
         span {
             @apply justify-items-center md:justify-items-normal md:text-left;
@@ -26,13 +26,21 @@
             @apply h-64;
         }
 
-        a.more {
-            @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
-        }
-
         .seggs {
             @apply text-5xl;
         }
+    }
+
+    &.news {
+        @apply gap-y-6 justify-items-center;
+
+        span {
+            @apply gap-y-2;
+        }
+    }
+
+    a.more {
+        @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
     }
 
     span {
@@ -46,7 +54,7 @@
             }
         }
 
-        a.more {
+        a.hmore {
             @apply mx-auto underline hover:gradtxt;
         }
     }

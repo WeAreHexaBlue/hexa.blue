@@ -62,7 +62,7 @@
 
     <section id="projects" class="sect">
         {#snippet moreProject(name: string)}
-            <a href={resolve(`/projects#${name}`)} class="more">
+            <a href={resolve(`/projects#${name}`)} class="hmore">
                 {m["home.project_overview.more"]()}
             </a>
         {/snippet}
