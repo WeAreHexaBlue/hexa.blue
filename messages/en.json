@@ -20,30 +20,30 @@
 				"future": "the future",
 				"foryou": "for you"
 			},
-			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> is an <b>organization</b> dedicated to the development of <b>open source software</b> in a variety of categories."
+			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> creates free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools."
 		},
 		"about": {
 			"title": "About HexaBlue",
-			"desc": "<b>HexaBlue</b> is an <b>organization</b> founded by <b>Flamey</b> with the goal of <b>providing quality free and open source software solutions</b> to any problem.<br /><b>Flamey</b> is the <i>only member</i> at the moment, but we are <b>always looking for more volunteers</b>."
+			"desc": "<b>HexaBlue</b> was founded by <b>Flamey</b> to build <b>free, open-source software</b> that solves everyday problems.<br />It is currently run solo, so <b>new volunteers and contributors are always welcome</b>!"
 		},
 		"project_overview": {
-			"title": "Main Projects",
+			"title": "Featured Projects",
 			"more": "See more...",
-			"dibsy": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />A never-seen-before concept in which there is <b>no such thing as a server</b>: all the content is <b>shared between users</b>.<br />It grants <b>privacy</b> and <b>customization</b> as freely as an open platform would.",
-			"seggs": "<b>Server Eggs</b> is a Discord bot based on <i>user-generated content</i>, designed as a fun way to <b>spread servers</b> and <b>funny media around</b>.<br />It also has <b>various other fun features</b>, but <i>the only way to know is to try it</i>...!"
+			"dibsy": "<b>dibsy</b> is a <b>private, serverless social network</b>.<br />Instead of a big tech company storing your data, everything is <b>shared directly between people</b>.<br />You get <b>complete privacy</b> and a <b>highly customizable experience</b>.",
+			"seggs": "<b>Server Eggs</b> is a Discord bot made for <b>sharing content</b> (\"<i><b>Egg</b>s</i>\") and <b>discovering new communities</b> along the way.<br />Have fun <i>collecting</i> as many <b>Egg</b>s as you can!"
 		}
 	},
 
 	"projects": {
 		"title": "Projects - HexaBlue",
 		"dibsy": {
-			"desc": "<b>dibsy</b> is an <b>all-in-one</b>, <b>peer-to-peer</b> social network platform.<br />All content is <b>shared between users</b> without needing a <b>server</b>. However, sometimes a <b>pseudo-server</b> may be useful, and that's what <b>Pillars</b> are.<br />This architecture guarantees <b>maximum privacy</b>, <b>zero outside control</b>, and <b>self-governance</b>. You can think of it as <i>a blueprint for an ideal real-world society</i>.",
+			"desc": "<b>dibsy</b> connects users directly to each other <i>without relying on a central server</i>.<br />Your data stays on your device and is shared <b>peer-to-peer</b>. For certain features, optional <b>Pillars</b> (which you can even self-host!) can provide useful services.<br />This setup ensures <b>complete privacy</b>, <b>zero corporate control</b>, and a space run entirely by its members.",
 			"soon": "Coming soon..."
 		},
 		"seggs": {
-			"desc": "<b>Server Eggs</b> is a Discord bot which revolves around <i>user-generated content</i> in the form of \"<b>Egg</b>s\", which are comprised of some <b>text</b>, an <b>attachment</b>, or <b>both</b>.<br />On top of that, it can be used to <b>spread servers around</b> and <b>grow communities</b>.<br/>It also has several <b>extra features</b>, such as <b>collecting Eggs</b> and <b>using them in battle</b>.",
+			"desc": "<b>Server Eggs</b> lets your Discord community <b>create and share content</b> called \"<b>Eggs</b>\" containing text, media, or both.<br />Use it to <b>promote your server</b>, find new places to hang out, or have fun <b>collecting Eggs</b> (especially <i>secret ones</i>...) and <b>battling friends</b>!",
 			"join": "Join Discord",
-			"add": "Add Bot"
+			"add": "Add to Discord"
 		}
 	},
 
@@ -58,7 +58,7 @@
 	},
 
 	"footer": {
-		"desc": "<b>All software</b> is licensed under the <i>GNU General Public License 3.0</i>",
-		"joindc": "If you want to <b>stay up to date</b>, consider <a href={href} class=\"gradtxt underline\">joining our Discord server</a>!"
+		"desc": "<b>All software</b> is free and open-source under the <i>GNU General Public License 3.0</i>",
+		"joindc": "Want to <b>stay in the loop</b>? <a href={href} class=\"gradtxt underline\">Join our Discord server</a>!"
 	}
 }

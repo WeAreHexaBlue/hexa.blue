@@ -1,6 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	
+
 	"hexablue": "HexaBlue",
 
 	"nav": {
@@ -20,29 +20,30 @@
 				"future": "il futuro",
 				"foryou": "per te"
 			},
-			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> è un'<b>organizzazione</b> dedicata allo sviluppo di <b>software open source</b> di svariate categorie e ambiti."
+			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> crea <b>software libero e open source</b> di qualità progettato per <b>darti il pieno controllo</b> attraverso una vasta gamma di strumenti digitali."
 		},
 		"about": {
-			"title": "About HexaBlue",
-			"desc": "<b>HexaBlue</b> è un'<b>organizzazione</b> fondata da <b>Flamey</b> con lo scopo di <b>offrire soluzioni di software libero e open source di qualità</b> per qualsiasi problema.<br /><b>Flamey</b> è l'<i>unicə membrə</i> al momento, ma siamo sempre <b>alla ricerca di nuovi volontari</b>."
+			"title": "Cos'è HexaBlue?",
+			"desc": "<b>HexaBlue</b> è stata fondata da <b>Flamey</b> per sviluppare <b>software libero e open source</b> in grado di risolvere i problemi di tutti i giorni.<br />Attualmente è portata avanti in solitaria, quindi <b>nuovi volontari e collaboratori sono sempre i benvenuti</b>!"
 		},
 		"project_overview": {
-			"title": "Progetti Principali",
-			"dibsy": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Un concetto mai visto prima in cui <b>non c'è un server</b>: tutti i contenuti vengono <b>condivisi tra gli utenti</b>.<br />Garantisce il livello di <b>privacy</b> e <b>personalizzazione</b> da aspettarsi da una piattaforma aperta.",
-			"seggs": "<b>Server Eggs</b> è un bot di Discord basato sui <i>contenuti generati dagli utenti</i>, progettato come un modo divertente di <b>spargere in giro i server</b> e <b>i media divertenti</b>.<br />Ha anche <b>altre funzioni divertenti</b>, ma <i>l'unico modo di saperle è di provarlo</i>...!"
+			"title": "Progetti in Evidenza",
+			"more": "Scopri di più...",
+			"dibsy": "<b>dibsy</b> è un <b>social network privato e senza server</b>.<br />Invece di affidare i tuoi dati a una grande azienda tecnologica, tutto viene <b>condiviso direttamente tra le persone</b>.<br />Ottieni il <b>massimo della privacy</b> e un'<b>esperienza altamente personalizzabile</b>.",
+			"seggs": "<b>Server Eggs</b> è un bot Discord pensato per <b>condividere contenuti</b> (\"<i><b>Uova</b></i>\") e <b>scoprire nuove community</b> allo stesso tempo.<br />Divertiti a <i>collezionare</i> più <b>Uova</b> possibile!"
 		}
 	},
 
 	"projects": {
 		"title": "Progetti - HexaBlue",
 		"dibsy": {
-			"desc": "<b>dibsy</b> è una piattaforma social <b>tutto-in-uno</b> e <b>peer-to-peer</b>.<br />Tutti i contenuti vengono <b>condvisi tra gli utenti</b> senza bisogno di un <b>server</b>. Però, a volte può essere utile uno <b>pseudo-server</b>, e quel ruolo è svolto dalle <b>Colonne</b>.<br />Questa architettura garantisce <b>privacy massima</b>, <b>zero controllo da fuori</b>, e <b>autogovernabilità</b>. La si può immaginare come <i>un progetto per una società ideale nel mondo reale</i>.",
+			"desc": "<b>dibsy</b> connette gli utenti direttamente tra loro <i>senza dipendere da un server centrale</i>.<br />I tuoi dati rimangono sul tuo dispositivo e vengono condivisi <b>peer-to-peer</b>. Per determinate funzionalità, le <b>Colonne</b> opzionali (puoi anche ospitarne una tu!) offrono servizi utili.<br />Questa architettura garantisce la <b>massima privacy</b>, uno spazio gestito interamente dai suoi membri e <b>totale libertà dalle grinfie delle big tech</b>.",
 			"soon": "Presto disponibile..."
 		},
 		"seggs": {
-			"desc": "<b>Server Eggs</b> è un bot di Discord che sfrutta i <i>contenuti generati dagli utenti</i> sotto forma di \"<b>Uova</b>\", che sono composte da un <b>testo</b>, un <b>allegato</b>, o <b>entrambi</b>.<br />Inoltre, può essere usato per <b>spargere in giro i server</b> e <b>far crescere le comunità</b>.<br/>Contiene diverse <b>funzioni extra</b>, come <b>collezionare Uova</b> e <b>mandarle in battaglia</b>.",
-			"join": "Unisciti al Discord",
-			"add": "Aggiungi Bot"
+			"desc": "<b>Server Eggs</b> permette alla tua community Discord di <b>creare e condividere</b> \"<b>Uova</b>\" contenenti testo, contenuti multimediali o entrambi.<br />Usalo per <b>promuovere il tuo server</b>, trovare nuovi spazi dove ritrovarsi, o divertirti a <b>collezionare Uova</b> (soprattutto <i>quelle segrete</i>...) e <b>sfidare gli amici in battaglia</b>!",
+			"join": "Unisciti al server",
+			"add": "Aggiungi a Discord"
 		}
 	},
 
@@ -57,7 +58,7 @@
 	},
 
 	"footer": {
-		"desc": "<b>Ogni</b> elemento <b>software</b> è licenziato dalla <i>Licenza Pubblica Generale GNU 3.0</i> (<i>GNU GPL 3.0</i>)",
-		"joindc": "Se vuoi <b>restare aggiornatə</b>, ti consigliamo di <a href={href} class=\"gradtxt underline\">unirti al nostro server Discord</a>!"
+		"desc": "<b>Tutto il software</b> è libero e open source sotto licenza <i>GNU General Public License 3.0</i>",
+		"joindc": "Vuoi <b>rimanere sempre aggiornato</b>? <a href={href} class=\"gradtxt underline\">Entra nel nostro server Discord</a>!"
 	}
 }
