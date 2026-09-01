@@ -2,7 +2,7 @@
 
 .sect {
     @apply grid justify-center;
-    @apply mx-16 my-10 gap-y-3 p-16 rounded-3xl;
+    @apply mx-4 sm:mx-16 my-10 gap-y-3 p-16 rounded-3xl;
     @apply bg-mist-800;
 
     @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
@@ -18,7 +18,7 @@
             @apply justify-items-center md:justify-items-normal md:text-left;
 
             &.more {
-                @apply flex gap-x-4;
+                @apply grid lg:flex gap-x-4 gap-y-2;
             }
         }
 
