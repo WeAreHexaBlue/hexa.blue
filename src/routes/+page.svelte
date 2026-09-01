@@ -32,8 +32,10 @@
         </div>
         <div class="herosect">
             <span class="hero">
-                <h1 class="gradtxt">{m.hexablue()}</h1>
-                <h1>{m["home.hero.is"]()}</h1>
+                <span class="prefix">
+                    <h1 class="gradtxt">{m.hexablue()}</h1>
+                    <h1>{m["home.hero.is"]()}</h1>
+                </span>
                 <span class="cycle" aria-live="polite">
                     <!-- The invisible words are rendered to consistently wrap text on small screens. -->
                     {#each heroCycle as word (word)}
@@ -103,17 +105,22 @@
     }
 
     .herosect {
-        @apply mt-40 md:mt-60 md:ml-30 md:justify-start md:text-left;
-        @apply px-6 md:px-0;
+        @apply mt-32 md:mt-46 xl:mt-60 px-6 xl:px-0;
+        @apply flex flex-col items-center text-center;
+        @apply xl:items-start xl:text-left xl:ml-30;
     }
 
     .hero {
-        @apply md:inline-flex flex flex-wrap justify-center gap-x-3;
+        @apply flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-x-3;
         @apply text-6xl font-black leading-tight;
     }
 
+    .hero .prefix {
+        @apply flex flex-wrap justify-center xl:justify-start gap-x-3;
+    }
+
     .hero .cycle {
-        @apply inline-grid;
+        @apply inline-grid xl:text-left;
 
         * {
             @apply col-start-1 row-start-1;
@@ -121,8 +128,8 @@
     }
 
     .herosect .desc {
-        @apply mx-auto md:mx-0 mt-4 md:mt-0 inset-x-0 max-w-3xl;
-        @apply text-xl;
+        @apply mt-2 xl:mt-0 max-w-2xl xl:max-w-3xl text-xl;
+        @apply mx-auto xl:mx-0;
     }
 
     #biglogo {

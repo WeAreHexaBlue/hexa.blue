@@ -47,6 +47,7 @@
 body {
     @apply bg-mist-900;
     @apply font-inter text-white text-center;
+    @apply overflow-x-hidden;
 }
 
 @utility brand {
