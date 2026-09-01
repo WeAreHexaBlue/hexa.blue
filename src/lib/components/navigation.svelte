@@ -15,7 +15,7 @@
 <nav class="nav">
     <span class="main">
         <a href={resolve("/")} class="brand">
-            <img src={logo} class="size-15" alt="HexaBlue Logo" />
+            <img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
             <h1 class="title">{m.hexablue()}</h1>
         </a>
         <span class="links">
@@ -37,7 +37,7 @@
 
     .nav {
         @apply fixed inset-x-0 z-50 mx-auto;
-        @apply grid md:flex origin-center items-center md:justify-between justify-items-center gap-5;
+        @apply grid sm:flex origin-center items-center sm:justify-between justify-items-center gap-2;
         @apply m-8 rounded-xl border border-gray-300 p-4;
         @apply bg-sky-900;
 
@@ -45,11 +45,11 @@
     }
 
     .nav .main {
-        @apply flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8;
+        @apply flex flex-col sm:flex-row items-center sm:justify-between gap-1 sm:gap-8;
     }
 
     .nav .links {
-        @apply flex items-center gap-6 text-2xl font-semibold;
+        @apply flex items-center gap-6 text-lg sm:text-2xl font-semibold;
 
         :hover {
             @apply bg-hbcol bg-clip-text text-transparent hbcol-angle-45 hbcol-dark-0%;

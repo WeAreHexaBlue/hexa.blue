@@ -96,7 +96,7 @@
 
     .intro {
         @apply relative z-0 w-full min-h-200 flex flex-col justify-start;
-        @apply -mt-65 md:-mt-40 pt-65 md:pt-40;
+        @apply -mt-50 sm:-mt-40 pt-50 sm:pt-40;
     }
 
     .introbg {
@@ -105,7 +105,7 @@
     }
 
     .herosect {
-        @apply mt-32 md:mt-46 xl:mt-60 px-6 xl:px-0;
+        @apply mt-44 xl:mt-60 px-6 xl:px-0;
         @apply flex flex-col items-center text-center;
         @apply xl:items-start xl:text-left xl:ml-30;
     }
@@ -133,7 +133,7 @@
     }
 
     #biglogo {
-        @apply absolute size-150 top-15 md:top-0 pointer-events-none select-none;
+        @apply absolute size-150 top-15 sm:top-0 pointer-events-none select-none;
 
         @apply left-1/2 -translate-x-1/2 translate-y-1/4;
         @apply opacity-60 xl:opacity-100;

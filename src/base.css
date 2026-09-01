@@ -55,7 +55,7 @@ body {
 }
 
 @utility title {
-    @apply text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
+    @apply text-3xl sm:text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
 
     &.white {
         @apply text-white bg-none;
