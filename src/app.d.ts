@@ -22,7 +22,7 @@ declare global {
 			title: string,
 			author: string,
 			body: string,
-			short?: string,
+			short: string | null,
 
 			created_at: string
 		}
@@ -31,8 +31,8 @@ declare global {
 	type Modify<
 		T,
 		KOmit extends keyof T = never,
-		KOptional extends Exclude<keyof T, KOmit> = never
-	> = Omit<T, KOmit | KOptional> & { [K in KOptional]?: T[K] };
+		KNullable extends Exclude<keyof T, KOmit> = never
+	> = Omit<T, KOmit | KNullable> & { [K in KNullable]: T[K] | null };
 }
 
 export {};

@@ -11,22 +11,48 @@ function checkAuth(request: Request, platform: App.Platform | undefined) {
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export async function POST({ request, platform }) {
+export async function PUT({ request, platform, url }) {
     checkAuth(request, platform);
 
-    const { slug, locale, title, author, body, short }: NewsPubPOST = await request.json();
+    const rbody = await request.json().catch(() => ({})) as NewsPubPUT;
+    const slug = rbody.slug ?? url.searchParams.get("slug");
+    const locale = rbody.locale ?? url.searchParams.get("locale");
 
-    const missing: string[] = [];
-	if (typeof slug !== "string" || !slug.trim()) missing.push("slug");
-	if (typeof locale !== "string" || !locale.trim()) missing.push("locale");
-	if (typeof title !== "string" || !title.trim()) missing.push("title");
-	if (typeof body !== "string" || !body.trim()) missing.push("body");
+    if (!slug || typeof slug !== "string" || !slug.trim())
+        throw error(400, "Missing or invalid `slug`.");
+    if (!locale || typeof locale !== "string" || !locale.trim())
+        throw error(400, "Missing or invalid `locale`.");
 
-	if (missing.length)
-		throw error(400, `Missing or invalid fields: ${missing.join(", ")}.`);
+    if (!slugPattern.test(slug))
+        throw error(400, "Slug must be lowercase letters, numbers, and hyphens only.");
 
-	if (!slugPattern.test(slug as string))
-		throw error(400, "Slug must be lowercase letters, numbers, and hyphens only.");
+    const title = rbody.title?.trim() || null;
+    const author = rbody.author?.trim() || null;
+    const body = rbody.body?.trim() || null;
+    const short = rbody.short?.trim() || null;
+
+    const binds = [ slug, locale, title, author, body, short ];
+
+    const update = await platform!.env.DB
+        .prepare(
+            `
+            UPDATE articles
+            SET
+                title  = COALESCE(?3, title),
+                author = COALESCE(?4, author),
+                body   = COALESCE(?5, body),
+                short  = COALESCE(?6, short)
+            WHERE slug = ?1 AND locale = ?2
+            `
+        )
+        .bind(...binds)
+        .run();
+    
+    if (update.meta.changes > 0)
+        return json({ ok: true, created: false, slug, locale });
+
+    if (!title || !author || !body)
+        throw error(400, "Creating a new article requires `title`, `author`, and `body`.");
 
     try {
         await platform!.env.DB
@@ -36,63 +62,19 @@ export async function POST({ request, platform }) {
                 VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
                 `
             )
-            .bind(slug, locale, title, author ?? "Flamey", body, short ?? null)
+            .bind(...binds)
             .run()
     } catch (e) {
         const message = e instanceof Error ? e.message : String(e);
 
-		if (message.includes("UNIQUE constraint failed")) {
-			throw error(409, "An article with this slug already exists for this locale.");
-		}
+        if (message.includes("NOT NULL constraint failed"))
+            throw error(400, "Creating a new article requires `title`, `author`, and `body`.");
 
 		console.error("D1 insert failed:", message);
 		throw error(500, "Failed to save article.");
     }
 
-    return json({ ok: true, slug })
-}
-
-export async function PATCH({ request, platform, url }) {
-    checkAuth(request, platform);
-
-    const slug = url.searchParams.get("slug");
-    const locale = url.searchParams.get("locale");
-    if (!slug || !locale)
-        throw error(400, "You need to specify `slug` and `locale` in the URL.");
-
-    const updates: NewsPubPATCH = await request.json();
-
-    const patchable = ["title", "author", "body", "short"] as const;
-    const columns = [];
-    const rows = [];
-
-    for (const field of patchable) {
-        if (updates[field] !== undefined) {
-            columns.push(`${field} = ?`);
-            rows.push(updates[field]);
-        }
-    }
-
-    if (columns.length === 0)
-        throw error(400, "No valid updates specified.");
-
-    rows.push(slug, locale);
-
-    const res = await platform!.env.DB
-        .prepare(
-            `
-            UPDATE articles
-            SET ${columns.join(", ")}
-            WHERE slug = ? and locale = ?
-            `
-        )
-        .bind(...rows)
-        .run()
-
-    if (res.meta.changes === 0)
-        throw error(404, "Article not found. Are `slug` and `locale` correct?")
-
-    return json({ ok: true, slug, updated: patchable.filter(f => updates[f] !== undefined) })
+    return json({ ok: true, created: true, slug, locale })
 }
 
 export async function DELETE({ request, platform, url }) {
@@ -112,5 +94,5 @@ export async function DELETE({ request, platform, url }) {
         throw error(404, "No article found for that slug and locale.");
     }
 
-    return json({ ok: true, slug });
+    return json({ ok: true, slug, locale });
 };
