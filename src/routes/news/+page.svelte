@@ -52,3 +52,15 @@
         {/each}
     {/if}
 </main>
+
+<style lang="postcss">
+    @reference "../../base.css";
+
+    .sect.news {
+        @apply gap-y-6 justify-items-center;
+
+        span {
+            @apply gap-y-2;
+        }
+    }
+</style>

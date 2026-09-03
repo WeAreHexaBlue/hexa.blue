@@ -50,6 +50,14 @@ body {
     @apply overflow-x-hidden;
 }
 
+ul {
+    @apply pl-0;
+}
+
+li {
+    @apply list-inside list-disc;
+}
+
 @utility brand {
     @apply flex items-center gap-2;
 }

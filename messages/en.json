@@ -5,7 +5,8 @@
 
 	"nav": {
 		"projects": "Projects",
-		"news": "News"
+		"news": "News",
+		"contact": "Contact"
 	},
 
 	"placeholder": "Work in progress...",
@@ -55,6 +56,13 @@
 		"slug": {
 			"title": "{title} - HexaBlue"
 		}
+	},
+
+	"contact": {
+		"title": "Contact - HexaBlue",
+		"email": "Email",
+		"discord": "Discord",
+		"github": "GitHub"
 	},
 
 	"footer": {

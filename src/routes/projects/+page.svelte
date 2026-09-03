@@ -43,3 +43,27 @@
         </span>
     </section>
 </main>
+
+<style lang="postcss">
+    @reference "../../base.css";
+
+    .sect.proj {
+        @apply flex flex-col md:flex-row justify-center items-center gap-x-12;
+
+        span {
+            @apply justify-items-center md:justify-items-normal md:text-left;
+
+            &.more {
+                @apply grid lg:flex gap-x-4 gap-y-2;
+            }
+        }
+
+        .logo {
+            @apply h-64;
+        }
+
+        .seggs {
+            @apply text-5xl mb-2 lg:mb-1;
+        }
+    }
+</style>

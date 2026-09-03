@@ -21,6 +21,7 @@
         <span class="links">
             <a href={resolve("/projects")}>{m["nav.projects"]()}</a>
             <a href={resolve("/news")}>{m["nav.news"]()}</a>
+            <a href={resolve("/contact")}>{m["nav.contact"]()}</a>
         </span>
     </span>
     <select name="lang" class="rounded-md" onchange={(e) => setLocale(e.currentTarget.value as Locale)}>
