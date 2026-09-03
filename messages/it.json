@@ -5,7 +5,8 @@
 
 	"nav": {
 		"projects": "Progetti",
-		"news": "Notizie"
+		"news": "Notizie",
+		"contact": "Contattaci"
 	},
 
 	"placeholder": "Lavori in corso...",
@@ -57,8 +58,15 @@
 		}
 	},
 
+	"contact": {
+		"title": "Contattaci - HexaBlue",
+		"email": "Email",
+		"discord": "Discord",
+		"github": "GitHub"
+	},
+
 	"footer": {
 		"desc": "<b>Tutto il software</b> è libero e open source sotto licenza <i>GNU General Public License 3.0</i>",
-		"joindc": "Vuoi <b>rimanere sempre aggiornato</b>? <a href={href} class=\"gradtxt underline\">Entra nel nostro server Discord</a>!"
+		"joindc": "Vuoi <b>rimanere sempre aggiornato</b>? <a href={href} class=\"gradtxt underline\">Unisciti al nostro server Discord</a>!"
 	}
 }
