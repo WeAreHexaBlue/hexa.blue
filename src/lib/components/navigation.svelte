@@ -6,7 +6,7 @@
 	import { cubicOut } from "svelte/easing";
 	import { prefersReducedMotion } from "svelte/motion";
 
-    import logo from "$lib/assets/hexablue.svg";
+    import logo from "$lib/assets/main/hexablue.svg";
 
     import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
 
@@ -47,6 +47,7 @@
 	<span class="links" class:vertical>
 		<a href={resolve("/projects")} onclick={closeMenu}>{m["nav.projects"]()}</a>
 		<a href={resolve("/news")} onclick={closeMenu}>{m["nav.news"]()}</a>
+		<a href={resolve("/members")} onclick={closeMenu}>{m["nav.members"]()}</a>
 		<a href={resolve("/contact")} onclick={closeMenu}>{m["nav.contact"]()}</a>
 	</span>
 {/snippet}

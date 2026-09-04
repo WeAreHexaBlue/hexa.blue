@@ -4,11 +4,11 @@
 
     import { fade } from "svelte/transition";
 
-    import logo from "$lib/assets/hexablue.svg";
+    import logo from "$lib/assets/main/hexablue.svg";
 
-    import dibsyLogo from "$lib/assets/dibsy.svg";
-    import dibsyWordmark from "$lib/assets/dibsy_wordmark.svg";
-    import seggsLogo from "$lib/assets/seggs.svg";
+    import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
+    import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg";
+    import seggsLogo from "$lib/assets/projects/seggs/seggs.svg";
 
     const heroCycle = [m["home.hero.cycle.open"](), m["home.hero.cycle.revol"](), m["home.hero.cycle.future"](), m["home.hero.cycle.foryou"]()]
     let index = $state(0)
@@ -83,7 +83,7 @@
         <span>
             <span class="projbrand">
                 <img src={seggsLogo} alt="Server Eggs Logo" />
-                <h1 class="seggs">Server Eggs</h1>
+                <h1 class="font-gsans font-extrabold">Server Eggs</h1>
             </span>
             <p>{@html m["home.project_overview.seggs"]()}</p>
             {@render moreProject("eggs")}
@@ -96,7 +96,7 @@
 
     .intro {
         @apply relative z-0 w-full min-h-200 flex flex-col justify-start;
-        @apply -mt-50 sm:-mt-40 pt-50 sm:pt-40;
+        @apply -mt-62 sm:-mt-44 md:-mt-40 pt-62 sm:pt-44 md:pt-40;
     }
 
     .introbg {
@@ -112,7 +112,7 @@
 
     .hero {
         @apply flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-x-3;
-        @apply text-6xl font-black leading-tight;
+        @apply text-4xl sm:text-5xl md:text-6xl font-black leading-tight;
     }
 
     .hero .prefix {
@@ -128,7 +128,7 @@
     }
 
     .herosect .desc {
-        @apply mt-2 xl:mt-0 max-w-2xl xl:max-w-3xl text-xl;
+        @apply mt-2 xl:mt-0 max-w-2xl xl:max-w-3xl sm:text-xl;
         @apply mx-auto xl:mx-0;
     }
 

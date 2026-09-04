@@ -1,41 +1,50 @@
 @import "../base.css";
 
-.sect {
-    @apply grid justify-center;
-    @apply mx-4 sm:mx-16 my-10 gap-y-3 p-6 lg:p-16 rounded-3xl;
-    @apply bg-mist-800;
+@layer components {
+    .sect {
+        @apply grid justify-center;
+        @apply mx-4 sm:mx-16 my-10 gap-y-3 p-6 lg:p-16 rounded-3xl;
+        @apply bg-mist-800;
 
-    @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
+        @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
 
-    .seggs {
-        @apply font-gsans font-extrabold text-4xl;
-    }
+        &.spangrid {
+            @apply grid gap-x-6 justify-stretch;
 
-    a.more {
-        @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
-    }
+            span {
+                @apply bg-mist-900 px-6 py-10 rounded-2xl;
+                @apply justify-center items-center;
 
-    span {
-        @apply grid gap-y-1;
-
-        .projbrand {
-            @apply flex gap-4 justify-center items-center my-2;
-        
-            img {
-                @apply h-16;
+                @apply transition-transform duration-300 hover:scale-105 hover:drop-shadow-lg;
             }
         }
 
-        a.hmore {
-            @apply mx-auto underline hover:gradtxt;
+        a.more {
+            @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
         }
-    }
 
-    h1 {
-        @apply text-4xl font-semibold;
-    }
+        span {
+            @apply grid gap-y-1;
 
-    p {
-        @apply max-w-prose;
+            .projbrand {
+                @apply flex gap-4 justify-center items-center my-2;
+
+                img {
+                    @apply h-16;
+                }
+            }
+
+            a.hmore {
+                @apply mx-auto underline hover:gradtxt;
+            }
+        }
+
+        h1 {
+            @apply text-4xl font-semibold;
+        }
+
+        p {
+            @apply max-w-prose;
+        }
     }
 }

@@ -2,10 +2,10 @@
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
 
-    import dibsyLogo from "$lib/assets/dibsy.svg";
-    import dibsyWordmark from "$lib/assets/dibsy_wordmark.svg"
+    import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
+    import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg"
 
-    import seggsLogo from "$lib/assets/seggs.svg";
+    import seggsLogo from "$lib/assets/projects/seggs/seggs.svg";
 </script>
 
 <svelte:head>

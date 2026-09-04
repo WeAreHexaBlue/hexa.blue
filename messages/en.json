@@ -6,6 +6,7 @@
 	"nav": {
 		"projects": "Projects",
 		"news": "News",
+		"members": "Members",
 		"contact": "Contact"
 	},
 
@@ -21,7 +22,7 @@
 				"future": "the future",
 				"foryou": "for you"
 			},
-			"desc": "<span class=\"gradtxt\"><b>HexaBlue</b></span> creates free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools."
+			"desc": "We create free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools."
 		},
 		"about": {
 			"title": "About HexaBlue",
@@ -56,6 +57,10 @@
 		"slug": {
 			"title": "{title} - HexaBlue"
 		}
+	},
+
+	"members": {
+		"title": "Members - HexaBlue"
 	},
 
 	"contact": {

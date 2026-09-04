@@ -10,7 +10,7 @@
         {m["nav.contact"]()}
     </h1>
 
-    <div class="sect contact">
+    <div class="sect spangrid md:grid-cols-3">
         <a href="mailto:support@hexa.blue" target="_blank">
             <span>
                 <h1>{m["contact.email"]()}</h1>
@@ -37,18 +37,3 @@
         </a>
     </div>
 </main>
-
-<style lang="postcss">
-    @reference "../../base.css";
-
-    .sect.contact {
-        @apply grid md:grid-cols-3 gap-x-6 justify-stretch;
-
-        span {
-            @apply bg-mist-900 px-6 py-10 rounded-2xl;
-            @apply justify-center items-center;
-
-            @apply transition-transform duration-300 hover:scale-105 hover:drop-shadow-lg;
-        }
-    }
-</style>

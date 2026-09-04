@@ -2,7 +2,7 @@
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
 
-    import logoWhite from "$lib/assets/hexablue_white.svg";
+    import logoWhite from "$lib/assets/main/hexablue_white.svg";
 </script>
 
 <footer class="footer">
