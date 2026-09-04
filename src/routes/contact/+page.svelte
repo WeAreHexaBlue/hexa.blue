@@ -10,7 +10,7 @@
         {m["nav.contact"]()}
     </h1>
 
-    <div class="sect spangrid md:grid-cols-3">
+    <div class="sect spangrid lg:grid-cols-3">
         <a href="mailto:support@hexa.blue" target="_blank">
             <span>
                 <h1>{m["contact.email"]()}</h1>

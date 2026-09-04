@@ -6,6 +6,7 @@
 	"nav": {
 		"projects": "Progetti",
 		"news": "Notizie",
+		"members": "Membri",
 		"contact": "Contattaci"
 	},
 
@@ -55,6 +56,18 @@
 
 		"slug": {
 			"title": "{title} - HexaBlue"
+		}
+	},
+
+	"members": {
+		"title": "Membri - HexaBlue",
+		"projects": "Progetti",
+		"members": {
+			"flamey": {
+				"roles": "Programmatore, Fondatore",
+				"bio": "Ciao! Sono <b>Flamey</b>, il fondatore di <b>HexaBlue</b>. Sono soprattutto un <i>programmatore</i>, ma faccio anche tante altre cose.",
+				"projects": "Sito di HexaBlue, dibsy, Server Eggs"
+			}
 		}
 	},
 

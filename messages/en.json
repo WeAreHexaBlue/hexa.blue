@@ -60,7 +60,15 @@
 	},
 
 	"members": {
-		"title": "Members - HexaBlue"
+		"title": "Members - HexaBlue",
+		"projects": "Projects",
+		"members": {
+			"flamey": {
+				"roles": "Programmer, Founder",
+				"bio": "Hi! I'm <b>Flamey</b>, the founder of <b>HexaBlue</b>. I'm mainly a <i>programmer</i>, but I also do a lot of other things.",
+				"projects": "HexaBlue Website, dibsy, Server Eggs"
+			}
+		}
 	},
 
 	"contact": {

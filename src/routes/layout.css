@@ -9,11 +9,11 @@
         @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
 
         &.spangrid {
-            @apply grid gap-x-6 justify-stretch;
+            @apply grid gap-x-6 justify-center 2xl:justify-stretch;
 
             span {
-                @apply bg-mist-900 px-6 py-10 rounded-2xl;
-                @apply justify-center items-center;
+                @apply bg-mist-900 px-6 py-6 rounded-2xl;
+                @apply justify-center justify-items-center gap-4;
 
                 @apply transition-transform duration-300 hover:scale-105 hover:drop-shadow-lg;
             }
