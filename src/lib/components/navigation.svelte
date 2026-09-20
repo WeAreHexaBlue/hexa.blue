@@ -1,6 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
 	import { m } from "$lib/paraglide/messages";
+	import { codeToHuman } from "$lib";
 
 	import { fade, fly, slide } from "svelte/transition";
 	import { cubicOut } from "svelte/easing";
@@ -9,11 +10,6 @@
     import logo from "$lib/assets/main/hexablue.svg";
 
     import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
-
-    let codeToHuman = {
-        en: "English",
-        it: "Italiano"
-    };
 
 	let menuOpen = $state(false);
 
@@ -30,7 +26,7 @@
 	}
 
 	function handleResize() {
-		if (window.innerWidth >= 1024) closeMenu();
+		if (window.innerWidth >= 1280) closeMenu();
 	}
 </script>
 
@@ -75,22 +71,24 @@
 				{@render links()}
 			</span>
 		</span>
-		<span class="desktop-only">
-			{@render langSelector()}
-		</span>
+		<span class="actions">
+			<span class="desktop-only">
+				{@render langSelector()}
+			</span>
 
-		<!-- Hamburger icon (or X) -->
-		<button
-			class="hamburger"
-			aria-label={menuOpen ? "Close menu" : "Open menu"}
-			aria-expanded={menuOpen}
-			aria-controls="mobile-menu"
-			onclick={toggleMenu}
-		>
-			<span class="ham-line ham-line-1" aria-hidden="true"></span>
-			<span class="ham-line ham-line-2" aria-hidden="true"></span>
-			<span class="ham-line ham-line-3" aria-hidden="true"></span>
-		</button>
+			<!-- Hamburger icon (or X) -->
+			<button
+				class="hamburger"
+				aria-label={menuOpen ? "Close menu" : "Open menu"}
+				aria-expanded={menuOpen}
+				aria-controls="mobile-menu"
+				onclick={toggleMenu}
+			>
+				<span class="ham-line ham-line-1" aria-hidden="true"></span>
+				<span class="ham-line ham-line-2" aria-hidden="true"></span>
+				<span class="ham-line ham-line-3" aria-hidden="true"></span>
+			</button>
+		</span>
 	</div>
 	{#if menuOpen}
 		<div
@@ -132,7 +130,7 @@
 
     .nav:hover {
         @apply border-white;
-        @apply lg:-translate-y-1 lg:drop-shadow-xl;
+        @apply xl:-translate-y-1 xl:drop-shadow-xl;
     }
 
 	.bar {
@@ -144,11 +142,11 @@
     }
 
 	.desktop-only {
-		@apply hidden lg:flex items-center;
+		@apply hidden xl:flex items-center;
 	}
 
     .links {
-        @apply flex items-center gap-6 text-lg sm:text-2xl font-semibold;
+        @apply flex items-center gap-6 text-2xl font-semibold;
 
         :hover {
             @apply bg-hbcol bg-clip-text text-transparent hbcol-angle-45 hbcol-dark-0%;
@@ -156,13 +154,17 @@
     }
 
 	.links.vertical {
-		@apply flex-col gap-4 text-2xl;
+		@apply flex-col md:grid md:grid-cols-4 gap-4 md:gap-8;
 	}
+
+    .actions {
+        @apply flex items-center gap-2 sm:gap-3;
+    }
 
 	.hamburger {
 		@apply flex flex-col items-center justify-center rounded-lg p-2 cursor-pointer;
 		@apply border border-transparent;
-		@apply lg:hidden;
+		@apply xl:hidden;
 		width: 2.75rem;
 		height: 2.75rem;
 
@@ -208,18 +210,18 @@
 	}
 
 	.lang {
-		@apply w-fit;
-	}
-
-	.mobile-inner .lang {
-		@apply mx-auto;
+		@apply w-fit text-center [text-align-last:center];
 	}
 
     .mobile-panel {
-		@apply lg:hidden;
+		@apply xl:hidden;
     }
 
 	.mobile-inner {
-		@apply flex flex-col items-stretch gap-5 border-t border-white/20 pt-4;
+		@apply grid justify-center content-center gap-5 border-t border-white/20 pt-4;
 	}
+
+    .mobile-inner .lang {
+        @apply mx-auto;
+    }
 </style>

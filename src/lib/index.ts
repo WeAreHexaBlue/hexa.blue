@@ -1,5 +1,10 @@
 import { getLocale } from "./paraglide/runtime";
 
+export const codeToHuman = {
+    en: "English",
+    it: "Italiano"
+};
+
 export function formatDateTime(dbstr: string) {
     const iso = dbstr.includes("T") ? dbstr : `${dbstr.replace(" ", "T")}Z`;
     const date = new Date(iso);
