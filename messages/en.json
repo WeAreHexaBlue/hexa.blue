@@ -13,6 +13,20 @@
 	"placeholder": "Work in progress...",
 	"back": "Back",
 
+	"embed": {
+		"buttons": {
+			"projects": "Explore Projects",
+			"news": "News",
+			"discord": "Join Discord",
+			"github": "GitHub",
+			"seggs": "Server Eggs",
+			"add": "Add to Discord",
+			"contact": "Contact Us",
+			"read": "Read the Article",
+			"allnews": "All News"
+		}
+	},
+
 	"home": {
 		"hero": {
 			"is": "is",
@@ -23,6 +37,9 @@
 				"foryou": "for you"
 			},
 			"desc": "We create free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools."
+		},
+		"embed": {
+			"description": "We create free, high-quality **open-source software** designed to **give you control** through a wide range of digital tools."
 		},
 		"about": {
 			"title": "About HexaBlue",
@@ -38,6 +55,9 @@
 
 	"projects": {
 		"title": "Projects - HexaBlue",
+		"embed": {
+			"description": "See all the **projects** that we're working on, such as **dibsy** and **Server Eggs**!"
+		},
 		"dibsy": {
 			"desc": "<b>dibsy</b> connects users directly to each other <i>without relying on a central server</i>.<br />Your data stays on your device and is shared <b>peer-to-peer</b>. For certain features, optional <b>Pillars</b> (which you can even self-host!) can provide useful services.<br />This setup ensures <b>complete privacy</b>, <b>zero corporate control</b>, and a space run entirely by its members.",
 			"soon": "Coming soon..."
@@ -51,6 +71,9 @@
 
 	"news": {
 		"title": "News - HexaBlue",
+		"embed": {
+			"description": "Updates, announcements, and behind-the-scenes notes from the **HexaBlue** team."
+		},
 		"none": "No articles yet...",
 		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>",
 
@@ -61,6 +84,9 @@
 
 	"members": {
 		"title": "Members - HexaBlue",
+		"embed": {
+			"description": "Meet the people behind HexaBlue. We are a small team building **free, open-source software**, and **new contributors are always welcome**!"
+		},
 		"projects": "Projects",
 		"members": {
 			"flamey": {
@@ -73,6 +99,9 @@
 
 	"contact": {
 		"title": "Contact - HexaBlue",
+		"embed": {
+			"description": "Questions, ideas, or want to contribute? Reach us by **email**, on **Discord**, or through **GitHub**."
+		},
 		"email": "Email",
 		"discord": "Discord",
 		"github": "GitHub"

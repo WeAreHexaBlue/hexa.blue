@@ -13,6 +13,20 @@
 	"placeholder": "Lavori in corso...",
 	"back": "Indietro",
 
+	"embed": {
+		"buttons": {
+			"projects": "Scopri i progetti",
+			"news": "Notizie",
+			"discord": "Unisciti a Discord",
+			"github": "GitHub",
+			"seggs": "Server Eggs",
+			"add": "Aggiungi a Discord",
+			"contact": "Contattaci",
+			"read": "Leggi l'articolo",
+			"allnews": "Tutte le notizie"
+		}
+	},
+
 	"home": {
 		"hero": {
 			"is": "è",
@@ -23,6 +37,9 @@
 				"foryou": "per te"
 			},
 			"desc": "Creiamo <b>software libero e open source</b> di qualità progettato per <b>darti il pieno controllo</b> attraverso una vasta gamma di strumenti digitali."
+		},
+		"embed": {
+			"description": "Creiamo **software libero e open source** di qualità, progettato per **darti il pieno controllo** attraverso una vasta gamma di strumenti digitali."
 		},
 		"about": {
 			"title": "Cos'è HexaBlue?",
@@ -38,6 +55,9 @@
 
 	"projects": {
 		"title": "Progetti - HexaBlue",
+		"embed": {
+			"description": "Vedi tutti i **progetti** a cui stiamo lavorando, come **dibsy** e **Server Eggs**!"
+		},
 		"dibsy": {
 			"desc": "<b>dibsy</b> connette gli utenti direttamente tra loro <i>senza dipendere da un server centrale</i>.<br />I tuoi dati rimangono sul tuo dispositivo e vengono condivisi <b>peer-to-peer</b>. Per determinate funzionalità, le <b>Colonne</b> opzionali (puoi anche ospitarne una tu!) offrono servizi utili.<br />Questa architettura garantisce la <b>massima privacy</b>, uno spazio gestito interamente dai suoi membri e <b>totale libertà dalle grinfie delle big tech</b>.",
 			"soon": "Presto disponibile..."
@@ -51,6 +71,9 @@
 
 	"news": {
 		"title": "Notizie - HexaBlue",
+		"embed": {
+			"description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
+		},
 		"none": "Non ci sono articoli per ora...",
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
 
@@ -61,6 +84,9 @@
 
 	"members": {
 		"title": "Membri - HexaBlue",
+		"embed": {
+			"description": "Le persone dietro HexaBlue. Siamo un piccolo team che sviluppa **software libero e open source**, e **nuovi collaboratori sono sempre i benvenuti**!"
+		},
 		"projects": "Progetti",
 		"members": {
 			"flamey": {
@@ -73,6 +99,9 @@
 
 	"contact": {
 		"title": "Contattaci - HexaBlue",
+		"embed": {
+			"description": "Domande, idee o voglia di contribuire? Contattaci via **email**, su **Discord** o tramite **GitHub**."
+		},
 		"email": "Email",
 		"discord": "Discord",
 		"github": "GitHub"

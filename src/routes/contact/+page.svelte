@@ -1,10 +1,23 @@
 <script lang="ts">
     import { m } from "$lib/paraglide/messages";
+    import { DISCORD_URL, GITHUB_URL } from "$lib";
+
+    import DiscordEmbed from "$lib/components/discord-embed.svelte";
 </script>
 
 <svelte:head>
     <title>{m["contact.title"]()}</title>
 </svelte:head>
+
+<DiscordEmbed
+    title={m["contact.title"]()}
+    description={m["contact.embed.description"]()}
+    buttons={[
+        { label: m["embed.buttons.discord"](), url: DISCORD_URL },
+        { label: m["embed.buttons.github"](), url: GITHUB_URL }
+    ]}
+/>
+
 <main>
     <h1 class="text-5xl font-extrabold">
         {m["nav.contact"]()}

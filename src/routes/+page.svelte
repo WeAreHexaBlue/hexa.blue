@@ -1,10 +1,14 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { DISCORD_URL, GITHUB_URL } from "$lib";
 
     import { fade } from "svelte/transition";
 
+    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+
     import logo from "$lib/assets/main/hexablue.svg";
+    import banner from "$lib/assets/main/banner.png";
 
     import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
     import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg";
@@ -25,6 +29,19 @@
 <svelte:head>
     <title>{m.hexablue()}</title>
 </svelte:head>
+
+<DiscordEmbed
+    title={m.hexablue()}
+    description={m["home.embed.description"]()}
+    images={[banner]}
+    primaryButton={{ label: m["embed.buttons.projects"](), url: resolve("/projects") }}
+    buttons={[
+        { label: m["embed.buttons.news"](), url: resolve("/news") },
+        { label: m["embed.buttons.discord"](), url: DISCORD_URL },
+        { label: m["embed.buttons.github"](), url: GITHUB_URL }
+    ]}
+/>
+
 <main>
     <section class="intro">
         <div class="introbg">

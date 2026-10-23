@@ -1,5 +1,8 @@
 <script lang="ts">
+    import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+
+    import DiscordEmbed from "$lib/components/discord-embed.svelte";
 
     import flamey from "$lib/assets/members/flamey.png";
 
@@ -13,6 +16,13 @@
 <svelte:head>
     <title>{m["members.title"]()}</title>
 </svelte:head>
+
+<DiscordEmbed
+    title={m["members.title"]()}
+    description={m["members.embed.description"]()}
+    primaryButton={{ label: m["embed.buttons.contact"](), url: resolve("/contact") }}
+/>
+
 <main>
     <h1 class="text-5xl font-extrabold">
         {m["nav.members"]()}

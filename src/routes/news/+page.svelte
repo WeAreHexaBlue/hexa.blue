@@ -3,6 +3,8 @@
     import { m } from "$lib/paraglide/messages";
     import { formatDateTime } from "$lib";
 
+    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+
     import sanitize from "sanitize-html";
 
     const { data } = $props();
@@ -11,6 +13,13 @@
 <svelte:head>
     <title>{m["news.title"]()}</title>
 </svelte:head>
+
+<DiscordEmbed
+    title={m["news.title"]()}
+    description={m["news.embed.description"]()}
+    primaryButton={{ label: m["embed.buttons.news"](), url: resolve("/news") }}
+/>
+
 <main>
     <h1 class="text-5xl font-extrabold">
         {m["nav.news"]()}

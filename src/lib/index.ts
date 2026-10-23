@@ -1,5 +1,9 @@
 import { getLocale } from "./paraglide/runtime";
 
+export const DISCORD_URL = "https://discord.gg/DsARcGwwdM";
+export const GITHUB_URL = "https://github.com/WeAreHexaBlue";
+export const SEGGS_URL = "https://eggs.hexa.blue";
+
 export const codeToHuman = {
     en: "English",
     it: "Italiano"

@@ -1,6 +1,9 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { SEGGS_URL } from "$lib";
+
+    import DiscordEmbed from "$lib/components/discord-embed.svelte";
 
     import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
     import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg"
@@ -11,6 +14,16 @@
 <svelte:head>
     <title>{m["projects.title"]()}</title>
 </svelte:head>
+
+<DiscordEmbed
+    title={m["projects.title"]()}
+    description={m["projects.embed.description"]()}
+    buttons={[
+        { label: "dibsy", url: resolve("/projects#dibsy") },
+        { label: "Server Eggs", url: SEGGS_URL }
+    ]}
+/>
+
 <main>
     <h1 class="text-5xl font-extrabold">
         {m["nav.projects"]()}
