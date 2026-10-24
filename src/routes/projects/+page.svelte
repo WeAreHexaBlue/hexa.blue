@@ -34,9 +34,9 @@
         <span>
             <img src={dibsyWordmark} class="h-16" alt="dibsy" />
             <p>{@html m["projects.dibsy.desc"]()}</p>
-            <a href={resolve("/projects#dibsy")} class="more">
-                {m["projects.dibsy.soon"]()}
-            </a>
+            <button class="gobtn" title={m["projects.dibsy.soon"]()} disabled>
+                {m["projects.dibsy.visit"]()}
+            </button>
         </span>
     </section>
 
@@ -46,12 +46,9 @@
             <h1 class="seggs">Server Eggs</h1>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
-                <a href="https://discord.gg/G9vfEZGZnT" target="_blank" class="more">
-                    {m["projects.seggs.join"]()}
-                </a>
-                <a href="https://discord.com/oauth2/authorize?client_id=886686500845138041" target="_blank" class="more">
-                    {m["projects.seggs.add"]()}
-                </a>
+                <button class="gobtn" onclick={() => window.open("https://eggs.hexa.blue/", "_blank")}>
+                    {m["projects.seggs.visit"]()}
+                </button>
             </span>
         </span>
     </section>
@@ -76,7 +73,7 @@
         }
 
         .seggs {
-            @apply text-5xl mb-2 lg:mb-1;
+            @apply text-5xl font-gsans font-extrabold mb-2 lg:mb-1;
         }
     }
 </style>

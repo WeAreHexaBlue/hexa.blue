@@ -64,8 +64,7 @@
 		},
 		"seggs": {
 			"desc": "<b>Server Eggs</b> permette alla tua community Discord di <b>creare e condividere</b> \"<b>Uova</b>\" contenenti testo, contenuti multimediali o entrambi.<br />Usalo per <b>promuovere il tuo server</b>, trovare nuovi spazi dove ritrovarsi, o divertirti a <b>collezionare Uova</b> (soprattutto <i>quelle segrete</i>...) e <b>sfidare gli amici in battaglia</b>!",
-			"join": "Unisciti al server",
-			"add": "Aggiungi a Discord"
+			"visit": "Sito Ufficiale"
 		}
 	},
 
