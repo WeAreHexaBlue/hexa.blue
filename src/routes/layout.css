@@ -54,5 +54,7 @@
         @apply bg-hbcol hbcol-angle-135 hover:hbcol-dark-40% disabled:hbcol-dark-50%;
         @apply rounded-2xl border border-transparent hover:border-white disabled:border-0;
         @apply font-extrabold disabled:text-gray-400;
+        @apply transition-transform duration-200 hover:scale-105 disabled:scale-100;
+        @apply cursor-pointer disabled:cursor-not-allowed;
     }
 }
