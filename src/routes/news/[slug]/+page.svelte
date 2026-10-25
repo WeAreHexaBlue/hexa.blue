@@ -2,7 +2,7 @@
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
     import { DISCORD_URL, formatDateTime } from "$lib";
-    import { htmlToText } from "$lib/html";
+    import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
     import TagList from "$lib/components/tag-list.svelte";
@@ -11,13 +11,7 @@
 
     const { data } = $props();
     const article = $derived(data.article);
-
-    const sanitizeOptions = {
-        allowedTags: ["b", "i", "u", "em", "strong", "a", "br", "code"],
-        allowedAttributes: {
-            "a": [ "href", "class" ]
-        }
-    };
+    const cover = $derived(firstImage(article.body));
 
     const description = $derived.by(() => {
         const text = htmlToText(article.short ?? article.body);
@@ -48,6 +42,8 @@
     description={description}
     type="article"
     publishedTime={publishedTime}
+    images={cover ? [cover.src] : []}
+    imageAlt={cover?.alt || undefined}
     primaryButton={{
         label: m["embed.buttons.read"](),
         url: resolve("/news/[slug]", { slug: article.slug })
@@ -58,7 +54,7 @@
     ]}
 />
 
-<main>
+<main class="mb-8">
     <h1 class="text-5xl font-extrabold">{article.title}</h1>
     <sub>
         {@html sanitize(
@@ -71,13 +67,67 @@
         )}
     </sub>
     <TagList tags={article.tags} />
-    <p class="mx-auto my-8 inset-x-0 max-w-prose">
+    <div class="article-body mx-auto my-8 inset-x-0 max-w-prose">
         {@html sanitize(
             article.body,
-            sanitizeOptions
+            articleSanitizeOptions
         )}
-    </p>
-    <a href={resolve("/news")} class="hover:gradtxt underline text-2xl">
+    </div>
+    <button onclick={() => location.href = resolve("/news")} class="gobtn px-10 text-2xl">
         {m.back()}
-    </a>
+    </button>
 </main>
+
+<style lang="postcss">
+    @reference "../../../base.css";
+
+    .article-body {
+        :global(p) {
+            @apply my-4;
+        }
+
+        :global(img) {
+            @apply mx-auto my-6 h-auto max-w-full rounded-2xl;
+        }
+
+        :global(img.img-tiny) {
+            max-width: min(10rem, 100%);
+        }
+
+        :global(img.img-small) {
+            max-width: min(20rem, 100%);
+        }
+
+        :global(img.img-medium) {
+            max-width: min(28rem, 100%);
+        }
+
+        :global(img.img-large) {
+            max-width: min(42rem, 100%);
+        }
+
+        :global(img.img-full) {
+            @apply w-full max-w-none;
+        }
+
+        :global(img.img-left) {
+            @apply ml-0 mr-auto;
+        }
+
+        :global(img.img-center) {
+            @apply mx-auto;
+        }
+
+        :global(img.img-right) {
+            @apply ml-auto mr-0;
+        }
+
+        :global(figure) {
+            @apply my-6;
+        }
+
+        :global(figcaption) {
+            @apply mt-2 text-sm text-mist-300;
+        }
+    }
+</style>

@@ -16,5 +16,11 @@
 			"database_name": "hexablue",
 			"database_id": "6e50865e-0840-4537-94b1-c8adc83cc8e8"
 		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "IMAGES",
+			"bucket_name": "hexablue-images"
+		}
 	]
 }
