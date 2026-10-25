@@ -19,3 +19,17 @@ export function formatDateTime(dbstr: string) {
         time: new Intl.DateTimeFormat(loc, { timeStyle: "short", hour12: false }).format(date)
     }
 }
+
+export function parseTags(tags: string | null | undefined): string[] {
+    if (!tags) return [];
+
+    try {
+        const parsed: unknown = JSON.parse(tags);
+
+        return Array.isArray(parsed)
+            ? parsed.filter((tag): tag is string => typeof tag === "string" && tag.length > 0)
+            : [];
+    } catch {
+        return [];
+    }
+}

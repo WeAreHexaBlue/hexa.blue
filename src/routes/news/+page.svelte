@@ -4,6 +4,7 @@
     import { formatDateTime } from "$lib";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
 
@@ -44,6 +45,7 @@
                             }
                         )}
                     </sub>
+                    <TagList tags={article.tags} />
                 </span>
                 <p>
                     {@html sanitize(

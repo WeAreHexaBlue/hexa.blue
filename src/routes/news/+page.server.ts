@@ -1,4 +1,5 @@
 import { getLocale } from "$lib/paraglide/runtime";
+import { parseTags } from "$lib";
 
 export async function load({ platform }) {
     const locale = getLocale();
@@ -6,7 +7,7 @@ export async function load({ platform }) {
     const { results }: { results: App.Article[] } = await platform!.env.DB
         .prepare(
             `
-            SELECT slug, title, author, short, created_at
+            SELECT slug, title, author, short, tags, created_at
             FROM articles
             WHERE locale = ?
             ORDER BY created_at DESC
@@ -15,5 +16,10 @@ export async function load({ platform }) {
         .bind(locale)
         .all();
     
-    return { articles: results }; 
+    return {
+        articles: results.map((article) => ({
+            ...article,
+            tags: parseTags(article.tags)
+        }))
+    };
 }

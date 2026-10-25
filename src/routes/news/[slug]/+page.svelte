@@ -4,6 +4,7 @@
     import { DISCORD_URL, formatDateTime } from "$lib";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
 
@@ -89,6 +90,7 @@
             }
         )}
     </sub>
+    <TagList tags={article.tags} />
     <p class="mx-auto my-8 inset-x-0 max-w-prose">
         {@html sanitize(
             article.body,

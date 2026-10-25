@@ -1,5 +1,6 @@
 import { error } from "@sveltejs/kit";
 import { getLocale, baseLocale } from "$lib/paraglide/runtime";
+import { parseTags } from "$lib";
 
 export async function load({ params, platform }) {
     const locale = getLocale();
@@ -20,5 +21,11 @@ export async function load({ params, platform }) {
 
     if (!article) throw error(404, `Post \`${params.slug}\` not found.`);
 
-    return { article, usedBase };
+    return {
+        article: {
+            ...article,
+            tags: parseTags(article.tags)
+        },
+        usedBase
+    };
 }
