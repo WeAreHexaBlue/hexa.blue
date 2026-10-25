@@ -1,18 +1,20 @@
 {
-    "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "hexablue",
-    "compatibility_date": "2026-08-30",
-    "main": ".svelte-kit/cloudflare/_worker.js",
-    "compatibility_flags": ["nodejs_als"],
-    "assets": {
-        "binding": "ASSETS",
-        "directory": ".svelte-kit/cloudflare",
-    },
-    "d1_databases": [
-        {
-            "binding": "DB",
-            "database_name": "news",
-            "database_id": "87116df8-fbb8-4363-b86b-9aed25c6e521"
-        }
-    ]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "hexablue",
+	"compatibility_date": "2026-08-30",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"compatibility_flags": [
+		"nodejs_als"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare",
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "hexablue",
+			"database_id": "6e50865e-0840-4537-94b1-c8adc83cc8e8"
+		}
+	]
 }
