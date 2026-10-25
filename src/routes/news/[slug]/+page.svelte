@@ -11,7 +11,7 @@
     const article = $derived(data.article);
 
     const sanitizeOptions = {
-        allowedTags: ["b", "i", "u", "em", "strong", "a"],
+        allowedTags: ["b", "i", "u", "em", "strong", "a", "br", "code"],
         allowedAttributes: {
             "a": [ "href", "class" ]
         }
