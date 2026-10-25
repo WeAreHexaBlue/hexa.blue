@@ -10,6 +10,42 @@ function checkAuth(request: Request, platform: App.Platform | undefined) {
 }
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const tagPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+const MAX_TAGS = 12;
+const MAX_TAG_LENGTH = 32;
+
+function normalizeTags(value: unknown): string[] | null {
+    if (value === undefined || value === null) return null;
+    if (!Array.isArray(value))
+        throw error(400, "`tags` must be an array of strings.");
+
+    const tags = [
+        ...new Set(
+            value
+                .map((tag) => {
+                    if (typeof tag !== "string")
+                        throw error(400, "`tags` must be an array of strings.");
+
+                    return tag.trim().toLowerCase().replace(/[\s_]+/g, "-");
+                })
+                .filter((tag) => tag.length > 0)
+        )
+    ];
+
+    if (tags.length > MAX_TAGS)
+        throw error(400, `An article can have at most ${MAX_TAGS} tags.`);
+
+    for (const tag of tags) {
+        if (tag.length > MAX_TAG_LENGTH || !tagPattern.test(tag))
+            throw error(
+                400,
+                `Invalid tag \`${tag}\`. Tags must be lowercase letters, numbers, and hyphens only.`
+            );
+    }
+
+    return tags;
+}
 
 export async function PUT({ request, platform, url }) {
     checkAuth(request, platform);
@@ -30,8 +66,10 @@ export async function PUT({ request, platform, url }) {
     const author = rbody.author?.trim() || null;
     const body = rbody.body?.trim() || null;
     const short = rbody.short?.trim() || null;
+    const tags = normalizeTags(rbody.tags);
+    const tagsJson = tags ? JSON.stringify(tags) : null;
 
-    const binds = [ slug, locale, title, author, body, short ];
+    const binds = [ slug, locale, title, author, body, short, tagsJson ];
 
     const update = await platform!.env.DB
         .prepare(
@@ -41,7 +79,8 @@ export async function PUT({ request, platform, url }) {
                 title  = COALESCE(?3, title),
                 author = COALESCE(?4, author),
                 body   = COALESCE(?5, body),
-                short  = COALESCE(?6, short)
+                short  = COALESCE(?6, short),
+                tags   = COALESCE(?7, tags)
             WHERE slug = ?1 AND locale = ?2
             `
         )
@@ -58,8 +97,8 @@ export async function PUT({ request, platform, url }) {
         await platform!.env.DB
             .prepare(
                 `
-                INSERT INTO articles (slug, locale, title, author, body, short, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+                INSERT INTO articles (slug, locale, title, author, body, short, tags, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
                 `
             )
             .bind(...binds)

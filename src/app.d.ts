@@ -24,6 +24,8 @@ declare global {
 			body: string,
 			short: string | null,
 
+			tags: string,
+
 			created_at: string
 		}
 	}

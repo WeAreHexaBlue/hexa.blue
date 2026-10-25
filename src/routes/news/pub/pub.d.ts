@@ -1,1 +1,3 @@
-type NewsPubPUT = Partial<Omit<App.Article, "id" | "created_at">>;
+type NewsPubPUT = Partial<Omit<App.Article, "id" | "created_at" | "tags">> & {
+    tags?: string[];
+};
