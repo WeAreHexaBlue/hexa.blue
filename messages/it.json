@@ -75,6 +75,7 @@
 		},
 		"none": "Non ci sono articoli per ora...",
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
+		"more": "Scopri di più...",
 
 		"search": {
 			"placeholder": "Cerca articoli...",

@@ -76,6 +76,7 @@
 		},
 		"none": "No articles yet...",
 		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>",
+		"more": "Read more...",
 
 		"search": {
 			"placeholder": "Search articles...",

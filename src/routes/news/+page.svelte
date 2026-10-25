@@ -169,7 +169,9 @@
                         }
                     )}
                 </p>
-                <a href={resolve("/news/[slug]", { slug: article.slug })} class="more">Read more...</a>
+                <button onclick={() => location.href = resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
+                    {m["news.more"]()}
+                </button>
             </section>
         {/each}
     {/if}
