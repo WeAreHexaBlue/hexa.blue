@@ -2,6 +2,7 @@
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
     import { DISCORD_URL, formatDateTime } from "$lib";
+    import { htmlToText } from "$lib/html";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
     import TagList from "$lib/components/tag-list.svelte";
@@ -18,29 +19,8 @@
         }
     };
 
-    function plainText(html: string) {
-        const spaced = html
-            .replace(/<br\s*\/?>/gi, " ")
-            .replace(/<\/(p|div|li|h[1-6]|blockquote)>/gi, " ");
-
-        return sanitize(spaced, { allowedTags: [], allowedAttributes: {} })
-            .replace(/&nbsp;/g, " ")
-            .replace(/&#x([0-9a-f]+);/gi, (_match, code: string) =>
-                String.fromCodePoint(parseInt(code, 16))
-            )
-            .replace(/&#(\d+);/g, (_match, code: string) => String.fromCodePoint(Number(code)))
-            .replace(/&lt;/g, "<")
-            .replace(/&gt;/g, ">")
-            .replace(/&quot;/g, '"')
-            .replace(/&#39;|&apos;/g, "'")
-            .replace(/&amp;/g, "&")
-            .replace(/\s+/g, " ")
-            .trim();
-    }
-
-    // Component embeds render markdown, so escape the characters of the article text.
     const description = $derived.by(() => {
-        const text = plainText(article.short ?? article.body);
+        const text = htmlToText(article.short ?? article.body);
         const chars = Array.from(text);
         const shortened =
             chars.length > 280 ? chars.slice(0, 280).join("").trimEnd() + "…" : text;

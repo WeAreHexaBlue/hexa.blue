@@ -77,6 +77,13 @@
 		"none": "No articles yet...",
 		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>",
 
+		"search": {
+			"placeholder": "Search articles...",
+			"label": "Search news articles",
+			"clear": "Clear search",
+			"none": "No articles match “{query}”."
+		},
+
 		"slug": {
 			"title": "{title} - HexaBlue"
 		}

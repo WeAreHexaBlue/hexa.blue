@@ -76,6 +76,13 @@
 		"none": "Non ci sono articoli per ora...",
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
 
+		"search": {
+			"placeholder": "Cerca articoli...",
+			"label": "Cerca gli articoli",
+			"clear": "Cancella la ricerca",
+			"none": "Nessun articolo corrisponde a “{query}”."
+		},
+
 		"slug": {
 			"title": "{title} - HexaBlue"
 		}
