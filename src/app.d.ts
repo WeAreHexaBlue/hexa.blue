@@ -14,6 +14,17 @@ declare global {
 			};
 		}
 
+		interface PageData {
+			/**
+			 * SEO hints provided by a page whose content is not available in
+			 * every locale (for example a news article).
+			 */
+			seo?: {
+				/** Locales in which this exact content exists. */
+				languages?: string[];
+			};
+		}
+
 		interface Article {
 			id: number,
 

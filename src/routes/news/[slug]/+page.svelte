@@ -5,6 +5,7 @@
     import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import ArticleSchema from "$lib/components/article-schema.svelte";
     import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
@@ -13,18 +14,20 @@
     const article = $derived(data.article);
     const cover = $derived(firstImage(article.body));
 
-    const description = $derived.by(() => {
+    const plainDescription = $derived.by(() => {
         const text = htmlToText(article.short ?? article.body);
         const chars = Array.from(text);
-        const shortened =
-            chars.length > 280 ? chars.slice(0, 280).join("").trimEnd() + "…" : text;
 
-        return shortened
+        return chars.length > 280 ? chars.slice(0, 280).join("").trimEnd() + "…" : text;
+    });
+
+    const description = $derived(
+        plainDescription
             .replace(/([\\*_~`|])/g, "\\$1")
             .replace(/\[/g, "\\[")
             .replace(/\]/g, "\\]")
-            .replace(/^([#>])/, "\\$1");
-    });
+            .replace(/^([#>])/, "\\$1")
+    );
 
     const publishedTime = $derived(
         article.created_at.includes("T")
@@ -36,6 +39,15 @@
 <svelte:head>
     <title>{m["news.slug.title"]({ title: article.title })}</title>
 </svelte:head>
+
+<ArticleSchema
+    title={article.title}
+    description={plainDescription}
+    published={publishedTime}
+    author={article.author}
+    image={cover?.src}
+    tags={article.tags}
+/>
 
 <DiscordEmbed
     title={article.title}
