@@ -1,7 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
-    import { SEGGS_URL } from "$lib";
+    import { SEGGS_URL, localeHref } from "$lib";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
 
@@ -19,7 +19,7 @@
     title={m["projects.title"]()}
     description={m["projects.embed.description"]()}
     buttons={[
-        { label: "dibsy", url: resolve("/projects#dibsy") },
+        { label: "dibsy", url: localeHref(resolve("/projects#dibsy")) },
         { label: "Server Eggs", url: SEGGS_URL }
     ]}
 />

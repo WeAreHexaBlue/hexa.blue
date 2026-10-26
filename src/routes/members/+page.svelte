@@ -1,5 +1,6 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
+    import { localeHref } from "$lib";
     import { m } from "$lib/paraglide/messages";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
@@ -20,7 +21,7 @@
 <DiscordEmbed
     title={m["members.title"]()}
     description={m["members.embed.description"]()}
-    primaryButton={{ label: m["embed.buttons.contact"](), url: resolve("/contact") }}
+    primaryButton={{ label: m["embed.buttons.contact"](), url: localeHref(resolve("/contact")) }}
 />
 
 <main>

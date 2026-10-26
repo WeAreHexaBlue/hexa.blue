@@ -1,5 +1,5 @@
-import { error } from "@sveltejs/kit";
-import { getLocale, baseLocale } from "$lib/paraglide/runtime";
+import { error, redirect } from "@sveltejs/kit";
+import { getLocale, baseLocale, localizeHref } from "$lib/paraglide/runtime";
 import { parseTags } from "$lib";
 
 export async function load({ params, platform }) {
@@ -20,6 +20,12 @@ export async function load({ params, platform }) {
     }
 
     if (!article) throw error(404, `Post \`${params.slug}\` not found.`);
+
+    // An article without a translation must not exist at a second URL.
+    // Send readers and crawlers to the single canonical copy instead.
+    if (usedBase) {
+        redirect(307, localizeHref(`/news/${params.slug}`, { locale: baseLocale }));
+    }
 
     return {
         article: {

@@ -2,7 +2,7 @@
     import { resolve } from "$app/paths";
     import { afterNavigate, goto } from "$app/navigation";
     import { m } from "$lib/paraglide/messages";
-    import { formatDateTime } from "$lib";
+    import { formatDateTime, localeHref } from "$lib";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
     import TagList from "$lib/components/tag-list.svelte";
@@ -67,7 +67,7 @@
 <DiscordEmbed
     title={m["news.title"]()}
     description={m["news.embed.description"]()}
-    primaryButton={{ label: m["embed.buttons.news"](), url: resolve("/news") }}
+    primaryButton={{ label: m["embed.buttons.news"](), url: localeHref(resolve("/news")) }}
 />
 
 <main>
@@ -79,7 +79,7 @@
         <form
             class="searchbar"
             method="GET"
-            action={resolve("/news")}
+            action={localeHref(resolve("/news"))}
             role="search"
             onsubmit={onSubmit}
         >
@@ -146,7 +146,7 @@
             <section class="sect news">
                 <span>
                     <h1>
-                        <a href={resolve("/news/[slug]", { slug: article.slug })} class="hover:underline">
+                        <a href={localeHref(resolve("/news/[slug]", { slug: article.slug }))} class="hover:underline">
                             {article.title}
                         </a>
                     </h1>
@@ -173,7 +173,7 @@
                         }
                     )}
                 </p>
-                <a href={resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
+                <a href={localeHref(resolve("/news/[slug]", { slug: article.slug }))} class="gobtn">
                     {m["news.more"]()}
                 </a>
             </section>

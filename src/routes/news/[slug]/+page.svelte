@@ -1,7 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
-    import { DISCORD_URL, formatDateTime } from "$lib";
+    import { DISCORD_URL, formatDateTime, localeHref } from "$lib";
     import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
 
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
@@ -46,10 +46,10 @@
     imageAlt={cover?.alt || undefined}
     primaryButton={{
         label: m["embed.buttons.read"](),
-        url: resolve("/news/[slug]", { slug: article.slug })
+        url: localeHref(resolve("/news/[slug]", { slug: article.slug }))
     }}
     buttons={[
-        { label: m["embed.buttons.allnews"](), url: resolve("/news") },
+        { label: m["embed.buttons.allnews"](), url: localeHref(resolve("/news")) },
         { label: m["embed.buttons.discord"](), url: DISCORD_URL }
     ]}
 />
@@ -73,7 +73,7 @@
             articleSanitizeOptions
         )}
     </div>
-    <a href={resolve("/news")} class="gobtn px-10 text-2xl">
+    <a href={localeHref(resolve("/news"))} class="gobtn px-10 text-2xl">
         {m.back()}
     </a>
 </main>

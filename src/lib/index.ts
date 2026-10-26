@@ -1,4 +1,12 @@
-import { getLocale } from "./paraglide/runtime";
+import { getLocale, localizeHref, type Locale } from "./paraglide/runtime";
+
+/**
+ * Applies the active locale's URL prefix to an app path.
+ * Locale is carried by the URL, so every internal link must go through this.
+ */
+export function localeHref(path: string, locale?: Locale) {
+    return localizeHref(path, locale ? { locale } : undefined);
+}
 
 export const DISCORD_URL = "https://discord.gg/DsARcGwwdM";
 export const GITHUB_URL = "https://github.com/WeAreHexaBlue";

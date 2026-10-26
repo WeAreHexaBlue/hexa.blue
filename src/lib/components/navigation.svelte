@@ -1,7 +1,9 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
+    import { goto } from "$app/navigation";
+    import { page } from "$app/state";
 	import { m } from "$lib/paraglide/messages";
-	import { codeToHuman } from "$lib";
+	import { codeToHuman, localeHref } from "$lib";
 
 	import { fade, fly, slide } from "svelte/transition";
 	import { cubicOut } from "svelte/easing";
@@ -9,9 +11,13 @@
 
     import logo from "$lib/assets/main/hexablue.svg";
 
-    import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
+    import { getLocale, locales, type Locale } from "$lib/paraglide/runtime";
 
 	let menuOpen = $state(false);
+
+	function switchLocale(locale: Locale) {
+		goto(localeHref(page.url.pathname + page.url.search, locale));
+	}
 
 	function toggleMenu() {
 		menuOpen = !menuOpen;
@@ -33,7 +39,7 @@
 <svelte:window onkeydown={handleKeydown} onresize={handleResize} />
 
 {#snippet brand()}
-	<a href={resolve("/")} class="brand" onclick={closeMenu}>
+	<a href={localeHref(resolve("/"))} class="brand" onclick={closeMenu}>
 		<img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
 		<h1 class="title">{m.hexablue()}</h1>
 	</a>
@@ -41,10 +47,10 @@
 
 {#snippet links(vertical = false)}
 	<span class="links" class:vertical>
-		<a href={resolve("/projects")} onclick={closeMenu}>{m["nav.projects"]()}</a>
-		<a href={resolve("/news")} onclick={closeMenu}>{m["nav.news"]()}</a>
-		<a href={resolve("/members")} onclick={closeMenu}>{m["nav.members"]()}</a>
-		<a href={resolve("/contact")} onclick={closeMenu}>{m["nav.contact"]()}</a>
+		<a href={localeHref(resolve("/projects"))} onclick={closeMenu}>{m["nav.projects"]()}</a>
+		<a href={localeHref(resolve("/news"))} onclick={closeMenu}>{m["nav.news"]()}</a>
+		<a href={localeHref(resolve("/members"))} onclick={closeMenu}>{m["nav.members"]()}</a>
+		<a href={localeHref(resolve("/contact"))} onclick={closeMenu}>{m["nav.contact"]()}</a>
 	</span>
 {/snippet}
 
@@ -53,7 +59,7 @@
 		name="lang"
 		class="rounded-md lang"
 		aria-label="Language"
-		onchange={(e) => setLocale(e.currentTarget.value as Locale)}
+		onchange={(e) => switchLocale(e.currentTarget.value as Locale)}
 	>
 		{#each locales as locale (locale)}
 			<option value={locale} class="bg-neutral-900 text-white" selected={getLocale() === locale}>
