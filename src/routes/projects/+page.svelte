@@ -46,9 +46,14 @@
             <h1 class="seggs">Server Eggs</h1>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
-                <button class="gobtn" onclick={() => window.open("https://eggs.hexa.blue/", "_blank")}>
+                <a
+                    class="gobtn"
+                    href={SEGGS_URL}
+                    target="_blank"
+                    rel="noopener"
+                >
                     {m["projects.seggs.visit"]()}
-                </button>
+                </a>
             </span>
         </span>
     </section>

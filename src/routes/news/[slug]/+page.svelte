@@ -73,9 +73,9 @@
             articleSanitizeOptions
         )}
     </div>
-    <button onclick={() => location.href = resolve("/news")} class="gobtn px-10 text-2xl">
+    <a href={resolve("/news")} class="gobtn px-10 text-2xl">
         {m.back()}
-    </button>
+    </a>
 </main>
 
 <style lang="postcss">

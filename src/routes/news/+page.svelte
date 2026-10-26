@@ -145,7 +145,11 @@
         {#each data.articles as article (article.slug)}
             <section class="sect news">
                 <span>
-                    <h1>{article.title}</h1>
+                    <h1>
+                        <a href={resolve("/news/[slug]", { slug: article.slug })} class="hover:underline">
+                            {article.title}
+                        </a>
+                    </h1>
                     <sub>
                         {@html sanitize(
                             m["news.published"](
@@ -169,9 +173,9 @@
                         }
                     )}
                 </p>
-                <button onclick={() => location.href = resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
+                <a href={resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
                     {m["news.more"]()}
-                </button>
+                </a>
             </section>
         {/each}
     {/if}
