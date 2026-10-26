@@ -135,7 +135,6 @@ function sniffImage(bytes: Uint8Array): { mime: string; ext: string } | null {
 
 async function imageKey(
     slug: string,
-    locale: string,
     name: string,
     extension: string,
     bytes: Uint8Array
@@ -154,13 +153,12 @@ async function imageKey(
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("");
 
-    return `articles/${slug}/${locale}/${base}-${hash}.${extension}`;
+    return `articles/${slug}/${base}-${hash}.${extension}`;
 }
 
 async function prepareImages(
     value: unknown,
-    slug: string,
-    locale: string
+    slug: string
 ): Promise<PreparedImage[] | undefined> {
     if (value === undefined || value === null) return undefined;
     if (!Array.isArray(value)) throw error(400, "`images` must be an array.");
@@ -211,7 +209,7 @@ async function prepareImages(
                 `Image \`${name}\` must be a PNG, JPEG, GIF, WebP, or AVIF file.`
             );
 
-        const key = await imageKey(slug, locale, name, sniffed.ext, bytes);
+        const key = await imageKey(slug, name, sniffed.ext, bytes);
 
         images.push({
             name,
@@ -275,7 +273,12 @@ async function uploadImages(bucket: R2Bucket, images: PreparedImage[]): Promise<
     );
 }
 
-async function deleteImages(bucket: R2Bucket, prefix: string, keep: Set<string>): Promise<void> {
+async function deleteUnreferencedImages(
+    bucket: R2Bucket,
+    slug: string,
+    keep: Set<string>
+): Promise<void> {
+    const prefix = `articles/${slug}/`;
     let cursor: string | undefined;
 
     do {
@@ -291,6 +294,35 @@ async function deleteImages(bucket: R2Bucket, prefix: string, keep: Set<string>)
 
         cursor = listed.truncated ? listed.cursor : undefined;
     } while (cursor);
+}
+
+function imageKeysIn(html: string, slug: string): Set<string> {
+    const keys = new Set<string>();
+    const pattern = /\/media\/(articles\/[A-Za-z0-9_./-]+)/g;
+    const prefix = `articles/${slug}/`;
+
+    for (const match of html.matchAll(pattern)) {
+        const key = decodeURIComponentSafe(match[1]);
+        if (key.startsWith(prefix)) keys.add(key);
+    }
+
+    return keys;
+}
+
+function keepImagesFor(
+    slug: string,
+    rows: { body: string; short: string | null }[]
+): Set<string> {
+    const keep = new Set<string>();
+
+    for (const row of rows) {
+        for (const key of imageKeysIn(row.body, slug)) keep.add(key);
+        if (row.short) {
+            for (const key of imageKeysIn(row.short, slug)) keep.add(key);
+        }
+    }
+
+    return keep;
 }
 
 export async function PUT({ request, platform, url }) {
@@ -315,7 +347,7 @@ export async function PUT({ request, platform, url }) {
     const body = rbody.body?.trim() || null;
     const short = rbody.short?.trim() || null;
     const tags = normalizeTags(rbody.tags);
-    const images = await prepareImages(rbody.images, slug, locale);
+    const images = await prepareImages(rbody.images, slug);
 
     const imageUrls = new Map(images?.map((image) => [image.name, image.url]));
 
@@ -397,13 +429,15 @@ export async function PUT({ request, platform, url }) {
         }
     }
 
-    if (images && bucket && finalBody !== null) {
+    if (bucket && finalBody !== null) {
         try {
-            await deleteImages(
-                bucket,
-                `articles/${slug}/${locale}/`,
-                new Set(images.map((image) => image.key))
-            );
+            const rows = await db
+                .prepare("SELECT body, short FROM articles WHERE slug = ?")
+                .bind(slug)
+                .all<{ body: string; short: string | null }>();
+
+            const keep = keepImagesFor(slug, rows.results);
+            await deleteUnreferencedImages(bucket, slug, keep);
         } catch (e) {
             console.error("Failed to clean up old article images:", e);
         }
@@ -426,7 +460,8 @@ export async function DELETE({ request, platform, url }) {
     if (!slug || !locale)
         throw error(400, "You need to specify `slug` and `locale` in the URL.");
 
-    const result = await platform!.env.DB
+    const db = platform!.env.DB;
+    const result = await db
         .prepare(`DELETE FROM articles WHERE slug = ? AND locale = ?`)
         .bind(slug, locale)
         .run();
@@ -438,7 +473,13 @@ export async function DELETE({ request, platform, url }) {
     const bucket = platform!.env.IMAGES;
     if (bucket) {
         try {
-            await deleteImages(bucket, `articles/${slug}/${locale}/`, new Set());
+            const rows = await db
+                .prepare("SELECT body, short FROM articles WHERE slug = ?")
+                .bind(slug)
+                .all<{ body: string; short: string | null }>();
+
+            const keep = keepImagesFor(slug, rows.results);
+            await deleteUnreferencedImages(bucket, slug, keep);
         } catch (e) {
             console.error("Failed to delete article images:", e);
         }

@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
 import type { RequestEvent, RequestHandler } from "./$types";
 
-const keyPattern = /^articles\/[a-z0-9-]+\/[A-Za-z0-9_-]+\/[a-z0-9-]+\.[a-z0-9]+$/;
+const keyPattern = /^articles\/[a-z0-9-]+\/(?:[A-Za-z0-9_-]+\/)?[a-z0-9-]+\.[a-z0-9]+$/;
 
 const mimeTypes: Record<string, string> = {
     avif: "image/avif",
