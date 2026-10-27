@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from "$app/state";
+    import { m } from "$lib/paraglide/messages";
     import { GITHUB_URL } from "$lib";
     import {
         baseLocale,
@@ -259,6 +260,12 @@
     <meta name="description" content={metaDescription} />
 
     <link rel="canonical" href={canonicalUrl} />
+    <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={m["news.feed.title"]()}
+        href={absoluteUrl(normalizePath(localizeHref("/news/rss.xml", { locale: currentLocale })))}
+    />
     {#each alternates as alternate (alternate.locale)}
         <link rel="alternate" hreflang={alternate.locale} href={alternate.href} />
     {/each}

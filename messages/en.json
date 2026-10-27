@@ -71,6 +71,10 @@
 
 	"news": {
 		"title": "News - HexaBlue",
+		"feed": {
+			"title": "HexaBlue News",
+			"description": "Updates, announcements, and behind-the-scenes notes from the HexaBlue team."
+		},
 		"embed": {
 			"description": "Updates, announcements, and behind-the-scenes notes from the **HexaBlue** team."
 		},

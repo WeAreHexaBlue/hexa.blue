@@ -70,6 +70,10 @@
 
 	"news": {
 		"title": "Notizie - HexaBlue",
+		"feed": {
+			"title": "Notizie HexaBlue",
+			"description": "Aggiornamenti, annunci e retroscena dal team di HexaBlue."
+		},
 		"embed": {
 			"description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
 		},

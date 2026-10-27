@@ -1,4 +1,5 @@
-import { baseLocale, locales } from "$lib/paraglide/runtime";
+import { locales } from "$lib/paraglide/runtime";
+import { escapeXml, localizedPath, toIsoDate } from "$lib/seo";
 import type { RequestEvent } from "./$types";
 
 const STATIC_PATHS = ["/", "/projects", "/news", "/members", "/contact"];
@@ -13,30 +14,6 @@ type SitemapArticle = {
     locale: string;
     created_at: string;
 };
-
-function localizedPath(path: string, locale: string): string {
-    const prefix = locale === baseLocale ? "" : `/${locale}`;
-    const suffix = path === "/" ? "" : path;
-    const localized = `${prefix}${suffix}`;
-
-    return localized === "" ? "/" : localized;
-}
-
-function toLastmod(value: string): string | undefined {
-    const iso = value.includes("T") ? value : `${value.replace(" ", "T")}Z`;
-    const date = new Date(iso);
-
-    return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
-}
-
-function escapeXml(value: string): string {
-    return value
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&apos;");
-}
 
 export async function GET({ platform, url }: RequestEvent) {
     const entries: Entry[] = STATIC_PATHS.flatMap((path) =>
@@ -55,7 +32,7 @@ export async function GET({ platform, url }: RequestEvent) {
 
             entries.push({
                 path: localizedPath(`/news/${article.slug}`, article.locale),
-                lastmod: toLastmod(article.created_at)
+                lastmod: toIsoDate(article.created_at)
             });
         }
     }
