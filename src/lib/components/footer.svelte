@@ -9,7 +9,7 @@
 <footer class="footer">
     <a href={localeHref(resolve("/"))} class="brand">
         <img src={logoWhite} class="size-15" alt="HexaBlue Logo" />
-        <h1 class="title white">{m.hexablue()}</h1>
+        <span class="title white">{m.hexablue()}</span>
     </a>
     <p>{@html m["footer.desc"]()}</p>
     <p>{@html m["footer.joindc"]({ href: "https://discord.gg/DsARcGwwdM" })}</p>

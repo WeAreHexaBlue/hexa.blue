@@ -43,7 +43,7 @@
     <section id="eggs" class="sect proj">
         <img src={seggsLogo} class="logo" alt="Server Eggs Logo" />
         <span>
-            <h1 class="seggs">Server Eggs</h1>
+            <h2 class="seggs">Server Eggs</h2>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
                 <a

@@ -40,7 +40,7 @@
     <span class="sect spangrid lg:grid-cols-3 2xl:grid-cols-5">
         <span class="lg:col-start-2 2xl:col-start-3"> <!-- Slight hack: since the row isn't filled, make it centered with this. Remove later. -->
             <img src={flamey} class="icon" alt="Flamey icon" />
-            <h1>Flamey</h1>
+            <h2>Flamey</h2>
             <sub>{@render list("flamey.roles", "b", ", ")}</sub>
             <p>{@html m["members.members.flamey.bio"]()}</p>
             <p>

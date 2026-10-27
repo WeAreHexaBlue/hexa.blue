@@ -135,21 +135,21 @@
 
     {#if data.articles.length === 0}
         <section class="sect">
-            <h1>
+            <h2>
                 {data.query
                     ? m["news.search.none"]({ query: data.query })
                     : m["news.none"]()}
-            </h1>
+            </h2>
         </section>
     {:else}
         {#each data.articles as article (article.slug)}
             <section class="sect news">
                 <span>
-                    <h1>
+                    <h2>
                         <a href={localeHref(resolve("/news/[slug]", { slug: article.slug }))} class="hover:underline">
                             {article.title}
                         </a>
-                    </h1>
+                    </h2>
                     <sub>
                         {@html sanitize(
                             m["news.published"](

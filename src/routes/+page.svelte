@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-    <title>{m.hexablue()}</title>
+    <title>{m["home.title"]()}</title>
 </svelte:head>
 
 <DiscordEmbed
@@ -48,10 +48,10 @@
             <img src={logo} id="biglogo" alt="HexaBlue Logo" />
         </div>
         <div class="herosect">
-            <span class="hero">
+            <h1 class="hero">
                 <span class="prefix">
-                    <h1 class="gradtxt">{m.hexablue()}</h1>
-                    <h1>{m["home.hero.is"]()}</h1>
+                    <span class="gradtxt">{m.hexablue()}</span>
+                    <span>{m["home.hero.is"]()}</span>
                 </span>
                 <span class="cycle" aria-live="polite">
                     <!-- The invisible words are rendered to consistently wrap text on small screens. -->
@@ -62,10 +62,10 @@
                     {/each}
 
                     {#key index}
-                        <h1 class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</h1>
+                        <span class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</span>
                     {/key}
                 </span>
-            </span>
+            </h1>
             <p class="desc">
                 {@html m["home.hero.desc"]()}
             </p>
@@ -73,9 +73,9 @@
     </section>
     
     <section id="about" class="sect">
-        <h1>
+        <h2>
             <a href={localeHref(resolve("/#about"))}>{m["home.about.title"]()}</a>
-        </h1>
+        </h2>
         <p>{@html m["home.about.desc"]()}</p>
     </section>
 
@@ -86,9 +86,9 @@
             </a>
         {/snippet}
 
-        <h1>
+        <h2>
             <a href={localeHref(resolve("/#projects"))}>{m["home.project_overview.title"]()}</a>
-        </h1>
+        </h2>
         <span>
             <span class="projbrand">
                 <img src={dibsyLogo} alt="dibsy Logo" />
@@ -100,7 +100,7 @@
         <span>
             <span class="projbrand">
                 <img src={seggsLogo} alt="Server Eggs Logo" />
-                <h1 class="font-gsans font-extrabold">Server Eggs</h1>
+                <span class="font-gsans text-4xl font-extrabold">Server Eggs</span>
             </span>
             <p>{@html m["home.project_overview.seggs"]()}</p>
             {@render moreProject("eggs")}
