@@ -3,7 +3,7 @@
     import { m } from "$lib/paraglide/messages";
     import { SEGGS_URL } from "$lib";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 
     import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
     import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg"
@@ -15,7 +15,7 @@
     <title>{m["projects.title"]()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["projects.title"]()}
     description={m["projects.embed.description"]()}
     buttons={[
@@ -30,9 +30,9 @@
     </h1>
     
     <section id="dibsy" class="sect proj">
-        <img src={dibsyLogo} class="logo" alt="dibsy Logo" />
+        <img src={dibsyLogo} class="logo" alt="" />
         <span>
-            <img src={dibsyWordmark} class="h-16" alt="dibsy" />
+            <h2><img src={dibsyWordmark} class="h-16" alt="dibsy" /></h2>
             <p>{@html m["projects.dibsy.desc"]()}</p>
             <button class="gobtn" title={m["projects.dibsy.soon"]()} disabled>
                 {m["projects.dibsy.visit"]()}
@@ -41,14 +41,19 @@
     </section>
 
     <section id="eggs" class="sect proj">
-        <img src={seggsLogo} class="logo" alt="Server Eggs Logo" />
+        <img src={seggsLogo} class="logo" alt="" />
         <span>
-            <h1 class="seggs">Server Eggs</h1>
+            <h2 class="seggs">Server Eggs</h2>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
-                <button class="gobtn" onclick={() => window.open("https://eggs.hexa.blue/", "_blank")}>
+                <a
+                    class="gobtn inline-block"
+                    href={SEGGS_URL}
+                    target="_blank"
+                    rel="external noopener"
+                >
                     {m["projects.seggs.visit"]()}
-                </button>
+                </a>
             </span>
         </span>
     </section>

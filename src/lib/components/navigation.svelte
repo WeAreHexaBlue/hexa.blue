@@ -1,5 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
+    import type { Pathname } from "$app/types";
+	import { page } from "$app/state";
 	import { m } from "$lib/paraglide/messages";
 	import { codeToHuman } from "$lib";
 
@@ -12,6 +14,10 @@
     import { getLocale, locales, setLocale, type Locale } from "$lib/paraglide/runtime";
 
 	let menuOpen = $state(false);
+
+	const currentRoute = $derived(page.route.id);
+
+	type NavPath = "/projects" | "/news" | "/members" | "/contact";
 
 	function toggleMenu() {
 		menuOpen = !menuOpen;
@@ -34,17 +40,27 @@
 
 {#snippet brand()}
 	<a href={resolve("/")} class="brand" onclick={closeMenu}>
-		<img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
-		<h1 class="title">{m.hexablue()}</h1>
+		<img src={logo} class="size-10 sm:size-15" alt="" />
+		<span class="title">{m.hexablue()}</span>
+	</a>
+{/snippet}
+
+{#snippet navLink(path: NavPath, label: string)}
+	<a
+		href={resolve(path as Pathname)}
+		aria-current={currentRoute?.startsWith(path) ? "page" : undefined}
+		onclick={closeMenu}
+	>
+		{label}
 	</a>
 {/snippet}
 
 {#snippet links(vertical = false)}
 	<span class="links" class:vertical>
-		<a href={resolve("/projects")} onclick={closeMenu}>{m["nav.projects"]()}</a>
-		<a href={resolve("/news")} onclick={closeMenu}>{m["nav.news"]()}</a>
-		<a href={resolve("/members")} onclick={closeMenu}>{m["nav.members"]()}</a>
-		<a href={resolve("/contact")} onclick={closeMenu}>{m["nav.contact"]()}</a>
+		{@render navLink("/projects", m["nav.projects"]())}
+		{@render navLink("/news", m["nav.news"]())}
+		{@render navLink("/members", m["nav.members"]())}
+		{@render navLink("/contact", m["nav.contact"]())}
 	</span>
 {/snippet}
 
@@ -52,7 +68,7 @@
 	<select
 		name="lang"
 		class="rounded-md lang"
-		aria-label="Language"
+		aria-label={m["a11y.language"]()}
 		onchange={(e) => setLocale(e.currentTarget.value as Locale)}
 	>
 		{#each locales as locale (locale)}

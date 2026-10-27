@@ -1,10 +1,11 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { baseLocale, localizeHref } from "$lib/paraglide/runtime";
     import { DISCORD_URL, formatDateTime } from "$lib";
     import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
     import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
@@ -31,19 +32,34 @@
             ? article.created_at
             : `${article.created_at.replace(" ", "T")}Z`
     );
+
+    // Fallback articles are English content shown inside a localized page.
+    const canonical = $derived(
+        data.usedBase ? localizeHref(`/news/${article.slug}`, { locale: baseLocale }) : undefined
+    );
 </script>
 
 <svelte:head>
     <title>{m["news.slug.title"]({ title: article.title })}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={article.title}
     description={description}
     type="article"
     publishedTime={publishedTime}
     images={cover ? [cover.src] : []}
     imageAlt={cover?.alt || undefined}
+    canonical={canonical}
+    alternateLocales={data.locales}
+    contentLocale={article.locale}
+    author={article.author}
+    keywords={article.tags}
+    breadcrumbs={[
+        { name: m.hexablue(), url: "/" },
+        { name: m["nav.news"](), url: "/news" },
+        { name: article.title, url: `/news/${article.slug}` }
+    ]}
     primaryButton={{
         label: m["embed.buttons.read"](),
         url: resolve("/news/[slug]", { slug: article.slug })
@@ -67,15 +83,15 @@
         )}
     </sub>
     <TagList tags={article.tags} />
-    <div class="article-body mx-auto my-8 inset-x-0 max-w-prose">
+    <div class="article-body mx-auto my-8 inset-x-0 max-w-prose" lang={article.locale}>
         {@html sanitize(
             article.body,
             articleSanitizeOptions
         )}
     </div>
-    <button onclick={() => location.href = resolve("/news")} class="gobtn px-10 text-2xl">
+    <a href={resolve("/news")} class="gobtn inline-block px-10 text-2xl">
         {m.back()}
-    </button>
+    </a>
 </main>
 
 <style lang="postcss">

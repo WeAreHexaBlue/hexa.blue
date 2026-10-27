@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit";
-import { getLocale, baseLocale } from "$lib/paraglide/runtime";
+import { getLocale, baseLocale, locales } from "$lib/paraglide/runtime";
 import { parseTags } from "$lib";
 
 export async function load({ params, platform }) {
@@ -21,11 +21,19 @@ export async function load({ params, platform }) {
 
     if (!article) throw error(404, `Post \`${params.slug}\` not found.`);
 
+    const { results: translations } = await platform!.env.DB
+        .prepare("SELECT DISTINCT locale FROM articles WHERE slug = ?")
+        .bind(params.slug)
+        .all<{ locale: string }>();
+
     return {
         article: {
             ...article,
             tags: parseTags(article.tags)
         },
-        usedBase
+        usedBase,
+        locales: translations
+            .map((translation) => translation.locale)
+            .filter((translation) => (locales as readonly string[]).includes(translation))
     };
 }

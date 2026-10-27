@@ -5,7 +5,7 @@
 
     import { fade } from "svelte/transition";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 
     import logo from "$lib/assets/main/hexablue.svg";
     import banner from "$lib/assets/main/banner.png";
@@ -30,7 +30,7 @@
     <title>{m.hexablue()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m.hexablue()}
     description={m["home.embed.description"]()}
     images={[banner]}
@@ -45,16 +45,18 @@
 <main>
     <section class="intro">
         <div class="introbg">
-            <img src={logo} id="biglogo" alt="HexaBlue Logo" />
+            <img src={logo} id="biglogo" alt="" />
         </div>
         <div class="herosect">
-            <span class="hero">
+            <h1 class="hero">
                 <span class="prefix">
-                    <h1 class="gradtxt">{m.hexablue()}</h1>
-                    <h1>{m["home.hero.is"]()}</h1>
+                    <span class="gradtxt">{m.hexablue()}</span>
+                    <span>{m["home.hero.is"]()}</span>
                 </span>
-                <span class="cycle" aria-live="polite">
+                <span class="cycle">
                     <!-- The invisible words are rendered to consistently wrap text on small screens. -->
+                    <!-- The animated word is decorative; assistive tech reads the static one. -->
+                    <span class="sr-only">{m["home.hero.cycle.open"]()}</span>
                     {#each heroCycle as word (word)}
                         <span class="invisible select-none pointer-events-none" aria-hidden="true">
                             {word}
@@ -62,10 +64,10 @@
                     {/each}
 
                     {#key index}
-                        <h1 class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</h1>
+                        <span class="gradtxt" aria-hidden="true" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</span>
                     {/key}
                 </span>
-            </span>
+            </h1>
             <p class="desc">
                 {@html m["home.hero.desc"]()}
             </p>
@@ -73,9 +75,9 @@
     </section>
     
     <section id="about" class="sect">
-        <h1>
+        <h2>
             <a href={resolve("/#about")}>{m["home.about.title"]()}</a>
-        </h1>
+        </h2>
         <p>{@html m["home.about.desc"]()}</p>
     </section>
 
@@ -86,12 +88,12 @@
             </a>
         {/snippet}
 
-        <h1>
+        <h2>
             <a href={resolve("/#projects")}>{m["home.project_overview.title"]()}</a>
-        </h1>
+        </h2>
         <span>
             <span class="projbrand">
-                <img src={dibsyLogo} alt="dibsy Logo" />
+                <img src={dibsyLogo} alt="" />
                 <img src={dibsyWordmark} alt="dibsy" />
             </span>
             <p>{@html m["home.project_overview.dibsy"]()}</p>
@@ -99,8 +101,8 @@
         </span>
         <span>
             <span class="projbrand">
-                <img src={seggsLogo} alt="Server Eggs Logo" />
-                <h1 class="font-gsans font-extrabold">Server Eggs</h1>
+                <img src={seggsLogo} alt="" />
+                <h3 class="font-gsans font-extrabold">Server Eggs</h3>
             </span>
             <p>{@html m["home.project_overview.seggs"]()}</p>
             {@render moreProject("eggs")}

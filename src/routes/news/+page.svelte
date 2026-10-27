@@ -4,7 +4,7 @@
     import { m } from "$lib/paraglide/messages";
     import { formatDateTime } from "$lib";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
     import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
@@ -62,11 +62,15 @@
 
 <svelte:head>
     <title>{m["news.title"]()}</title>
+    {#if data.query}
+        <meta name="robots" content="noindex, follow" />
+    {/if}
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["news.title"]()}
     description={m["news.embed.description"]()}
+    alternateLocales={data.query ? [] : undefined}
     primaryButton={{ label: m["embed.buttons.news"](), url: resolve("/news") }}
 />
 
@@ -135,17 +139,19 @@
 
     {#if data.articles.length === 0}
         <section class="sect">
-            <h1>
+            <h2>
                 {data.query
                     ? m["news.search.none"]({ query: data.query })
                     : m["news.none"]()}
-            </h1>
+            </h2>
         </section>
     {:else}
         {#each data.articles as article (article.slug)}
             <section class="sect news">
                 <span>
-                    <h1>{article.title}</h1>
+                    <h2>
+                        <a href={resolve("/news/[slug]", { slug: article.slug })}>{article.title}</a>
+                    </h2>
                     <sub>
                         {@html sanitize(
                             m["news.published"](
@@ -169,9 +175,12 @@
                         }
                     )}
                 </p>
-                <button onclick={() => location.href = resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
+                <a
+                    href={resolve("/news/[slug]", { slug: article.slug })}
+                    class="gobtn inline-block"
+                >
                     {m["news.more"]()}
-                </button>
+                </a>
             </section>
         {/each}
     {/if}
