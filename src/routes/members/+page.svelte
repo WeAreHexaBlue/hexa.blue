@@ -2,7 +2,7 @@
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 
     import flamey from "$lib/assets/members/flamey.png";
 
@@ -17,7 +17,7 @@
     <title>{m["members.title"]()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["members.title"]()}
     description={m["members.embed.description"]()}
     primaryButton={{ label: m["embed.buttons.contact"](), url: resolve("/contact") }}

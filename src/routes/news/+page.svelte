@@ -4,7 +4,7 @@
     import { m } from "$lib/paraglide/messages";
     import { formatDateTime } from "$lib";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
     import TagList from "$lib/components/tag-list.svelte";
 
     import sanitize from "sanitize-html";
@@ -67,9 +67,10 @@
     {/if}
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["news.title"]()}
     description={m["news.embed.description"]()}
+    alternateLocales={data.query ? [] : undefined}
     primaryButton={{ label: m["embed.buttons.news"](), url: resolve("/news") }}
 />
 

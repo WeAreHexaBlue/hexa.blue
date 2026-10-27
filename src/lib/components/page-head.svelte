@@ -1,5 +1,13 @@
 <script lang="ts">
     import { page } from "$app/state";
+    import {
+        baseLocale,
+        deLocalizeHref,
+        getLocale,
+        localizeHref,
+        locales,
+        type Locale
+    } from "$lib/paraglide/runtime";
 
     type EmbedButton = {
         label: string;
@@ -18,6 +26,9 @@
         accentColor?: number;
         type?: "website" | "article";
         publishedTime?: string;
+        canonical?: string;
+        alternateLocales?: string[];
+        contentLocale?: string;
     };
 
     let {
@@ -31,11 +42,52 @@
         siteName = "HexaBlue",
         accentColor = 0x006eff,
         type = "website",
-        publishedTime
+        publishedTime,
+        canonical,
+        alternateLocales = [...locales],
+        contentLocale
     }: Props = $props();
 
+    const OG_LOCALES: Record<string, string> = {
+        en: "en_US",
+        it: "it_IT"
+    };
+
     const absoluteUrl = (value: string) => new URL(value, page.url.origin).href;
+
+    function normalizePath(path: string) {
+        return path.length > 1 ? path.replace(/\/+$/, "") : path;
+    }
+
     const pageUrl = $derived(absoluteUrl(page.url.pathname));
+    const canonicalPath = $derived(normalizePath(canonical ?? page.url.pathname));
+    const canonicalUrl = $derived(absoluteUrl(canonicalPath));
+
+    const currentLocale = getLocale();
+    const contentLang = $derived(contentLocale ?? currentLocale);
+    const ogLocale = $derived(OG_LOCALES[contentLang] ?? contentLang);
+
+    // Only locales that actually have a translated page belong in hreflang.
+    const alternates = $derived.by(() => {
+        if (alternateLocales.length < 2) return [];
+
+        const path = deLocalizeHref(canonicalPath);
+
+        return alternateLocales.map((locale) => ({
+            locale,
+            href: absoluteUrl(normalizePath(localizeHref(path, { locale: locale as Locale })))
+        }));
+    });
+
+    const xDefault = $derived(
+        alternates.find((alternate) => alternate.locale === baseLocale)?.href
+    );
+
+    const alternateOgLocales = $derived(
+        alternates
+            .filter((alternate) => alternate.locale !== contentLang)
+            .map((alternate) => OG_LOCALES[alternate.locale] ?? alternate.locale)
+    );
 
     // Open Graph descriptions are plain text, while component embeds render markdown.
     const plainDescription = $derived(
@@ -51,6 +103,16 @@
             .replace(/\s+/g, " ")
             .trim()
     );
+
+    const metaDescription = $derived.by(() => {
+        if (plainDescription.length <= 160) return plainDescription;
+
+        const truncated = plainDescription.slice(0, 157);
+        const lastSpace = truncated.lastIndexOf(" ");
+        const clean = lastSpace > 120 ? truncated.slice(0, lastSpace) : truncated;
+
+        return `${clean.trimEnd()}…`;
+    });
 
     // Discord renders this payload instead of the standard Open Graph card.
     // https://docs.discord.com/developers/link-previews/component-embeds
@@ -120,13 +182,25 @@
 </script>
 
 <svelte:head>
-    <meta name="description" content={plainDescription} />
+    <meta name="description" content={metaDescription} />
+
+    <link rel="canonical" href={canonicalUrl} />
+    {#each alternates as alternate (alternate.locale)}
+        <link rel="alternate" hreflang={alternate.locale} href={alternate.href} />
+    {/each}
+    {#if xDefault}
+        <link rel="alternate" hreflang="x-default" href={xDefault} />
+    {/if}
 
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={plainDescription} />
-    <meta property="og:url" content={pageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
+    <meta property="og:locale" content={ogLocale} />
+    {#each alternateOgLocales as locale (locale)}
+        <meta property="og:locale:alternate" content={locale} />
+    {/each}
     {#if type === "article" && publishedTime}
         <meta property="article:published_time" content={publishedTime} />
     {/if}

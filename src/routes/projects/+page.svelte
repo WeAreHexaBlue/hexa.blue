@@ -3,7 +3,7 @@
     import { m } from "$lib/paraglide/messages";
     import { SEGGS_URL } from "$lib";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 
     import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
     import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg"
@@ -15,7 +15,7 @@
     <title>{m["projects.title"]()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["projects.title"]()}
     description={m["projects.embed.description"]()}
     buttons={[

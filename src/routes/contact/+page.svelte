@@ -2,14 +2,14 @@
     import { m } from "$lib/paraglide/messages";
     import { DISCORD_URL, GITHUB_URL } from "$lib";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 </script>
 
 <svelte:head>
     <title>{m["contact.title"]()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m["contact.title"]()}
     description={m["contact.embed.description"]()}
     buttons={[

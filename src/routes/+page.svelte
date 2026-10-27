@@ -5,7 +5,7 @@
 
     import { fade } from "svelte/transition";
 
-    import DiscordEmbed from "$lib/components/discord-embed.svelte";
+    import PageHead from "$lib/components/page-head.svelte";
 
     import logo from "$lib/assets/main/hexablue.svg";
     import banner from "$lib/assets/main/banner.png";
@@ -30,7 +30,7 @@
     <title>{m.hexablue()}</title>
 </svelte:head>
 
-<DiscordEmbed
+<PageHead
     title={m.hexablue()}
     description={m["home.embed.description"]()}
     images={[banner]}
