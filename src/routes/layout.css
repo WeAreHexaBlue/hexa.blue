@@ -39,7 +39,7 @@
             }
         }
 
-        h1 {
+        :is(h2, h3) {
             @apply text-4xl font-semibold;
         }
 

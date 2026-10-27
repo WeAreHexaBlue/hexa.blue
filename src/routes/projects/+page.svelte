@@ -32,7 +32,7 @@
     <section id="dibsy" class="sect proj">
         <img src={dibsyLogo} class="logo" alt="dibsy Logo" />
         <span>
-            <img src={dibsyWordmark} class="h-16" alt="dibsy" />
+            <h2><img src={dibsyWordmark} class="h-16" alt="dibsy" /></h2>
             <p>{@html m["projects.dibsy.desc"]()}</p>
             <button class="gobtn" title={m["projects.dibsy.soon"]()} disabled>
                 {m["projects.dibsy.visit"]()}
@@ -43,7 +43,7 @@
     <section id="eggs" class="sect proj">
         <img src={seggsLogo} class="logo" alt="Server Eggs Logo" />
         <span>
-            <h1 class="seggs">Server Eggs</h1>
+            <h2 class="seggs">Server Eggs</h2>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
                 <a

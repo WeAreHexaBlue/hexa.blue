@@ -35,7 +35,7 @@
 {#snippet brand()}
 	<a href={resolve("/")} class="brand" onclick={closeMenu}>
 		<img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
-		<h1 class="title">{m.hexablue()}</h1>
+		<span class="title">{m.hexablue()}</span>
 	</a>
 {/snippet}
 
