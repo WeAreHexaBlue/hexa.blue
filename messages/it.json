@@ -1,6 +1,11 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 
+	"a11y": {
+		"skip": "Vai al contenuto",
+		"language": "Lingua"
+	},
+
 	"hexablue": "HexaBlue",
 
 	"nav": {

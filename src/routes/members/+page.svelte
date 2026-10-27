@@ -41,7 +41,7 @@
             <img
                 src={flamey}
                 class="icon"
-                alt="Flamey icon"
+                alt=""
                 width="512"
                 height="512"
                 decoding="async"

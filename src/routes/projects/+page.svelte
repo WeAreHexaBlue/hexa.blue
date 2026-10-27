@@ -30,7 +30,7 @@
     </h1>
     
     <section id="dibsy" class="sect proj">
-        <img src={dibsyLogo} class="logo" alt="dibsy Logo" />
+        <img src={dibsyLogo} class="logo" alt="" />
         <span>
             <h2><img src={dibsyWordmark} class="h-16" alt="dibsy" /></h2>
             <p>{@html m["projects.dibsy.desc"]()}</p>
@@ -41,7 +41,7 @@
     </section>
 
     <section id="eggs" class="sect proj">
-        <img src={seggsLogo} class="logo" alt="Server Eggs Logo" />
+        <img src={seggsLogo} class="logo" alt="" />
         <span>
             <h2 class="seggs">Server Eggs</h2>
             <p>{@html m["projects.seggs.desc"]()}</p>

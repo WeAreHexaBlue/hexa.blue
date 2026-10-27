@@ -7,7 +7,7 @@
 
 <footer class="footer">
     <a href={resolve("/")} class="brand">
-        <img src={logoWhite} class="size-15" alt="HexaBlue Logo" />
+        <img src={logoWhite} class="size-15" alt="" />
         <span class="title white">{m.hexablue()}</span>
     </a>
     <p>{@html m["footer.desc"]()}</p>
