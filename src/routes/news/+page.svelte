@@ -62,6 +62,9 @@
 
 <svelte:head>
     <title>{m["news.title"]()}</title>
+    {#if data.query}
+        <meta name="robots" content="noindex, follow" />
+    {/if}
 </svelte:head>
 
 <DiscordEmbed
@@ -145,7 +148,9 @@
         {#each data.articles as article (article.slug)}
             <section class="sect news">
                 <span>
-                    <h1>{article.title}</h1>
+                    <h1>
+                        <a href={resolve("/news/[slug]", { slug: article.slug })}>{article.title}</a>
+                    </h1>
                     <sub>
                         {@html sanitize(
                             m["news.published"](
@@ -169,9 +174,12 @@
                         }
                     )}
                 </p>
-                <button onclick={() => location.href = resolve("/news/[slug]", { slug: article.slug })} class="gobtn">
+                <a
+                    href={resolve("/news/[slug]", { slug: article.slug })}
+                    class="gobtn inline-block"
+                >
                     {m["news.more"]()}
-                </button>
+                </a>
             </section>
         {/each}
     {/if}

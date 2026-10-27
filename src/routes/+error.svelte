@@ -10,6 +10,11 @@
     }
 </script>
 
+<svelte:head>
+    <title>{page.status} - {m.hexablue()}</title>
+    <meta name="robots" content="noindex" />
+</svelte:head>
+
 <main class="flex flex-col flex-1 justify-center items-center">
     <span class="mb-6">
         <h1 class="font-extrabold text-6xl">
