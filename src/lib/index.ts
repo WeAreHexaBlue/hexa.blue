@@ -25,7 +25,7 @@ export function formatDateTime(dbstr: string) {
     return {
         date: new Intl.DateTimeFormat(loc, { dateStyle: "long" }).format(date),
         time: new Intl.DateTimeFormat(loc, { timeStyle: "short", hour12: false }).format(date)
-    }
+    };
 }
 
 export function parseTags(tags: string | null | undefined): string[] {

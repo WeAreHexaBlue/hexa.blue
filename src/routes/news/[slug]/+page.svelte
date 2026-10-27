@@ -51,9 +51,9 @@
 
 <DiscordEmbed
     title={article.title}
-    description={description}
+    {description}
     type="article"
-    publishedTime={publishedTime}
+    {publishedTime}
     images={cover ? [cover.src] : []}
     imageAlt={cover?.alt || undefined}
     primaryButton={{
@@ -70,20 +70,16 @@
     <h1 class="text-5xl font-extrabold">{article.title}</h1>
     <sub>
         {@html sanitize(
-            m["news.published"](
-                { author: article.author, ...formatDateTime(article.created_at) }
-            ), {
+            m["news.published"]({ author: article.author, ...formatDateTime(article.created_at) }),
+            {
                 allowedTags: ["b", "i"],
                 allowedAttributes: {}
             }
         )}
     </sub>
     <TagList tags={article.tags} />
-    <div class="article-body mx-auto my-8 inset-x-0 max-w-prose">
-        {@html sanitize(
-            article.body,
-            articleSanitizeOptions
-        )}
+    <div class="article-body inset-x-0 mx-auto my-8 max-w-prose">
+        {@html sanitize(article.body, articleSanitizeOptions)}
     </div>
     <a href={localeHref(resolve("/news"))} class="gobtn px-10 text-2xl">
         {m.back()}
@@ -123,7 +119,7 @@
         }
 
         :global(img.img-left) {
-            @apply ml-0 mr-auto;
+            @apply mr-auto ml-0;
         }
 
         :global(img.img-center) {
@@ -131,7 +127,7 @@
         }
 
         :global(img.img-right) {
-            @apply ml-auto mr-0;
+            @apply mr-0 ml-auto;
         }
 
         :global(figure) {

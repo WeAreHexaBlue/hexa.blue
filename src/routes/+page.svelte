@@ -14,8 +14,13 @@
     import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg";
     import seggsLogo from "$lib/assets/projects/seggs/seggs.svg";
 
-    const heroCycle = [m["home.hero.cycle.open"](), m["home.hero.cycle.revol"](), m["home.hero.cycle.future"](), m["home.hero.cycle.foryou"]()]
-    let index = $state(0)
+    const heroCycle = [
+        m["home.hero.cycle.open"](),
+        m["home.hero.cycle.revol"](),
+        m["home.hero.cycle.future"](),
+        m["home.hero.cycle.foryou"]()
+    ];
+    let index = $state(0);
 
     $effect(() => {
         const interval = setInterval(() => {
@@ -56,13 +61,17 @@
                 <span class="cycle" aria-live="polite">
                     <!-- The invisible words are rendered to consistently wrap text on small screens. -->
                     {#each heroCycle as word (word)}
-                        <span class="invisible select-none pointer-events-none" aria-hidden="true">
+                        <span class="pointer-events-none invisible select-none" aria-hidden="true">
                             {word}
                         </span>
                     {/each}
 
                     {#key index}
-                        <span class="gradtxt" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>{heroCycle[index]}</span>
+                        <span
+                            class="gradtxt"
+                            in:fade={{ duration: 300, delay: 300 }}
+                            out:fade={{ duration: 300 }}>{heroCycle[index]}</span
+                        >
                     {/key}
                 </span>
             </h1>
@@ -71,7 +80,7 @@
             </p>
         </div>
     </section>
-    
+
     <section id="about" class="sect">
         <h2>
             <a href={localeHref(resolve("/#about"))}>{m["home.about.title"]()}</a>
@@ -109,31 +118,31 @@
 </main>
 
 <style lang="postcss">
-	@reference "../base.css";
+    @reference "../base.css";
 
     .intro {
-        @apply relative z-0 w-full min-h-200 flex flex-col justify-start;
-        @apply -mt-62 sm:-mt-44 md:-mt-40 pt-62 sm:pt-44 md:pt-40;
+        @apply relative z-0 flex min-h-200 w-full flex-col justify-start;
+        @apply -mt-62 pt-62 sm:-mt-44 sm:pt-44 md:-mt-40 md:pt-40;
     }
 
     .introbg {
-        @apply absolute top-0 w-full h-200 -z-50 overflow-hidden;
-        @apply bg-hbcol hbcol-dark-50% hbcol-angle-0;
+        @apply absolute top-0 -z-50 h-200 w-full overflow-hidden;
+        @apply bg-hbcol hbcol-angle-0 hbcol-dark-50%;
     }
 
     .herosect {
-        @apply mt-44 xl:mt-60 px-6 xl:px-0;
+        @apply mt-44 px-6 xl:mt-60 xl:px-0;
         @apply flex flex-col items-center text-center;
-        @apply xl:items-start xl:text-left xl:ml-30;
+        @apply xl:ml-30 xl:items-start xl:text-left;
     }
 
     .hero {
-        @apply flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-x-3;
-        @apply text-4xl sm:text-5xl md:text-6xl font-black leading-tight;
+        @apply flex flex-col items-center justify-center gap-x-3 xl:flex-row xl:justify-start;
+        @apply text-4xl leading-tight font-black sm:text-5xl md:text-6xl;
     }
 
     .hero .prefix {
-        @apply flex flex-wrap justify-center xl:justify-start gap-x-3;
+        @apply flex flex-wrap justify-center gap-x-3 xl:justify-start;
     }
 
     .hero .cycle {
@@ -145,17 +154,17 @@
     }
 
     .herosect .desc {
-        @apply mt-2 xl:mt-0 max-w-2xl xl:max-w-3xl sm:text-xl;
+        @apply mt-2 max-w-2xl sm:text-xl xl:mt-0 xl:max-w-3xl;
         @apply mx-auto xl:mx-0;
     }
 
     #biglogo {
-        @apply absolute size-150 top-15 sm:top-0 pointer-events-none select-none;
+        @apply pointer-events-none absolute top-15 size-150 select-none sm:top-0;
 
         @apply left-1/2 -translate-x-1/2 translate-y-1/4;
         @apply opacity-60 xl:opacity-100;
 
-        @apply xl:left-auto xl:right-40 xl:top-40 xl:bottom-auto;
+        @apply xl:top-40 xl:right-40 xl:bottom-auto xl:left-auto;
         @apply xl:translate-x-0 xl:translate-y-0;
     }
 </style>

@@ -30,21 +30,25 @@
     </h1>
 
     {#snippet list(index: Index, tag: string, joiner: string)}
-        {@html (m[`members.members.${index}`])()
+        {@html m[`members.members.${index}`]()
             .split(", ")
-            .map(part => `<${tag}>${part}</${tag}>`)
-            .join(joiner)
-        }
+            .map((part) => `<${tag}>${part}</${tag}>`)
+            .join(joiner)}
     {/snippet}
 
     <span class="sect spangrid lg:grid-cols-3 2xl:grid-cols-5">
-        <span class="lg:col-start-2 2xl:col-start-3"> <!-- Slight hack: since the row isn't filled, make it centered with this. Remove later. -->
+        <span class="lg:col-start-2 2xl:col-start-3">
+            <!-- Slight hack: since the row isn't filled, make it centered with this. Remove later. -->
             <img src={flamey} class="icon" alt="Flamey icon" />
             <h2>Flamey</h2>
             <sub>{@render list("flamey.roles", "b", ", ")}</sub>
             <p>{@html m["members.members.flamey.bio"]()}</p>
             <p>
-                <b>{m["members.projects"]()}</b>:<br />{@render list("flamey.projects", "i", "<br />")}
+                <b>{m["members.projects"]()}</b>:<br />{@render list(
+                    "flamey.projects",
+                    "i",
+                    "<br />"
+                )}
             </p>
         </span>
     </span>
@@ -54,7 +58,7 @@
     @reference "../../base.css";
 
     .icon {
-        @apply rounded-2xl size-64;
+        @apply size-64 rounded-2xl;
     }
 
     sub {

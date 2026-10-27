@@ -5,8 +5,9 @@ import { parseTags } from "$lib";
 export async function load({ params, platform }) {
     const locale = getLocale();
 
-    const { results }: { results: App.Article[] } = await platform!.env.DB
-        .prepare("SELECT * FROM articles WHERE slug = ?")
+    const { results }: { results: App.Article[] } = await platform!.env.DB.prepare(
+        "SELECT * FROM articles WHERE slug = ?"
+    )
         .bind(params.slug)
         .all();
 

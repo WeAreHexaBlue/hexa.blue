@@ -19,7 +19,7 @@
     @reference "../../base.css";
 
     ul.tags {
-        @apply flex flex-wrap justify-center gap-2 mt-3;
+        @apply mt-3 flex flex-wrap justify-center gap-2;
     }
 
     li {

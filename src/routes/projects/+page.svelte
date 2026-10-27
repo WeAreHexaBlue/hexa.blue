@@ -6,7 +6,7 @@
     import DiscordEmbed from "$lib/components/discord-embed.svelte";
 
     import dibsyLogo from "$lib/assets/projects/dibsy/dibsy.svg";
-    import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg"
+    import dibsyWordmark from "$lib/assets/projects/dibsy/dibsy_wordmark.svg";
 
     import seggsLogo from "$lib/assets/projects/seggs/seggs.svg";
 </script>
@@ -28,7 +28,7 @@
     <h1 class="text-5xl font-extrabold">
         {m["nav.projects"]()}
     </h1>
-    
+
     <section id="dibsy" class="sect proj">
         <img src={dibsyLogo} class="logo" alt="dibsy Logo" />
         <span>
@@ -46,12 +46,7 @@
             <h2 class="seggs">Server Eggs</h2>
             <p>{@html m["projects.seggs.desc"]()}</p>
             <span class="more">
-                <a
-                    class="gobtn"
-                    href={SEGGS_URL}
-                    target="_blank"
-                    rel="noopener"
-                >
+                <a class="gobtn" href={SEGGS_URL} target="_blank" rel="noopener">
                     {m["projects.seggs.visit"]()}
                 </a>
             </span>
@@ -63,13 +58,13 @@
     @reference "../../base.css";
 
     .sect.proj {
-        @apply flex flex-col md:flex-row justify-center items-center gap-x-12;
+        @apply flex flex-col items-center justify-center gap-x-12 md:flex-row;
 
         span {
             @apply justify-items-center md:justify-items-normal md:text-left;
 
             &.more {
-                @apply grid lg:flex gap-x-4 gap-y-2;
+                @apply grid gap-x-4 gap-y-2 lg:flex;
             }
         }
 
@@ -78,7 +73,7 @@
         }
 
         .seggs {
-            @apply text-5xl font-gsans font-extrabold mb-2 lg:mb-1;
+            @apply mb-2 font-gsans text-5xl font-extrabold lg:mb-1;
         }
     }
 </style>

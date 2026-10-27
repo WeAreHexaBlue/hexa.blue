@@ -2,134 +2,141 @@
     import { resolve } from "$app/paths";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
-	import { m } from "$lib/paraglide/messages";
-	import { codeToHuman, localeHref } from "$lib";
+    import { m } from "$lib/paraglide/messages";
+    import { codeToHuman, localeHref } from "$lib";
 
-	import { fade, fly, slide } from "svelte/transition";
-	import { cubicOut } from "svelte/easing";
-	import { prefersReducedMotion } from "svelte/motion";
+    import { fade, fly, slide } from "svelte/transition";
+    import { cubicOut } from "svelte/easing";
+    import { prefersReducedMotion } from "svelte/motion";
 
     import logo from "$lib/assets/main/hexablue.svg";
 
     import { getLocale, locales, type Locale } from "$lib/paraglide/runtime";
 
-	let menuOpen = $state(false);
+    let menuOpen = $state(false);
 
-	function switchLocale(locale: Locale) {
-		goto(localeHref(page.url.pathname + page.url.search, locale));
-	}
+    function switchLocale(locale: Locale) {
+        goto(localeHref(page.url.pathname + page.url.search, locale));
+    }
 
-	function toggleMenu() {
-		menuOpen = !menuOpen;
-	}
+    function toggleMenu() {
+        menuOpen = !menuOpen;
+    }
 
-	function closeMenu() {
-		menuOpen = false;
-	}
+    function closeMenu() {
+        menuOpen = false;
+    }
 
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === "Escape") closeMenu();
-	}
+    function handleKeydown(e: KeyboardEvent) {
+        if (e.key === "Escape") closeMenu();
+    }
 
-	function handleResize() {
-		if (window.innerWidth >= 1280) closeMenu();
-	}
+    function handleResize() {
+        if (window.innerWidth >= 1280) closeMenu();
+    }
 </script>
 
 <svelte:window onkeydown={handleKeydown} onresize={handleResize} />
 
 {#snippet brand()}
-	<a href={localeHref(resolve("/"))} class="brand" onclick={closeMenu}>
-		<img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
-		<span class="title">{m.hexablue()}</span>
-	</a>
+    <a href={localeHref(resolve("/"))} class="brand" onclick={closeMenu}>
+        <img src={logo} class="size-10 sm:size-15" alt="HexaBlue Logo" />
+        <span class="title">{m.hexablue()}</span>
+    </a>
 {/snippet}
 
 {#snippet links(vertical = false)}
-	<span class="links" class:vertical>
-		<a href={localeHref(resolve("/projects"))} onclick={closeMenu}>{m["nav.projects"]()}</a>
-		<a href={localeHref(resolve("/news"))} onclick={closeMenu}>{m["nav.news"]()}</a>
-		<a href={localeHref(resolve("/members"))} onclick={closeMenu}>{m["nav.members"]()}</a>
-		<a href={localeHref(resolve("/contact"))} onclick={closeMenu}>{m["nav.contact"]()}</a>
-	</span>
+    <span class="links" class:vertical>
+        <a href={localeHref(resolve("/projects"))} onclick={closeMenu}>{m["nav.projects"]()}</a>
+        <a href={localeHref(resolve("/news"))} onclick={closeMenu}>{m["nav.news"]()}</a>
+        <a href={localeHref(resolve("/members"))} onclick={closeMenu}>{m["nav.members"]()}</a>
+        <a href={localeHref(resolve("/contact"))} onclick={closeMenu}>{m["nav.contact"]()}</a>
+    </span>
 {/snippet}
 
 {#snippet langSelector()}
-	<select
-		name="lang"
-		class="rounded-md lang"
-		aria-label="Language"
-		onchange={(e) => switchLocale(e.currentTarget.value as Locale)}
-	>
-		{#each locales as locale (locale)}
-			<option value={locale} class="bg-neutral-900 text-white" selected={getLocale() === locale}>
-				{codeToHuman[locale]}
-			</option>
-		{/each}
-	</select>
+    <select
+        name="lang"
+        class="lang rounded-md"
+        aria-label="Language"
+        onchange={(e) => switchLocale(e.currentTarget.value as Locale)}
+    >
+        {#each locales as locale (locale)}
+            <option
+                value={locale}
+                class="bg-neutral-900 text-white"
+                selected={getLocale() === locale}
+            >
+                {codeToHuman[locale]}
+            </option>
+        {/each}
+    </select>
 {/snippet}
 
-<nav class="nav" in:fly={{ y: -12, duration: prefersReducedMotion.current ? 0 : 220, easing: cubicOut }}>
-	<div class="bar">
-		<span class="main">
-			{@render brand()}
-			<span class="desktop-only">
-				{@render links()}
-			</span>
-		</span>
-		<span class="actions">
-			<span class="desktop-only">
-				{@render langSelector()}
-			</span>
+<nav
+    class="nav"
+    in:fly={{ y: -12, duration: prefersReducedMotion.current ? 0 : 220, easing: cubicOut }}
+>
+    <div class="bar">
+        <span class="main">
+            {@render brand()}
+            <span class="desktop-only">
+                {@render links()}
+            </span>
+        </span>
+        <span class="actions">
+            <span class="desktop-only">
+                {@render langSelector()}
+            </span>
 
-			<!-- Hamburger icon (or X) -->
-			<button
-				class="hamburger"
-				aria-label={menuOpen ? "Close menu" : "Open menu"}
-				aria-expanded={menuOpen}
-				aria-controls="mobile-menu"
-				onclick={toggleMenu}
-			>
-				<span class="ham-line ham-line-1" aria-hidden="true"></span>
-				<span class="ham-line ham-line-2" aria-hidden="true"></span>
-				<span class="ham-line ham-line-3" aria-hidden="true"></span>
-			</button>
-		</span>
-	</div>
-	{#if menuOpen}
-		<div
-			id="mobile-menu"
-			class="mobile-panel"
-			in:slide={{ duration: prefersReducedMotion.current ? 0 : 300, easing: cubicOut }}
-			out:slide={{
-				duration: prefersReducedMotion.current ? 0 : 250,
-				delay: prefersReducedMotion.current ? 0 : 60,
-				easing: cubicOut
-			}}
-		>
-			<div
-				class="mobile-inner"
-				in:fade|global={{
-					delay: prefersReducedMotion.current ? 0 : 120,
-					duration: prefersReducedMotion.current ? 0 : 200
-				}}
-				out:fade|global={{ duration: prefersReducedMotion.current ? 0 : 120 }}
-			>
-				{@render links(true)}
-				{@render langSelector()}
-			</div>
-		</div>
-	{/if}
+            <!-- Hamburger icon (or X) -->
+            <button
+                class="hamburger"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                onclick={toggleMenu}
+            >
+                <span class="ham-line ham-line-1" aria-hidden="true"></span>
+                <span class="ham-line ham-line-2" aria-hidden="true"></span>
+                <span class="ham-line ham-line-3" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+    {#if menuOpen}
+        <div
+            id="mobile-menu"
+            class="mobile-panel"
+            in:slide={{ duration: prefersReducedMotion.current ? 0 : 300, easing: cubicOut }}
+            out:slide={{
+                duration: prefersReducedMotion.current ? 0 : 250,
+                delay: prefersReducedMotion.current ? 0 : 60,
+                easing: cubicOut
+            }}
+        >
+            <div
+                class="mobile-inner"
+                in:fade|global={{
+                    delay: prefersReducedMotion.current ? 0 : 120,
+                    duration: prefersReducedMotion.current ? 0 : 200
+                }}
+                out:fade|global={{ duration: prefersReducedMotion.current ? 0 : 120 }}
+            >
+                {@render links(true)}
+                {@render langSelector()}
+            </div>
+        </div>
+    {/if}
 </nav>
 
 <style lang="postcss">
-	@reference "../../base.css";
+    @reference "../../base.css";
 
     .nav {
         @apply fixed inset-x-0 z-50 mx-auto;
-        @apply m-4 sm:m-8 rounded-xl border border-gray-300 p-4;
+        @apply m-4 rounded-xl border border-gray-300 p-4 sm:m-8;
         @apply bg-sky-900;
-		@apply flex flex-col items-stretch gap-2;
+        @apply flex flex-col items-stretch gap-2;
 
         @apply transition-all duration-300;
     }
@@ -139,17 +146,17 @@
         @apply xl:-translate-y-1 xl:drop-shadow-xl;
     }
 
-	.bar {
-		@apply flex w-full items-center justify-between gap-2;
-	}
+    .bar {
+        @apply flex w-full items-center justify-between gap-2;
+    }
 
     .nav .main {
         @apply flex items-center gap-8;
     }
 
-	.desktop-only {
-		@apply hidden xl:flex items-center;
-	}
+    .desktop-only {
+        @apply hidden items-center xl:flex;
+    }
 
     .links {
         @apply flex items-center gap-6 text-2xl font-semibold;
@@ -159,73 +166,73 @@
         }
     }
 
-	.links.vertical {
-		@apply flex-col md:grid md:grid-cols-4 gap-4 md:gap-8;
-	}
+    .links.vertical {
+        @apply flex-col gap-4 md:grid md:grid-cols-4 md:gap-8;
+    }
 
     .actions {
         @apply flex items-center gap-2 sm:gap-3;
     }
 
-	.hamburger {
-		@apply flex flex-col items-center justify-center rounded-lg p-2 cursor-pointer;
-		@apply border border-transparent;
-		@apply xl:hidden;
-		width: 2.75rem;
-		height: 2.75rem;
+    .hamburger {
+        @apply flex cursor-pointer flex-col items-center justify-center rounded-lg p-2;
+        @apply border border-transparent;
+        @apply xl:hidden;
+        width: 2.75rem;
+        height: 2.75rem;
 
-		--ham-line: 2px;
-		--ham-gap: 6px;
-		--ham-shift: calc(var(--ham-line) + var(--ham-gap));
-		gap: var(--ham-gap);
+        --ham-line: 2px;
+        --ham-gap: 6px;
+        --ham-shift: calc(var(--ham-line) + var(--ham-gap));
+        gap: var(--ham-gap);
 
-		&:hover {
-			@apply border-white;
-		}
+        &:hover {
+            @apply border-white;
+        }
 
-		&[aria-expanded="true"] {
-			.ham-line-1 {
-				transform: translateY(var(--ham-shift)) rotate(45deg);
-			}
+        &[aria-expanded="true"] {
+            .ham-line-1 {
+                transform: translateY(var(--ham-shift)) rotate(45deg);
+            }
 
-			.ham-line-2 {
-				opacity: 0;
-			}
+            .ham-line-2 {
+                opacity: 0;
+            }
 
-			.ham-line-3 {
-				transform: translateY(calc(var(--ham-shift) * -1)) rotate(-45deg);
-			}
-		}
-	}
-
-	.ham-line {
-		display: block;
-		width: 1.5rem;
-		height: var(--ham-line);
-		border-radius: 9999px;
-		background: currentColor;
-		transition:
-			transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 200ms ease;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.ham-line {
-			transition: none;
-		}
-	}
-
-	.lang {
-		@apply w-fit text-center [text-align-last:center];
-	}
-
-    .mobile-panel {
-		@apply xl:hidden;
+            .ham-line-3 {
+                transform: translateY(calc(var(--ham-shift) * -1)) rotate(-45deg);
+            }
+        }
     }
 
-	.mobile-inner {
-		@apply grid justify-center content-center gap-5 border-t border-white/20 pt-4;
-	}
+    .ham-line {
+        display: block;
+        width: 1.5rem;
+        height: var(--ham-line);
+        border-radius: 9999px;
+        background: currentColor;
+        transition:
+            transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 200ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ham-line {
+            transition: none;
+        }
+    }
+
+    .lang {
+        @apply w-fit text-center [text-align-last:center];
+    }
+
+    .mobile-panel {
+        @apply xl:hidden;
+    }
+
+    .mobile-inner {
+        @apply grid content-center justify-center gap-5 border-t border-white/20 pt-4;
+    }
 
     .mobile-inner .lang {
         @apply mx-auto;

@@ -26,10 +26,11 @@
     function updateURL(value: string) {
         const term = value.trim();
 
-        goto(
-            term ? resolve(`/news?q=${encodeURIComponent(term)}`) : resolve("/news"),
-            { replaceState: true, keepFocus: true, noScroll: true }
-        );
+        goto(term ? resolve(`/news?q=${encodeURIComponent(term)}`) : resolve("/news"), {
+            replaceState: true,
+            keepFocus: true,
+            noScroll: true
+        });
     }
 
     function onInput(event: Event) {
@@ -136,9 +137,7 @@
     {#if data.articles.length === 0}
         <section class="sect">
             <h2>
-                {data.query
-                    ? m["news.search.none"]({ query: data.query })
-                    : m["news.none"]()}
+                {data.query ? m["news.search.none"]({ query: data.query }) : m["news.none"]()}
             </h2>
         </section>
     {:else}
@@ -146,15 +145,20 @@
             <section class="sect news">
                 <span>
                     <h2>
-                        <a href={localeHref(resolve("/news/[slug]", { slug: article.slug }))} class="hover:underline">
+                        <a
+                            href={localeHref(resolve("/news/[slug]", { slug: article.slug }))}
+                            class="hover:underline"
+                        >
                             {article.title}
                         </a>
                     </h2>
                     <sub>
                         {@html sanitize(
-                            m["news.published"](
-                                { author: article.author, ...formatDateTime(article.created_at) }
-                            ), {
+                            m["news.published"]({
+                                author: article.author,
+                                ...formatDateTime(article.created_at)
+                            }),
+                            {
                                 allowedTags: ["b", "i"],
                                 allowedAttributes: {}
                             }
@@ -163,15 +167,12 @@
                     <TagList tags={article.tags} />
                 </span>
                 <p>
-                    {@html sanitize(
-                        article.short ?? article.body,
-                        {
-                            allowedTags: ["b", "i", "u", "em", "strong", "a"],
-                            allowedAttributes: {
-                                "a": [ "href", "class" ]
-                            }
+                    {@html sanitize(article.short ?? article.body, {
+                        allowedTags: ["b", "i", "u", "em", "strong", "a"],
+                        allowedAttributes: {
+                            a: ["href", "class"]
                         }
-                    )}
+                    })}
                 </p>
                 <a href={localeHref(resolve("/news/[slug]", { slug: article.slug }))} class="gobtn">
                     {m["news.more"]()}
@@ -185,7 +186,7 @@
     @reference "../../base.css";
 
     .sect.news {
-        @apply gap-y-6 justify-items-center;
+        @apply justify-items-center gap-y-6;
 
         span {
             @apply gap-y-2;
@@ -193,7 +194,7 @@
     }
 
     .sect.search {
-        @apply block py-4 px-4;
+        @apply block px-4 py-4;
     }
 
     .searchbar {

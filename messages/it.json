@@ -1,122 +1,122 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format",
+    "$schema": "https://inlang.com/schema/inlang-message-format",
 
-	"hexablue": "HexaBlue",
+    "hexablue": "HexaBlue",
 
-	"nav": {
-		"projects": "Progetti",
-		"news": "Notizie",
-		"members": "Membri",
-		"contact": "Contattaci"
-	},
+    "nav": {
+        "projects": "Progetti",
+        "news": "Notizie",
+        "members": "Membri",
+        "contact": "Contattaci"
+    },
 
-	"placeholder": "Lavori in corso...",
-	"back": "Indietro",
+    "placeholder": "Lavori in corso...",
+    "back": "Indietro",
 
-	"embed": {
-		"buttons": {
-			"projects": "Scopri i progetti",
-			"news": "Notizie",
-			"discord": "Unisciti a Discord",
-			"github": "GitHub",
-			"seggs": "Server Eggs",
-			"add": "Aggiungi a Discord",
-			"contact": "Contattaci",
-			"read": "Leggi l'articolo",
-			"allnews": "Tutte le notizie"
-		}
-	},
+    "embed": {
+        "buttons": {
+            "projects": "Scopri i progetti",
+            "news": "Notizie",
+            "discord": "Unisciti a Discord",
+            "github": "GitHub",
+            "seggs": "Server Eggs",
+            "add": "Aggiungi a Discord",
+            "contact": "Contattaci",
+            "read": "Leggi l'articolo",
+            "allnews": "Tutte le notizie"
+        }
+    },
 
-	"home": {
-		"title": "HexaBlue - Software libero e open source per i tuoi strumenti digitali",
-		"hero": {
-			"is": "è",
-			"cycle": {
-				"open": "aperta",
-				"revol": "rivoluzionaria",
-				"future": "il futuro",
-				"foryou": "per te"
-			},
-			"desc": "Creiamo <b>software libero e open source</b> di qualità progettato per <b>darti il pieno controllo</b> attraverso una vasta gamma di strumenti digitali."
-		},
-		"embed": {
-			"description": "Creiamo **software libero e open source** di qualità, progettato per **darti il pieno controllo** attraverso una vasta gamma di strumenti digitali."
-		},
-		"about": {
-			"title": "Cos'è HexaBlue?",
-			"desc": "<b>HexaBlue</b> è stata fondata da <b>Flamey</b> per sviluppare <b>software libero e open source</b> in grado di risolvere i problemi di tutti i giorni.<br />Attualmente è portata avanti in solitaria, quindi <b>nuovi volontari e collaboratori sono sempre i benvenuti</b>!"
-		},
-		"project_overview": {
-			"title": "Progetti in Evidenza",
-			"more": "Scopri di più...",
-			"dibsy": "<b>dibsy</b> è un <b>social network privato e senza server</b>.<br />Invece di affidare i tuoi dati a una grande azienda tecnologica, tutto viene <b>condiviso direttamente tra le persone</b>.<br />Ottieni il <b>massimo della privacy</b> e un'<b>esperienza altamente personalizzabile</b>.",
-			"seggs": "<b>Server Eggs</b> è un bot Discord pensato per <b>condividere contenuti</b> (\"<i><b>Uova</b></i>\") e <b>scoprire nuove community</b> allo stesso tempo.<br />Divertiti a <i>collezionare</i> più <b>Uova</b> possibile!"
-		}
-	},
+    "home": {
+        "title": "HexaBlue - Software libero e open source per i tuoi strumenti digitali",
+        "hero": {
+            "is": "è",
+            "cycle": {
+                "open": "aperta",
+                "revol": "rivoluzionaria",
+                "future": "il futuro",
+                "foryou": "per te"
+            },
+            "desc": "Creiamo <b>software libero e open source</b> di qualità progettato per <b>darti il pieno controllo</b> attraverso una vasta gamma di strumenti digitali."
+        },
+        "embed": {
+            "description": "Creiamo **software libero e open source** di qualità, progettato per **darti il pieno controllo** attraverso una vasta gamma di strumenti digitali."
+        },
+        "about": {
+            "title": "Cos'è HexaBlue?",
+            "desc": "<b>HexaBlue</b> è stata fondata da <b>Flamey</b> per sviluppare <b>software libero e open source</b> in grado di risolvere i problemi di tutti i giorni.<br />Attualmente è portata avanti in solitaria, quindi <b>nuovi volontari e collaboratori sono sempre i benvenuti</b>!"
+        },
+        "project_overview": {
+            "title": "Progetti in Evidenza",
+            "more": "Scopri di più...",
+            "dibsy": "<b>dibsy</b> è un <b>social network privato e senza server</b>.<br />Invece di affidare i tuoi dati a una grande azienda tecnologica, tutto viene <b>condiviso direttamente tra le persone</b>.<br />Ottieni il <b>massimo della privacy</b> e un'<b>esperienza altamente personalizzabile</b>.",
+            "seggs": "<b>Server Eggs</b> è un bot Discord pensato per <b>condividere contenuti</b> (\"<i><b>Uova</b></i>\") e <b>scoprire nuove community</b> allo stesso tempo.<br />Divertiti a <i>collezionare</i> più <b>Uova</b> possibile!"
+        }
+    },
 
-	"projects": {
-		"title": "Progetti - HexaBlue",
-		"embed": {
-			"description": "Vedi tutti i **progetti** a cui stiamo lavorando, come **dibsy** e **Server Eggs**!"
-		},
-		"dibsy": {
-			"desc": "<b>dibsy</b> connette gli utenti direttamente tra loro <i>senza dipendere da un server centrale</i>.<br />I tuoi dati rimangono sul tuo dispositivo e vengono condivisi <b>peer-to-peer</b>. Per determinate funzionalità, le <b>Colonne</b> opzionali (puoi anche ospitarne una tu!) offrono servizi utili.<br />Questa architettura garantisce la <b>massima privacy</b>, uno spazio gestito interamente dai suoi membri e <b>totale libertà dalle grinfie delle big tech</b>.",
-			"soon": "Presto disponibile..."
-		},
-		"seggs": {
-			"desc": "<b>Server Eggs</b> permette alla tua community Discord di <b>creare e condividere</b> \"<b>Uova</b>\" contenenti testo, contenuti multimediali o entrambi.<br />Usalo per <b>promuovere il tuo server</b>, trovare nuovi spazi dove ritrovarsi, o divertirti a <b>collezionare Uova</b> (soprattutto <i>quelle segrete</i>...) e <b>sfidare gli amici in battaglia</b>!",
-			"visit": "Sito Ufficiale"
-		}
-	},
+    "projects": {
+        "title": "Progetti - HexaBlue",
+        "embed": {
+            "description": "Vedi tutti i **progetti** a cui stiamo lavorando, come **dibsy** e **Server Eggs**!"
+        },
+        "dibsy": {
+            "desc": "<b>dibsy</b> connette gli utenti direttamente tra loro <i>senza dipendere da un server centrale</i>.<br />I tuoi dati rimangono sul tuo dispositivo e vengono condivisi <b>peer-to-peer</b>. Per determinate funzionalità, le <b>Colonne</b> opzionali (puoi anche ospitarne una tu!) offrono servizi utili.<br />Questa architettura garantisce la <b>massima privacy</b>, uno spazio gestito interamente dai suoi membri e <b>totale libertà dalle grinfie delle big tech</b>.",
+            "soon": "Presto disponibile..."
+        },
+        "seggs": {
+            "desc": "<b>Server Eggs</b> permette alla tua community Discord di <b>creare e condividere</b> \"<b>Uova</b>\" contenenti testo, contenuti multimediali o entrambi.<br />Usalo per <b>promuovere il tuo server</b>, trovare nuovi spazi dove ritrovarsi, o divertirti a <b>collezionare Uova</b> (soprattutto <i>quelle segrete</i>...) e <b>sfidare gli amici in battaglia</b>!",
+            "visit": "Sito Ufficiale"
+        }
+    },
 
-	"news": {
-		"title": "Notizie - HexaBlue",
-		"embed": {
-			"description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
-		},
-		"none": "Non ci sono articoli per ora...",
-		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
-		"more": "Scopri di più...",
+    "news": {
+        "title": "Notizie - HexaBlue",
+        "embed": {
+            "description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
+        },
+        "none": "Non ci sono articoli per ora...",
+        "published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
+        "more": "Scopri di più...",
 
-		"search": {
-			"placeholder": "Cerca articoli...",
-			"label": "Cerca gli articoli",
-			"clear": "Cancella la ricerca",
-			"none": "Nessun articolo corrisponde a “{query}”."
-		},
+        "search": {
+            "placeholder": "Cerca articoli...",
+            "label": "Cerca gli articoli",
+            "clear": "Cancella la ricerca",
+            "none": "Nessun articolo corrisponde a “{query}”."
+        },
 
-		"slug": {
-			"title": "{title} - HexaBlue"
-		}
-	},
+        "slug": {
+            "title": "{title} - HexaBlue"
+        }
+    },
 
-	"members": {
-		"title": "Membri - HexaBlue",
-		"embed": {
-			"description": "Le persone dietro HexaBlue. Siamo un piccolo team che sviluppa **software libero e open source**, e **nuovi collaboratori sono sempre i benvenuti**!"
-		},
-		"projects": "Progetti",
-		"members": {
-			"flamey": {
-				"roles": "Programmatore, Fondatore",
-				"bio": "Ciao! Sono <b>Flamey</b>, il fondatore di <b>HexaBlue</b>. Sono soprattutto un <i>programmatore</i>, ma faccio anche tante altre cose.",
-				"projects": "Sito di HexaBlue, dibsy, Server Eggs"
-			}
-		}
-	},
+    "members": {
+        "title": "Membri - HexaBlue",
+        "embed": {
+            "description": "Le persone dietro HexaBlue. Siamo un piccolo team che sviluppa **software libero e open source**, e **nuovi collaboratori sono sempre i benvenuti**!"
+        },
+        "projects": "Progetti",
+        "members": {
+            "flamey": {
+                "roles": "Programmatore, Fondatore",
+                "bio": "Ciao! Sono <b>Flamey</b>, il fondatore di <b>HexaBlue</b>. Sono soprattutto un <i>programmatore</i>, ma faccio anche tante altre cose.",
+                "projects": "Sito di HexaBlue, dibsy, Server Eggs"
+            }
+        }
+    },
 
-	"contact": {
-		"title": "Contattaci - HexaBlue",
-		"embed": {
-			"description": "Domande, idee o voglia di contribuire? Contattaci via **email**, su **Discord** o tramite **GitHub**."
-		},
-		"email": "Email",
-		"discord": "Discord",
-		"github": "GitHub"
-	},
+    "contact": {
+        "title": "Contattaci - HexaBlue",
+        "embed": {
+            "description": "Domande, idee o voglia di contribuire? Contattaci via **email**, su **Discord** o tramite **GitHub**."
+        },
+        "email": "Email",
+        "discord": "Discord",
+        "github": "GitHub"
+    },
 
-	"footer": {
-		"desc": "<b>Tutto il software</b> è libero e open source sotto licenza <i>GNU General Public License 3.0</i>",
-		"joindc": "Vuoi <b>rimanere sempre aggiornato</b>? <a href={href} class=\"gradtxt underline\">Unisciti al nostro server Discord</a>!"
-	}
+    "footer": {
+        "desc": "<b>Tutto il software</b> è libero e open source sotto licenza <i>GNU General Public License 3.0</i>",
+        "joindc": "Vuoi <b>rimanere sempre aggiornato</b>? <a href={href} class=\"gradtxt underline\">Unisciti al nostro server Discord</a>!"
+    }
 }

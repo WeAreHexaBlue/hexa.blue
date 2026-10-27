@@ -27,25 +27,19 @@
         <a href="mailto:support@hexa.blue" target="_blank">
             <span>
                 <h2>{m["contact.email"]()}</h2>
-                <p class="hover:gradtxt underline">
-                    support@hexa.blue
-                </p>
+                <p class="underline hover:gradtxt">support@hexa.blue</p>
             </span>
         </a>
         <a href="https://discord.gg/DsARcGwwdM" target="_blank">
             <span>
                 <h2>{m["contact.discord"]()}</h2>
-                <p class="hover:gradtxt underline">
-                    discord.gg/DsARcGwwDM
-                </p>
+                <p class="underline hover:gradtxt">discord.gg/DsARcGwwDM</p>
             </span>
         </a>
         <a href="https://github.com/WeAreHexaBlue" target="_blank">
             <span>
                 <h2>{m["contact.github"]()}</h2>
-                <p class="hover:gradtxt underline">
-                    WeAreHexaBlue
-                </p>
+                <p class="underline hover:gradtxt">WeAreHexaBlue</p>
             </span>
         </a>
     </div>

@@ -56,9 +56,7 @@
     );
 
     // Split so the Svelte parser does not treat this as the end of the script block.
-    const jsonLdTag = $derived(
-        `<script type="application/ld+json">${jsonLd}` + '</' + 'script>'
-    );
+    const jsonLdTag = $derived(`<script type="application/ld+json">${jsonLd}` + "</" + "script>");
 </script>
 
 <svelte:head>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -9,33 +9,42 @@
 @theme {
     --font-inter: "Inter", sans-serif;
     --font-gsans: "Google Sans Flex", sans-serif;
-    --color-mainblue: #006EFF;
+    --color-mainblue: #006eff;
 }
 
 @utility bg-hbcol {
-    background-image: 
-        linear-gradient(
-            rgba(0, 0, 0, var(--hbcol-dark, 0)),
-            rgba(0, 0, 0, var(--hbcol-dark, 0))
-        ),
-        linear-gradient(
-            var(--hbcol-angle),
-            #006EFF 0%,
-            #00BFFF 100%
-        );
+    background-image:
+        linear-gradient(rgba(0, 0, 0, var(--hbcol-dark, 0)), rgba(0, 0, 0, var(--hbcol-dark, 0))),
+        linear-gradient(var(--hbcol-angle), #006eff 0%, #00bfff 100%);
 }
 
-@utility hbcol-angle-0   { --hbcol-angle: 0deg; }
-@utility hbcol-angle-45  { --hbcol-angle: 45deg; }
-@utility hbcol-angle-90  { --hbcol-angle: 90deg; }
-@utility hbcol-angle-135 { --hbcol-angle: 135deg; }
-@utility hbcol-angle-180 { --hbcol-angle: 180deg; }
-@utility hbcol-angle-225 { --hbcol-angle: 225deg; }
-@utility hbcol-angle-270 { --hbcol-angle: 270deg; }
-@utility hbcol-angle-315 { --hbcol-angle: 315deg; }
+@utility hbcol-angle-0 {
+    --hbcol-angle: 0deg;
+}
+@utility hbcol-angle-45 {
+    --hbcol-angle: 45deg;
+}
+@utility hbcol-angle-90 {
+    --hbcol-angle: 90deg;
+}
+@utility hbcol-angle-135 {
+    --hbcol-angle: 135deg;
+}
+@utility hbcol-angle-180 {
+    --hbcol-angle: 180deg;
+}
+@utility hbcol-angle-225 {
+    --hbcol-angle: 225deg;
+}
+@utility hbcol-angle-270 {
+    --hbcol-angle: 270deg;
+}
+@utility hbcol-angle-315 {
+    --hbcol-angle: 315deg;
+}
 @utility hbcol-angle-* {
-  --hbcol-angle: --value(integer)deg;
-  --hbcol-angle: --value([*]);
+    --hbcol-angle: --value(integer) deg;
+    --hbcol-angle: --value([*]);
 }
 
 @utility hbcol-dark-* {
@@ -45,7 +54,7 @@
 
 body {
     @apply bg-mist-900;
-    @apply font-inter text-white text-center;
+    @apply text-center font-inter text-white;
     @apply overflow-x-hidden;
 }
 
@@ -62,13 +71,13 @@ li {
 }
 
 @utility title {
-    @apply text-3xl sm:text-5xl font-black bg-hbcol hbcol-dark-0% hbcol-angle-45 bg-clip-text text-transparent;
+    @apply bg-hbcol bg-clip-text text-3xl font-black text-transparent hbcol-angle-45 hbcol-dark-0% sm:text-5xl;
 
     &.white {
-        @apply text-white bg-none;
+        @apply bg-none text-white;
     }
 }
 
 @utility gradtxt {
-    @apply bg-clip-text bg-hbcol hbcol-angle-45 text-transparent;
+    @apply bg-hbcol bg-clip-text text-transparent hbcol-angle-45;
 }

@@ -36,8 +36,7 @@ type PreparedImage = {
 
 function normalizeTags(value: unknown): string[] | null {
     if (value === undefined || value === null) return null;
-    if (!Array.isArray(value))
-        throw error(400, "`tags` must be an array of strings.");
+    if (!Array.isArray(value)) throw error(400, "`tags` must be an array of strings.");
 
     const tags = [
         ...new Set(
@@ -46,14 +45,16 @@ function normalizeTags(value: unknown): string[] | null {
                     if (typeof tag !== "string")
                         throw error(400, "`tags` must be an array of strings.");
 
-                    return tag.trim().toLowerCase().replace(/[\s_]+/g, "-");
+                    return tag
+                        .trim()
+                        .toLowerCase()
+                        .replace(/[\s_]+/g, "-");
                 })
                 .filter((tag) => tag.length > 0)
         )
     ];
 
-    if (tags.length > MAX_TAGS)
-        throw error(400, `An article can have at most ${MAX_TAGS} tags.`);
+    if (tags.length > MAX_TAGS) throw error(400, `An article can have at most ${MAX_TAGS} tags.`);
 
     for (const tag of tags) {
         if (tag.length > MAX_TAG_LENGTH || !tagPattern.test(tag))
@@ -67,9 +68,7 @@ function normalizeTags(value: unknown): string[] | null {
 }
 
 function decodeBase64(value: string): Uint8Array {
-    const data = value
-        .replace(/\s+/g, "")
-        .replace(/^data:[^;]*;base64,/i, "");
+    const data = value.replace(/\s+/g, "").replace(/^data:[^;]*;base64,/i, "");
 
     if (!data || data.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(data))
         throw error(400, "Image data must be valid base64.");
@@ -113,21 +112,15 @@ function sniffImage(bytes: Uint8Array): { mime: string; ext: string } | null {
 
     if (bytes.length >= 6) {
         const header = ascii(bytes, 0, 6);
-        if (header === "GIF87a" || header === "GIF89a")
-            return { mime: "image/gif", ext: "gif" };
+        if (header === "GIF87a" || header === "GIF89a") return { mime: "image/gif", ext: "gif" };
     }
 
-    if (
-        bytes.length >= 12 &&
-        ascii(bytes, 0, 4) === "RIFF" &&
-        ascii(bytes, 8, 12) === "WEBP"
-    )
+    if (bytes.length >= 12 && ascii(bytes, 0, 4) === "RIFF" && ascii(bytes, 8, 12) === "WEBP")
         return { mime: "image/webp", ext: "webp" };
 
     if (bytes.length >= 12 && ascii(bytes, 4, 8) === "ftyp") {
         const brand = ascii(bytes, 8, 12);
-        if (brand === "avif" || brand === "avis")
-            return { mime: "image/avif", ext: "avif" };
+        if (brand === "avif" || brand === "avis") return { mime: "image/avif", ext: "avif" };
     }
 
     return null;
@@ -156,10 +149,7 @@ async function imageKey(
     return `articles/${slug}/${base}-${hash}.${extension}`;
 }
 
-async function prepareImages(
-    value: unknown,
-    slug: string
-): Promise<PreparedImage[] | undefined> {
+async function prepareImages(value: unknown, slug: string): Promise<PreparedImage[] | undefined> {
     if (value === undefined || value === null) return undefined;
     if (!Array.isArray(value)) throw error(400, "`images` must be an array.");
 
@@ -190,8 +180,7 @@ async function prepareImages(
         if (names.has(name)) throw error(400, `Duplicate image \`${name}\`.`);
         names.add(name);
 
-        if (typeof data !== "string")
-            throw error(400, `Image \`${name}\` needs base64 \`data\`.`);
+        if (typeof data !== "string") throw error(400, `Image \`${name}\` needs base64 \`data\`.`);
 
         const bytes = decodeBase64(data);
 
@@ -204,10 +193,7 @@ async function prepareImages(
 
         const sniffed = sniffImage(bytes);
         if (!sniffed)
-            throw error(
-                400,
-                `Image \`${name}\` must be a PNG, JPEG, GIF, WebP, or AVIF file.`
-            );
+            throw error(400, `Image \`${name}\` must be a PNG, JPEG, GIF, WebP, or AVIF file.`);
 
         const key = await imageKey(slug, name, sniffed.ext, bytes);
 
@@ -286,9 +272,7 @@ async function deleteUnreferencedImages(
         if (cursor) options.cursor = cursor;
 
         const listed = await bucket.list(options);
-        const stale = listed.objects
-            .map((object) => object.key)
-            .filter((key) => !keep.has(key));
+        const stale = listed.objects.map((object) => object.key).filter((key) => !keep.has(key));
 
         if (stale.length > 0) await bucket.delete(stale);
 
@@ -309,10 +293,7 @@ function imageKeysIn(html: string, slug: string): Set<string> {
     return keys;
 }
 
-function keepImagesFor(
-    slug: string,
-    rows: { body: string; short: string | null }[]
-): Set<string> {
+function keepImagesFor(slug: string, rows: { body: string; short: string | null }[]): Set<string> {
     const keep = new Set<string>();
 
     for (const row of rows) {
@@ -328,7 +309,7 @@ function keepImagesFor(
 export async function PUT({ request, platform, url }) {
     checkAuth(request, platform);
 
-    const rbody = await request.json().catch(() => ({})) as NewsPubPUT;
+    const rbody = (await request.json().catch(() => ({}))) as NewsPubPUT;
     const slug = rbody.slug ?? url.searchParams.get("slug");
     const locale = rbody.locale ?? url.searchParams.get("locale");
 
@@ -351,10 +332,7 @@ export async function PUT({ request, platform, url }) {
 
     const imageUrls = new Map(images?.map((image) => [image.name, image.url]));
 
-    for (const name of [
-        ...imageReferences(body ?? ""),
-        ...imageReferences(short ?? "")
-    ]) {
+    for (const name of [...imageReferences(body ?? ""), ...imageReferences(short ?? "")]) {
         if (!imageUrls.has(name) && !imageUrls.has(decodeURIComponentSafe(name)))
             throw error(
                 400,
@@ -363,8 +341,7 @@ export async function PUT({ request, platform, url }) {
     }
 
     const bucket = platform!.env.IMAGES;
-    if (images && images.length > 0 && !bucket)
-        throw error(500, "Image storage not ready.");
+    if (images && images.length > 0 && !bucket) throw error(500, "Image storage not ready.");
 
     const db = platform!.env.DB;
     const existing = await db
@@ -378,8 +355,7 @@ export async function PUT({ request, platform, url }) {
     const finalBody = body ? rewriteImageReferences(body, imageUrls) : null;
     const finalShort = short ? rewriteImageReferences(short, imageUrls) : null;
 
-    if (images && images.length > 0)
-        await uploadImages(bucket!, images);
+    if (images && images.length > 0) await uploadImages(bucket!, images);
 
     const binds = [
         slug,
@@ -457,8 +433,7 @@ export async function DELETE({ request, platform, url }) {
 
     const slug = url.searchParams.get("slug");
     const locale = url.searchParams.get("locale");
-    if (!slug || !locale)
-        throw error(400, "You need to specify `slug` and `locale` in the URL.");
+    if (!slug || !locale) throw error(400, "You need to specify `slug` and `locale` in the URL.");
 
     const db = platform!.env.DB;
     const result = await db

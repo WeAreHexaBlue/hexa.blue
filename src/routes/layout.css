@@ -3,16 +3,16 @@
 @layer components {
     .sect {
         @apply grid justify-center;
-        @apply mx-4 sm:mx-16 my-10 gap-y-3 p-6 lg:p-16 rounded-3xl;
+        @apply mx-4 my-10 gap-y-3 rounded-3xl p-6 sm:mx-16 lg:p-16;
         @apply bg-mist-800;
 
-        @apply scroll-mt-65 md:scroll-mt-40 scroll-smooth;
+        @apply scroll-mt-65 scroll-smooth md:scroll-mt-40;
 
         &.spangrid {
-            @apply grid gap-x-6 justify-center 2xl:justify-stretch;
+            @apply grid justify-center gap-x-6 2xl:justify-stretch;
 
             span {
-                @apply bg-mist-900 px-6 py-6 rounded-2xl;
+                @apply rounded-2xl bg-mist-900 px-6 py-6;
                 @apply justify-center justify-items-center gap-4;
 
                 @apply transition-transform duration-300 hover:scale-105 hover:drop-shadow-lg;
@@ -20,14 +20,14 @@
         }
 
         a.more {
-            @apply mx-0 underline hover:gradtxt font-semibold text-3xl max-w-fit;
+            @apply mx-0 max-w-fit text-3xl font-semibold underline hover:gradtxt;
         }
 
         span {
             @apply grid gap-y-1;
 
             .projbrand {
-                @apply flex gap-4 justify-center items-center my-2;
+                @apply my-2 flex items-center justify-center gap-4;
 
                 img {
                     @apply h-16;
@@ -51,7 +51,7 @@
 
     .gobtn {
         @apply inline-block w-fit;
-        @apply p-3 sm:p-2 sm:px-3.5 mt-3;
+        @apply mt-3 p-3 sm:p-2 sm:px-3.5;
         @apply bg-hbcol hbcol-angle-135 hover:hbcol-dark-40% disabled:hbcol-dark-50%;
         @apply rounded-2xl border border-transparent hover:border-white disabled:border-0;
         @apply font-extrabold disabled:text-gray-400;
