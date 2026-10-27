@@ -1,5 +1,6 @@
 <script lang="ts">
     import { page } from "$app/state";
+    import { GITHUB_URL } from "$lib";
     import {
         baseLocale,
         deLocalizeHref,
@@ -11,6 +12,11 @@
 
     type EmbedButton = {
         label: string;
+        url: string;
+    };
+
+    type Breadcrumb = {
+        name: string;
         url: string;
     };
 
@@ -26,6 +32,10 @@
         accentColor?: number;
         type?: "website" | "article";
         publishedTime?: string;
+        author?: string;
+        keywords?: string[];
+        breadcrumbs?: Breadcrumb[];
+        schemas?: Record<string, unknown>[];
         canonical?: string;
         alternateLocales?: string[];
         contentLocale?: string;
@@ -43,6 +53,10 @@
         accentColor = 0x006eff,
         type = "website",
         publishedTime,
+        author,
+        keywords = [],
+        breadcrumbs = [],
+        schemas = [],
         canonical,
         alternateLocales = [...locales],
         contentLocale
@@ -122,10 +136,7 @@
             ...(imageAlt ? { description: imageAlt } : {})
         }));
 
-        const linkText = title
-            .replace(/\\/g, "\\\\")
-            .replace(/\[/g, "\\[")
-            .replace(/\]/g, "\\]");
+        const linkText = title.replace(/\\/g, "\\\\").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
 
         const content = `# [${linkText}](${pageUrl})\n${description}`;
 
@@ -179,6 +190,69 @@
     const fallbackImage = $derived(image ?? images[0]);
     const fallbackImageUrl = $derived(fallbackImage ? absoluteUrl(fallbackImage) : undefined);
     const themeColor = $derived(`#${accentColor.toString(16).padStart(6, "0")}`);
+
+    const organizationId = `${page.url.origin}/#organization`;
+    const websiteId = `${page.url.origin}/#website`;
+
+    const structuredData = $derived.by(() => {
+        const graph: Record<string, unknown>[] = [
+            {
+                "@type": "Organization",
+                "@id": organizationId,
+                name: "HexaBlue",
+                url: page.url.origin,
+                logo: absoluteUrl("/logo.svg"),
+                email: "support@hexa.blue",
+                sameAs: [GITHUB_URL]
+            },
+            {
+                "@type": "WebSite",
+                "@id": websiteId,
+                name: siteName,
+                url: page.url.origin,
+                inLanguage: currentLocale,
+                publisher: { "@id": organizationId }
+            }
+        ];
+
+        if (type === "article") {
+            graph.push({
+                "@type": "Article",
+                headline: title,
+                description: plainDescription,
+                datePublished: publishedTime,
+                image: fallbackImageUrl ? [fallbackImageUrl] : undefined,
+                author: author ? { "@type": "Person", name: author } : { "@id": organizationId },
+                publisher: { "@id": organizationId },
+                mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+                inLanguage: contentLang,
+                keywords: keywords.length > 0 ? keywords.join(", ") : undefined
+            });
+        }
+
+        if (breadcrumbs.length > 0) {
+            graph.push({
+                "@type": "BreadcrumbList",
+                itemListElement: breadcrumbs.map(({ name, url }, index) => ({
+                    "@type": "ListItem",
+                    position: index + 1,
+                    name,
+                    item: absoluteUrl(normalizePath(localizeHref(url, { locale: currentLocale })))
+                }))
+            });
+        }
+
+        graph.push(...schemas);
+
+        return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replaceAll(
+            "<",
+            "\\u003c"
+        );
+    });
+
+    const structuredDataTag = $derived(
+        `<script type="application/ld+json">${structuredData}${closingTag}`
+    );
 </script>
 
 <svelte:head>
@@ -220,4 +294,5 @@
     {/if}
 
     {@html embedTag}
+    {@html structuredDataTag}
 </svelte:head>

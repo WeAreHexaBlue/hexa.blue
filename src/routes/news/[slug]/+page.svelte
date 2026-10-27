@@ -53,6 +53,13 @@
     canonical={canonical}
     alternateLocales={data.locales}
     contentLocale={article.locale}
+    author={article.author}
+    keywords={article.tags}
+    breadcrumbs={[
+        { name: m.hexablue(), url: "/" },
+        { name: m["nav.news"](), url: "/news" },
+        { name: article.title, url: `/news/${article.slug}` }
+    ]}
     primaryButton={{
         label: m["embed.buttons.read"](),
         url: resolve("/news/[slug]", { slug: article.slug })
