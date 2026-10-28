@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Weblate owns the formatting of translation files
+/messages/
