@@ -2,6 +2,7 @@
     import { page } from "$app/state";
     import { m } from "$lib/paraglide/messages";
     import { GITHUB_URL } from "$lib";
+    import { ogLocale } from "$lib/i18n";
     import {
         baseLocale,
         deLocalizeHref,
@@ -63,11 +64,6 @@
         contentLocale
     }: Props = $props();
 
-    const OG_LOCALES: Record<string, string> = {
-        en: "en_US",
-        it: "it_IT"
-    };
-
     const absoluteUrl = (value: string) => new URL(value, page.url.origin).href;
 
     function normalizePath(path: string) {
@@ -80,7 +76,7 @@
 
     const currentLocale = getLocale();
     const contentLang = $derived(contentLocale ?? currentLocale);
-    const ogLocale = $derived(OG_LOCALES[contentLang] ?? contentLang);
+    const currentOgLocale = $derived(ogLocale(contentLang));
 
     // Only locales that actually have a translated page belong in hreflang.
     const alternates = $derived.by(() => {
@@ -101,7 +97,7 @@
     const alternateOgLocales = $derived(
         alternates
             .filter((alternate) => alternate.locale !== contentLang)
-            .map((alternate) => OG_LOCALES[alternate.locale] ?? alternate.locale)
+            .map((alternate) => ogLocale(alternate.locale))
     );
 
     // Open Graph descriptions are plain text, while component embeds render markdown.
@@ -278,7 +274,7 @@
     <meta property="og:description" content={plainDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
-    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale" content={currentOgLocale} />
     {#each alternateOgLocales as locale (locale)}
         <meta property="og:locale:alternate" content={locale} />
     {/each}

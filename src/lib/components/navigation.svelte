@@ -3,7 +3,7 @@
     import type { Pathname } from "$app/types";
 	import { page } from "$app/state";
 	import { m } from "$lib/paraglide/messages";
-	import { codeToHuman } from "$lib";
+	import { localeName } from "$lib/i18n";
 
 	import { fade, fly, slide } from "svelte/transition";
 	import { cubicOut } from "svelte/easing";
@@ -73,7 +73,7 @@
 	>
 		{#each locales as locale (locale)}
 			<option value={locale} class="bg-neutral-900 text-white" selected={getLocale() === locale}>
-				{codeToHuman[locale]}
+				{localeName(locale)}
 			</option>
 		{/each}
 	</select>

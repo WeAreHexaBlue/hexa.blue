@@ -1,3 +1,3 @@
 # hexa.blue
 
-The official HexaBlue website. Not yet in production.
+The official HexaBlue website.
