@@ -3,6 +3,7 @@
     import { m } from "$lib/paraglide/messages";
     import { baseLocale, localizeHref } from "$lib/paraglide/runtime";
     import { DISCORD_URL, formatDateTime } from "$lib";
+    import { localizedHref } from "$lib/i18n";
     import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
 
     import PageHead from "$lib/components/page-head.svelte";
@@ -62,10 +63,10 @@
     ]}
     primaryButton={{
         label: m["embed.buttons.read"](),
-        url: resolve("/news/[slug]", { slug: article.slug })
+        url: resolve(localizedHref(`/news/${article.slug}`))
     }}
     buttons={[
-        { label: m["embed.buttons.allnews"](), url: resolve("/news") },
+        { label: m["embed.buttons.allnews"](), url: resolve(localizedHref("/news")) },
         { label: m["embed.buttons.discord"](), url: DISCORD_URL }
     ]}
 />
@@ -89,7 +90,7 @@
             articleSanitizeOptions
         )}
     </div>
-    <a href={resolve("/news")} class="gobtn inline-block px-10 text-2xl">
+    <a href={resolve(localizedHref("/news"))} class="gobtn inline-block px-10 text-2xl">
         {m.back()}
     </a>
 </main>

@@ -1,9 +1,8 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
-    import type { Pathname } from "$app/types";
 	import { page } from "$app/state";
 	import { m } from "$lib/paraglide/messages";
-	import { localeName } from "$lib/i18n";
+	import { localeName, localizedHref } from "$lib/i18n";
 
 	import { fade, fly, slide } from "svelte/transition";
 	import { cubicOut } from "svelte/easing";
@@ -39,7 +38,7 @@
 <svelte:window onkeydown={handleKeydown} onresize={handleResize} />
 
 {#snippet brand()}
-	<a href={resolve("/")} class="brand" onclick={closeMenu}>
+	<a href={resolve(localizedHref("/"))} class="brand" onclick={closeMenu}>
 		<img src={logo} class="size-10 sm:size-15" alt="" />
 		<span class="title">{m.hexablue()}</span>
 	</a>
@@ -47,7 +46,7 @@
 
 {#snippet navLink(path: NavPath, label: string)}
 	<a
-		href={resolve(path as Pathname)}
+		href={resolve(localizedHref(path))}
 		aria-current={currentRoute?.startsWith(path) ? "page" : undefined}
 		onclick={closeMenu}
 	>

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
+    import { localizedHref } from "$lib/i18n";
 
     let { tags }: { tags: string[] } = $props();
 </script>
@@ -8,7 +9,7 @@
     <ul class="tags">
         {#each tags as tag (tag)}
             <li>
-                <a href={resolve(`/news?q=${encodeURIComponent(tag)}`)}>{tag}</a>
+                <a href={resolve(localizedHref(`/news?q=${encodeURIComponent(tag)}`))}>{tag}</a>
             </li>
         {/each}
     </ul>

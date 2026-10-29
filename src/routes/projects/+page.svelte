@@ -1,6 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { localizedHref } from "$lib/i18n";
     import { SEGGS_URL } from "$lib";
 
     import PageHead from "$lib/components/page-head.svelte";
@@ -19,7 +20,7 @@
     title={m["projects.title"]()}
     description={m["projects.embed.description"]()}
     buttons={[
-        { label: "dibsy", url: resolve("/projects#dibsy") },
+        { label: "dibsy", url: resolve(localizedHref("/projects#dibsy")) },
         { label: "Server Eggs", url: SEGGS_URL }
     ]}
 />

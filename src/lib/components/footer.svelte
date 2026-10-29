@@ -1,12 +1,13 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { localizedHref } from "$lib/i18n";
 
     import logoWhite from "$lib/assets/main/hexablue_white.svg";
 </script>
 
 <footer class="footer">
-    <a href={resolve("/")} class="brand">
+    <a href={resolve(localizedHref("/"))} class="brand">
         <img src={logoWhite} class="size-15" alt="" />
         <span class="title white">{m.hexablue()}</span>
     </a>

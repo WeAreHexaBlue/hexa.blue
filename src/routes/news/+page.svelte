@@ -2,6 +2,7 @@
     import { resolve } from "$app/paths";
     import { afterNavigate, goto } from "$app/navigation";
     import { m } from "$lib/paraglide/messages";
+    import { localizedHref } from "$lib/i18n";
     import { formatDateTime } from "$lib";
 
     import PageHead from "$lib/components/page-head.svelte";
@@ -27,7 +28,7 @@
         const term = value.trim();
 
         goto(
-            term ? resolve(`/news?q=${encodeURIComponent(term)}`) : resolve("/news"),
+            resolve(localizedHref(term ? `/news?q=${encodeURIComponent(term)}` : "/news")),
             { replaceState: true, keepFocus: true, noScroll: true }
         );
     }
@@ -71,7 +72,7 @@
     title={m["news.title"]()}
     description={m["news.embed.description"]()}
     alternateLocales={data.query ? [] : undefined}
-    primaryButton={{ label: m["embed.buttons.news"](), url: resolve("/news") }}
+    primaryButton={{ label: m["embed.buttons.news"](), url: resolve(localizedHref("/news")) }}
 />
 
 <main>
@@ -83,7 +84,7 @@
         <form
             class="searchbar"
             method="GET"
-            action={resolve("/news")}
+            action={resolve(localizedHref("/news"))}
             role="search"
             onsubmit={onSubmit}
         >
@@ -150,7 +151,7 @@
             <section class="sect news">
                 <span>
                     <h2>
-                        <a href={resolve("/news/[slug]", { slug: article.slug })}>{article.title}</a>
+                        <a href={resolve(localizedHref(`/news/${article.slug}`))}>{article.title}</a>
                     </h2>
                     <sub>
                         {@html sanitize(
@@ -176,7 +177,7 @@
                     )}
                 </p>
                 <a
-                    href={resolve("/news/[slug]", { slug: article.slug })}
+                    href={resolve(localizedHref(`/news/${article.slug}`))}
                     class="gobtn inline-block"
                 >
                     {m["news.more"]()}

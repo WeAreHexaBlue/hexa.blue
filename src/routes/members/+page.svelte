@@ -1,6 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { localizedHref } from "$lib/i18n";
 
     import PageHead from "$lib/components/page-head.svelte";
 
@@ -20,7 +21,7 @@
 <PageHead
     title={m["members.title"]()}
     description={m["members.embed.description"]()}
-    primaryButton={{ label: m["embed.buttons.contact"](), url: resolve("/contact") }}
+    primaryButton={{ label: m["embed.buttons.contact"](), url: resolve(localizedHref("/contact")) }}
 />
 
 <main>

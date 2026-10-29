@@ -1,6 +1,7 @@
 <script lang="ts">
     import { resolve } from "$app/paths";
     import { m } from "$lib/paraglide/messages";
+    import { localizedHref } from "$lib/i18n";
     import { DISCORD_URL, GITHUB_URL } from "$lib";
 
     import { fade } from "svelte/transition";
@@ -34,9 +35,9 @@
     title={m.hexablue()}
     description={m["home.embed.description"]()}
     images={[banner]}
-    primaryButton={{ label: m["embed.buttons.projects"](), url: resolve("/projects") }}
+    primaryButton={{ label: m["embed.buttons.projects"](), url: resolve(localizedHref("/projects")) }}
     buttons={[
-        { label: m["embed.buttons.news"](), url: resolve("/news") },
+        { label: m["embed.buttons.news"](), url: resolve(localizedHref("/news")) },
         { label: m["embed.buttons.discord"](), url: DISCORD_URL },
         { label: m["embed.buttons.github"](), url: GITHUB_URL }
     ]}
@@ -76,20 +77,20 @@
     
     <section id="about" class="sect">
         <h2>
-            <a href={resolve("/#about")}>{m["home.about.title"]()}</a>
+            <a href={resolve(localizedHref("/#about"))}>{m["home.about.title"]()}</a>
         </h2>
         <p>{@html m["home.about.desc"]()}</p>
     </section>
 
     <section id="projects" class="sect">
         {#snippet moreProject(name: string)}
-            <a href={resolve(`/projects#${name}`)} class="hmore">
+            <a href={resolve(localizedHref(`/projects#${name}`))} class="hmore">
                 {m["home.project_overview.more"]()}
             </a>
         {/snippet}
 
         <h2>
-            <a href={resolve("/#projects")}>{m["home.project_overview.title"]()}</a>
+            <a href={resolve(localizedHref("/#projects"))}>{m["home.project_overview.title"]()}</a>
         </h2>
         <span>
             <span class="projbrand">
