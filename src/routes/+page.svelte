@@ -72,6 +72,10 @@
             <p class="desc">
                 {@html m["home.hero.desc"]()}
             </p>
+            <span class="flex gap-4 text-center">
+                <a class="gobtn md:py-4 md:px-8" href={resolve(localizedHref("/projects"))} target="_blank">{m["home.hero.buttons.projects"]()}</a>
+                <a class="gobtn md:py-4 md:px-8" href={resolve(localizedHref("/contact"))} target="_blank">{m["home.hero.buttons.donate"]()}</a>
+            </span>
         </div>
     </section>
     

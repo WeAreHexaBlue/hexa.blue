@@ -39,7 +39,11 @@
 				"future": "the future",
 				"foryou": "for you"
 			},
-			"desc": "We create free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools."
+			"desc": "We create free, high-quality <b>open-source software</b> designed to <b>give you control</b> through a wide range of digital tools.",
+			"buttons": {
+				"projects": "View Projects",
+				"donate": "Donate"
+			}
 		},
 		"embed": {
 			"description": "We create free, high-quality **open-source software** designed to **give you control** through a wide range of digital tools."
@@ -113,13 +117,17 @@
 	},
 
 	"contact": {
-		"title": "Contact - HexaBlue",
+		"header": "Contacts & Links",
+		"title": "Contacts & Links - HexaBlue",
 		"embed": {
-			"description": "Questions, ideas, or want to contribute? Reach us by **email**, on **Discord**, or through **GitHub**."
+			"description": "Check out **where to find us** or **donate** on other platforms!"
 		},
+		"support": "Support HexaBlue on Ko-fi",
 		"email": "Email",
 		"discord": "Discord",
-		"github": "GitHub"
+		"kofi": "Ko-fi",
+		"github": "GitHub",
+		"twitter": "Twitter / X"
 	},
 
 	"footer": {

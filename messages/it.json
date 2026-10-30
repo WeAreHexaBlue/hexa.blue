@@ -112,13 +112,12 @@
 	},
 
 	"contact": {
-		"title": "Contattaci - HexaBlue",
+		"header": "Contatti e Link",
+		"title": "Contatti e Link - HexaBlue",
 		"embed": {
-			"description": "Domande, idee o voglia di contribuire? Contattaci via **email**, su **Discord** o tramite **GitHub**."
+			"description": "Scopri **dove trovarci** e **come donare** su altre piattaforme!"
 		},
-		"email": "Email",
-		"discord": "Discord",
-		"github": "GitHub"
+		"support": "Sostieni HexaBlue su Ko-fi"
 	},
 
 	"footer": {
