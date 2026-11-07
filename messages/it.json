@@ -80,7 +80,7 @@
 		"embed": {
 			"description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
 		},
-		"none": "Non ci sono articoli per ora...",
+		"none": "Nessun articolo per ora...",
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
 		"more": "Scopri di più...",
 
@@ -94,7 +94,7 @@
 			"title": "Sondaggi",
 			"active": "Attivo",
 			"finished": "Concluso",
-			"from": "Da",
+			"from": "da",
 			"yourVote": "Il tuo voto",
 			"votes": "{count} voti ({percent}%)",
 			"total": "{count} voti in totale",

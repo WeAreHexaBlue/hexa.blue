@@ -99,7 +99,7 @@
 			"title": "Polls",
 			"active": "Active",
 			"finished": "Finished",
-			"from": "From",
+			"from": "from",
 			"yourVote": "Your vote",
 			"votes": "{count} votes ({percent}%)",
 			"total": "{count} votes total",
