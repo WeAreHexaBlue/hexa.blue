@@ -85,8 +85,8 @@
     @reference "../../base.css";
 
     .poll {
-        @apply grid gap-4 rounded-2xl border border-mist-700 bg-mist-900 p-5 text-left;
-        @apply w-full;
+        @apply grid min-w-0 gap-4 rounded-2xl border border-mist-700 bg-mist-900 p-5 text-left;
+        @apply w-full content-start break-words;
     }
 
     header {
@@ -94,7 +94,7 @@
     }
 
     h3 {
-        @apply text-xl leading-snug font-semibold;
+        @apply min-w-0 text-xl leading-snug font-semibold;
     }
 
     .status {

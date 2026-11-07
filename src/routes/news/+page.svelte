@@ -279,7 +279,7 @@
     }
 
     .sect.polls-view {
-        @apply w-full max-w-6xl gap-y-10;
+        @apply mx-auto w-[calc(100%_-_2rem)] max-w-6xl grid-cols-1 gap-y-10 sm:w-[calc(100%_-_8rem)];
 
         .group {
             @apply grid w-full gap-4;
@@ -295,7 +295,7 @@
     }
 
     .poll-grid {
-        @apply grid w-full gap-5 md:grid-cols-2;
+        @apply grid w-full items-start gap-5 lg:grid-cols-2;
     }
 
     .sect.search {
