@@ -80,9 +80,32 @@
 		"embed": {
 			"description": "Aggiornamenti, annunci e retroscena dal team di **HexaBlue**."
 		},
-		"none": "Non ci sono articoli per ora...",
+		"none": "Nessun articolo per ora...",
 		"published": "Pubblicato da <b>{author}</b> il <i>{date}</i> alle <i>{time}</i>",
 		"more": "Scopri di più...",
+
+		"tabs": {
+			"label": "Sezioni delle notizie",
+			"articles": "Articoli",
+			"polls": "Sondaggi"
+		},
+
+		"polls": {
+			"title": "Sondaggi",
+			"active": "Attivo",
+			"finished": "Concluso",
+			"from": "da",
+			"yourVote": "Il tuo voto",
+			"votes": "{count} voti ({percent}%)",
+			"total": "{count} voti in totale",
+			"ends": "Termina il {date} alle {time}",
+			"ended": "Terminato il {date} alle {time}",
+			"activeTitle": "Sondaggi attivi",
+			"finishedTitle": "Sondaggi conclusi",
+			"none": "Nessun sondaggio per ora...",
+			"noneActive": "Nessun sondaggio attivo al momento.",
+			"noneFinished": "Nessun sondaggio concluso."
+		},
 
 		"search": {
 			"placeholder": "Cerca articoli...",

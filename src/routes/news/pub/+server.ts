@@ -16,6 +16,12 @@ const localePattern = /^[A-Za-z0-9_-]+$/;
 const MAX_TAGS = 12;
 const MAX_TAG_LENGTH = 32;
 
+const MAX_POLLS = 10;
+const MAX_POLL_OPTIONS = 12;
+const MIN_POLL_OPTIONS = 2;
+const MAX_POLL_QUESTION_LENGTH = 200;
+const MAX_POLL_OPTION_LENGTH = 120;
+
 const MAX_IMAGES = 24;
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const MAX_TOTAL_IMAGE_BYTES = 32 * 1024 * 1024;
@@ -36,8 +42,7 @@ type PreparedImage = {
 
 function normalizeTags(value: unknown): string[] | null {
     if (value === undefined || value === null) return null;
-    if (!Array.isArray(value))
-        throw error(400, "`tags` must be an array of strings.");
+    if (!Array.isArray(value)) throw error(400, "`tags` must be an array of strings.");
 
     const tags = [
         ...new Set(
@@ -46,14 +51,16 @@ function normalizeTags(value: unknown): string[] | null {
                     if (typeof tag !== "string")
                         throw error(400, "`tags` must be an array of strings.");
 
-                    return tag.trim().toLowerCase().replace(/[\s_]+/g, "-");
+                    return tag
+                        .trim()
+                        .toLowerCase()
+                        .replace(/[\s_]+/g, "-");
                 })
                 .filter((tag) => tag.length > 0)
         )
     ];
 
-    if (tags.length > MAX_TAGS)
-        throw error(400, `An article can have at most ${MAX_TAGS} tags.`);
+    if (tags.length > MAX_TAGS) throw error(400, `An article can have at most ${MAX_TAGS} tags.`);
 
     for (const tag of tags) {
         if (tag.length > MAX_TAG_LENGTH || !tagPattern.test(tag))
@@ -66,10 +73,170 @@ function normalizeTags(value: unknown): string[] | null {
     return tags;
 }
 
+type NormalizedPoll = {
+    key: string;
+    question: string;
+    options: string[];
+    endsAt: string | null;
+};
+
+function normalizePolls(value: unknown): NormalizedPoll[] | null {
+    if (value === undefined || value === null) return null;
+    if (!Array.isArray(value)) throw error(400, "`polls` must be an array.");
+
+    if (value.length > MAX_POLLS)
+        throw error(400, `An article can have at most ${MAX_POLLS} polls.`);
+
+    const keys = new Set<string>();
+    const polls: NormalizedPoll[] = [];
+
+    for (const item of value) {
+        if (!item || typeof item !== "object")
+            throw error(400, "Each poll must be an object with `key`, `question`, and `options`.");
+
+        const { key, question, options, ends_at } = item as {
+            key?: unknown;
+            question?: unknown;
+            options?: unknown;
+            ends_at?: unknown;
+        };
+
+        if (typeof key !== "string") throw error(400, "Each poll needs a string `key`.");
+
+        const pollKey = key.trim().toLowerCase();
+        if (!slugPattern.test(pollKey))
+            throw error(400, "Poll keys must be lowercase letters, numbers, and hyphens only.");
+        if (keys.has(pollKey)) throw error(400, `Duplicate poll key \`${pollKey}\`.`);
+        keys.add(pollKey);
+
+        if (typeof question !== "string" || !question.trim())
+            throw error(400, `Poll \`${pollKey}\` needs a question.`);
+
+        const pollQuestion = question.trim();
+        if (pollQuestion.length > MAX_POLL_QUESTION_LENGTH)
+            throw error(
+                400,
+                `Poll questions can be at most ${MAX_POLL_QUESTION_LENGTH} characters.`
+            );
+
+        if (
+            !Array.isArray(options) ||
+            options.length < MIN_POLL_OPTIONS ||
+            options.length > MAX_POLL_OPTIONS
+        )
+            throw error(
+                400,
+                `Poll \`${pollKey}\` needs between ${MIN_POLL_OPTIONS} and ${MAX_POLL_OPTIONS} options.`
+            );
+
+        const labels = options.map((option) => {
+            if (typeof option !== "string" || !option.trim())
+                throw error(400, `Poll \`${pollKey}\` has an empty option.`);
+
+            const label = option.trim();
+            if (label.length > MAX_POLL_OPTION_LENGTH)
+                throw error(
+                    400,
+                    `Poll options can be at most ${MAX_POLL_OPTION_LENGTH} characters.`
+                );
+
+            return label;
+        });
+
+        if (new Set(labels).size !== labels.length)
+            throw error(400, `Poll \`${pollKey}\` has duplicate options.`);
+
+        let endsAt: string | null = null;
+        if (ends_at !== undefined && ends_at !== null && ends_at !== "") {
+            if (typeof ends_at !== "string")
+                throw error(400, `Poll \`${pollKey}\` has an invalid \`ends_at\` date.`);
+
+            const date = new Date(ends_at);
+            if (Number.isNaN(date.getTime()))
+                throw error(400, `Poll \`${pollKey}\` has an invalid \`ends_at\` date.`);
+
+            endsAt = date.toISOString();
+        }
+
+        polls.push({
+            key: pollKey,
+            question: pollQuestion,
+            options: labels,
+            endsAt
+        });
+    }
+
+    return polls;
+}
+
+async function syncPolls(
+    db: D1Database,
+    articleId: number,
+    polls: NormalizedPoll[]
+): Promise<void> {
+    for (const poll of polls) {
+        const existing = await db
+            .prepare("SELECT id FROM polls WHERE article_id = ? AND poll_key = ?")
+            .bind(articleId, poll.key)
+            .first<{ id: number }>();
+
+        let pollId: number;
+
+        if (existing) {
+            await db
+                .prepare("UPDATE polls SET question = ?, ends_at = ? WHERE id = ?")
+                .bind(poll.question, poll.endsAt, existing.id)
+                .run();
+            pollId = existing.id;
+        } else {
+            const inserted = await db
+                .prepare(
+                    `
+                    INSERT INTO polls (article_id, poll_key, question, ends_at)
+                    VALUES (?, ?, ?, ?)
+                    RETURNING id
+                    `
+                )
+                .bind(articleId, poll.key, poll.question, poll.endsAt)
+                .first<{ id: number }>();
+
+            if (!inserted) throw new Error("Failed to create poll.");
+            pollId = inserted.id;
+        }
+
+        const { results: existingOptions } = await db
+            .prepare("SELECT id FROM poll_options WHERE poll_id = ? ORDER BY position ASC")
+            .bind(pollId)
+            .all<{ id: number }>();
+
+        for (let position = 0; position < poll.options.length; position++) {
+            const label = poll.options[position];
+            const option = existingOptions[position];
+
+            if (option) {
+                await db
+                    .prepare("UPDATE poll_options SET label = ? WHERE id = ?")
+                    .bind(label, option.id)
+                    .run();
+            } else {
+                await db
+                    .prepare("INSERT INTO poll_options (poll_id, position, label) VALUES (?, ?, ?)")
+                    .bind(pollId, position, label)
+                    .run();
+            }
+        }
+
+        if (existingOptions.length > poll.options.length) {
+            await db
+                .prepare("DELETE FROM poll_options WHERE poll_id = ? AND position >= ?")
+                .bind(pollId, poll.options.length)
+                .run();
+        }
+    }
+}
+
 function decodeBase64(value: string): Uint8Array {
-    const data = value
-        .replace(/\s+/g, "")
-        .replace(/^data:[^;]*;base64,/i, "");
+    const data = value.replace(/\s+/g, "").replace(/^data:[^;]*;base64,/i, "");
 
     if (!data || data.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(data))
         throw error(400, "Image data must be valid base64.");
@@ -113,21 +280,15 @@ function sniffImage(bytes: Uint8Array): { mime: string; ext: string } | null {
 
     if (bytes.length >= 6) {
         const header = ascii(bytes, 0, 6);
-        if (header === "GIF87a" || header === "GIF89a")
-            return { mime: "image/gif", ext: "gif" };
+        if (header === "GIF87a" || header === "GIF89a") return { mime: "image/gif", ext: "gif" };
     }
 
-    if (
-        bytes.length >= 12 &&
-        ascii(bytes, 0, 4) === "RIFF" &&
-        ascii(bytes, 8, 12) === "WEBP"
-    )
+    if (bytes.length >= 12 && ascii(bytes, 0, 4) === "RIFF" && ascii(bytes, 8, 12) === "WEBP")
         return { mime: "image/webp", ext: "webp" };
 
     if (bytes.length >= 12 && ascii(bytes, 4, 8) === "ftyp") {
         const brand = ascii(bytes, 8, 12);
-        if (brand === "avif" || brand === "avis")
-            return { mime: "image/avif", ext: "avif" };
+        if (brand === "avif" || brand === "avis") return { mime: "image/avif", ext: "avif" };
     }
 
     return null;
@@ -156,10 +317,7 @@ async function imageKey(
     return `articles/${slug}/${base}-${hash}.${extension}`;
 }
 
-async function prepareImages(
-    value: unknown,
-    slug: string
-): Promise<PreparedImage[] | undefined> {
+async function prepareImages(value: unknown, slug: string): Promise<PreparedImage[] | undefined> {
     if (value === undefined || value === null) return undefined;
     if (!Array.isArray(value)) throw error(400, "`images` must be an array.");
 
@@ -190,8 +348,7 @@ async function prepareImages(
         if (names.has(name)) throw error(400, `Duplicate image \`${name}\`.`);
         names.add(name);
 
-        if (typeof data !== "string")
-            throw error(400, `Image \`${name}\` needs base64 \`data\`.`);
+        if (typeof data !== "string") throw error(400, `Image \`${name}\` needs base64 \`data\`.`);
 
         const bytes = decodeBase64(data);
 
@@ -204,10 +361,7 @@ async function prepareImages(
 
         const sniffed = sniffImage(bytes);
         if (!sniffed)
-            throw error(
-                400,
-                `Image \`${name}\` must be a PNG, JPEG, GIF, WebP, or AVIF file.`
-            );
+            throw error(400, `Image \`${name}\` must be a PNG, JPEG, GIF, WebP, or AVIF file.`);
 
         const key = await imageKey(slug, name, sniffed.ext, bytes);
 
@@ -286,9 +440,7 @@ async function deleteUnreferencedImages(
         if (cursor) options.cursor = cursor;
 
         const listed = await bucket.list(options);
-        const stale = listed.objects
-            .map((object) => object.key)
-            .filter((key) => !keep.has(key));
+        const stale = listed.objects.map((object) => object.key).filter((key) => !keep.has(key));
 
         if (stale.length > 0) await bucket.delete(stale);
 
@@ -309,10 +461,7 @@ function imageKeysIn(html: string, slug: string): Set<string> {
     return keys;
 }
 
-function keepImagesFor(
-    slug: string,
-    rows: { body: string; short: string | null }[]
-): Set<string> {
+function keepImagesFor(slug: string, rows: { body: string; short: string | null }[]): Set<string> {
     const keep = new Set<string>();
 
     for (const row of rows) {
@@ -328,7 +477,7 @@ function keepImagesFor(
 export async function PUT({ request, platform, url }) {
     checkAuth(request, platform);
 
-    const rbody = await request.json().catch(() => ({})) as NewsPubPUT;
+    const rbody = (await request.json().catch(() => ({}))) as NewsPubPUT;
     const slug = rbody.slug ?? url.searchParams.get("slug");
     const locale = rbody.locale ?? url.searchParams.get("locale");
 
@@ -347,14 +496,12 @@ export async function PUT({ request, platform, url }) {
     const body = rbody.body?.trim() || null;
     const short = rbody.short?.trim() || null;
     const tags = normalizeTags(rbody.tags);
+    const polls = normalizePolls(rbody.polls);
     const images = await prepareImages(rbody.images, slug);
 
     const imageUrls = new Map(images?.map((image) => [image.name, image.url]));
 
-    for (const name of [
-        ...imageReferences(body ?? ""),
-        ...imageReferences(short ?? "")
-    ]) {
+    for (const name of [...imageReferences(body ?? ""), ...imageReferences(short ?? "")]) {
         if (!imageUrls.has(name) && !imageUrls.has(decodeURIComponentSafe(name)))
             throw error(
                 400,
@@ -363,8 +510,7 @@ export async function PUT({ request, platform, url }) {
     }
 
     const bucket = platform!.env.IMAGES;
-    if (images && images.length > 0 && !bucket)
-        throw error(500, "Image storage not ready.");
+    if (images && images.length > 0 && !bucket) throw error(500, "Image storage not ready.");
 
     const db = platform!.env.DB;
     const existing = await db
@@ -378,8 +524,7 @@ export async function PUT({ request, platform, url }) {
     const finalBody = body ? rewriteImageReferences(body, imageUrls) : null;
     const finalShort = short ? rewriteImageReferences(short, imageUrls) : null;
 
-    if (images && images.length > 0)
-        await uploadImages(bucket!, images);
+    if (images && images.length > 0) await uploadImages(bucket!, images);
 
     const binds = [
         slug,
@@ -429,6 +574,17 @@ export async function PUT({ request, platform, url }) {
         }
     }
 
+    if (polls) {
+        const saved =
+            existing ??
+            (await db
+                .prepare("SELECT id FROM articles WHERE slug = ? AND locale = ?")
+                .bind(slug, locale)
+                .first<{ id: number }>());
+
+        if (saved) await syncPolls(db, saved.id, polls);
+    }
+
     if (bucket && finalBody !== null) {
         try {
             const rows = await db
@@ -457,8 +613,7 @@ export async function DELETE({ request, platform, url }) {
 
     const slug = url.searchParams.get("slug");
     const locale = url.searchParams.get("locale");
-    if (!slug || !locale)
-        throw error(400, "You need to specify `slug` and `locale` in the URL.");
+    if (!slug || !locale) throw error(400, "You need to specify `slug` and `locale` in the URL.");
 
     const db = platform!.env.DB;
     const result = await db
