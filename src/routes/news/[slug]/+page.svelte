@@ -5,6 +5,7 @@
     import { DISCORD_URL, formatDateTime } from "$lib";
     import { localizedHref } from "$lib/i18n";
     import { htmlToText, articleSanitizeOptions, firstImage } from "$lib/html";
+    import { splitArticlePolls } from "$lib/polls";
 
     import PageHead from "$lib/components/page-head.svelte";
     import TagList from "$lib/components/tag-list.svelte";
@@ -15,6 +16,14 @@
     const { data } = $props();
     const article = $derived(data.article);
     const cover = $derived(firstImage(article.body));
+
+    const bodyParts = $derived(splitArticlePolls(article.body));
+    const pollByKey = $derived(new Map(data.polls.map((poll) => [poll.key, poll])));
+    const unplacedPolls = $derived(
+        data.polls.filter(
+            (poll) => !bodyParts.some((part) => part.type === "poll" && part.key === poll.key)
+        )
+    );
 
     const description = $derived.by(() => {
         const text = htmlToText(article.short ?? article.body);
@@ -83,13 +92,26 @@
         )}
     </sub>
     <TagList tags={article.tags} />
-    <div class="article-body inset-x-0 mx-auto my-8 max-w-prose" lang={article.locale}>
-        {@html sanitize(article.body, articleSanitizeOptions)}
+    <div class="article-content" lang={article.locale}>
+        {#each bodyParts as part, index (index)}
+            {#if part.type === "html"}
+                <div class="article-body">
+                    {@html sanitize(part.html, articleSanitizeOptions)}
+                </div>
+            {:else}
+                {@const poll = pollByKey.get(part.key)}
+                {#if poll}
+                    <div class="article-poll">
+                        <PollCard {poll} />
+                    </div>
+                {/if}
+            {/if}
+        {/each}
     </div>
-    {#if data.polls.length > 0}
+    {#if unplacedPolls.length > 0}
         <section class="article-polls" aria-label={m["news.polls.title"]()}>
             <h2>{m["news.polls.title"]()}</h2>
-            {#each data.polls as poll (poll.id)}
+            {#each unplacedPolls as poll (poll.id)}
                 <PollCard {poll} />
             {/each}
         </section>
@@ -108,6 +130,14 @@
 
     .article-polls h2 {
         @apply mt-4 text-3xl font-semibold;
+    }
+
+    .article-content {
+        @apply inset-x-0 mx-auto my-8 max-w-prose;
+    }
+
+    .article-poll {
+        @apply my-6;
     }
 
     .article-body {

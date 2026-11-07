@@ -26,6 +26,30 @@ export type Poll = {
     article?: PollArticle;
 };
 
+export type ArticlePart = { type: "html"; html: string } | { type: "poll"; key: string };
+
+const POLL_MARKER = /<poll\b[^>]*\bkey\s*=\s*["']([^"']+)["'][^>]*>(?:\s*<\/poll>)?/gi;
+
+export function splitArticlePolls(html: string): ArticlePart[] {
+    const parts: ArticlePart[] = [];
+    let last = 0;
+
+    for (const match of html.matchAll(POLL_MARKER)) {
+        const start = match.index ?? 0;
+        const before = html.slice(last, start);
+
+        if (before.trim()) parts.push({ type: "html", html: before });
+
+        parts.push({ type: "poll", key: match[1].trim().toLowerCase() });
+        last = start + match[0].length;
+    }
+
+    const after = html.slice(last);
+    if (after.trim()) parts.push({ type: "html", html: after });
+
+    return parts;
+}
+
 export type PollRow = {
     id: number;
     poll_key: string;
