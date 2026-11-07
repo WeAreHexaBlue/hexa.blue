@@ -7,11 +7,16 @@
 
     import PageHead from "$lib/components/page-head.svelte";
     import TagList from "$lib/components/tag-list.svelte";
+    import PollCard from "$lib/components/poll.svelte";
 
     import sanitize from "sanitize-html";
     import { onDestroy } from "svelte";
 
     const { data } = $props();
+
+    const isPolls = $derived(data.tab === "polls");
+    const activePolls = $derived(data.polls.filter((poll) => !poll.finished));
+    const finishedPolls = $derived(data.polls.filter((poll) => poll.finished));
 
     // svelte-ignore state_referenced_locally
     let query = $state(data.query);
@@ -27,10 +32,11 @@
     function updateURL(value: string) {
         const term = value.trim();
 
-        goto(
-            resolve(localizedHref(term ? `/news?q=${encodeURIComponent(term)}` : "/news")),
-            { replaceState: true, keepFocus: true, noScroll: true }
-        );
+        goto(resolve(localizedHref(term ? `/news?q=${encodeURIComponent(term)}` : "/news")), {
+            replaceState: true,
+            keepFocus: true,
+            noScroll: true
+        });
     }
 
     function onInput(event: Event) {
@@ -80,110 +86,167 @@
         {m["nav.news"]()}
     </h1>
 
-    <section class="sect search">
-        <form
-            class="searchbar"
-            method="GET"
-            action={resolve(localizedHref("/news"))}
-            role="search"
-            onsubmit={onSubmit}
+    <nav class="subtabs" aria-label={m["news.tabs.label"]()}>
+        <a
+            href={resolve(
+                localizedHref(data.query ? `/news?q=${encodeURIComponent(data.query)}` : "/news")
+            )}
+            class={["chip", { active: !isPolls }]}
+            aria-current={!isPolls ? "page" : undefined}
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-            >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-            </svg>
-            <input
-                type="search"
-                name="q"
-                value={query}
-                oninput={onInput}
-                onkeydown={onKeydown}
-                placeholder={m["news.search.placeholder"]()}
-                aria-label={m["news.search.label"]()}
-                autocomplete="off"
-                spellcheck="false"
-                enterkeyhint="search"
-            />
-            {#if query}
-                <button
-                    type="button"
-                    class="clear"
-                    onclick={clearSearch}
-                    aria-label={m["news.search.clear"]()}
-                    title={m["news.search.clear"]()}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M18 6 6 18M6 6l12 12" />
-                    </svg>
-                </button>
+            {m["news.tabs.articles"]()}
+        </a>
+        <a
+            href={resolve(localizedHref("/news?tab=polls"))}
+            class={["chip", { active: isPolls }]}
+            aria-current={isPolls ? "page" : undefined}
+        >
+            {m["news.tabs.polls"]()}
+            {#if data.polls.length > 0}
+                <span class="count">{data.polls.length}</span>
             {/if}
-        </form>
-    </section>
+        </a>
+    </nav>
 
-    {#if data.articles.length === 0}
-        <section class="sect">
-            <h2>
-                {data.query
-                    ? m["news.search.none"]({ query: data.query })
-                    : m["news.none"]()}
-            </h2>
-        </section>
+    {#if isPolls}
+        {#if data.polls.length === 0}
+            <section class="sect">
+                <h2>{m["news.polls.none"]()}</h2>
+            </section>
+        {:else}
+            <section class="sect polls-view">
+                <div class="group">
+                    <h2>{m["news.polls.activeTitle"]()}</h2>
+                    {#if activePolls.length === 0}
+                        <p class="empty">{m["news.polls.noneActive"]()}</p>
+                    {:else}
+                        <div class="poll-grid">
+                            {#each activePolls as poll (poll.id)}
+                                <PollCard {poll} showArticle />
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+
+                <div class="group">
+                    <h2>{m["news.polls.finishedTitle"]()}</h2>
+                    {#if finishedPolls.length === 0}
+                        <p class="empty">{m["news.polls.noneFinished"]()}</p>
+                    {:else}
+                        <div class="poll-grid">
+                            {#each finishedPolls as poll (poll.id)}
+                                <PollCard {poll} showArticle />
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+            </section>
+        {/if}
     {:else}
-        {#each data.articles as article (article.slug)}
-            <section class="sect news">
-                <span>
-                    <h2>
-                        <a href={resolve(localizedHref(`/news/${article.slug}`))}>{article.title}</a>
-                    </h2>
-                    <sub>
-                        {@html sanitize(
-                            m["news.published"](
-                                { author: article.author, ...formatDateTime(article.created_at) }
-                            ), {
-                                allowedTags: ["b", "i"],
-                                allowedAttributes: {}
-                            }
-                        )}
-                    </sub>
-                    <TagList tags={article.tags} />
-                </span>
-                <p>
-                    {@html sanitize(
-                        article.short ?? article.body,
-                        {
+        <section class="sect search">
+            <form
+                class="searchbar"
+                method="GET"
+                action={resolve(localizedHref("/news"))}
+                role="search"
+                onsubmit={onSubmit}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+                <input
+                    type="search"
+                    name="q"
+                    value={query}
+                    oninput={onInput}
+                    onkeydown={onKeydown}
+                    placeholder={m["news.search.placeholder"]()}
+                    aria-label={m["news.search.label"]()}
+                    autocomplete="off"
+                    spellcheck="false"
+                    enterkeyhint="search"
+                />
+                {#if query}
+                    <button
+                        type="button"
+                        class="clear"
+                        onclick={clearSearch}
+                        aria-label={m["news.search.clear"]()}
+                        title={m["news.search.clear"]()}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M18 6 6 18M6 6l12 12" />
+                        </svg>
+                    </button>
+                {/if}
+            </form>
+        </section>
+
+        {#if data.articles.length === 0}
+            <section class="sect">
+                <h2>
+                    {data.query ? m["news.search.none"]({ query: data.query }) : m["news.none"]()}
+                </h2>
+            </section>
+        {:else}
+            {#each data.articles as article (article.slug)}
+                <section class="sect news">
+                    <span>
+                        <h2>
+                            <a href={resolve(localizedHref(`/news/${article.slug}`))}
+                                >{article.title}</a
+                            >
+                        </h2>
+                        <sub>
+                            {@html sanitize(
+                                m["news.published"]({
+                                    author: article.author,
+                                    ...formatDateTime(article.created_at)
+                                }),
+                                {
+                                    allowedTags: ["b", "i"],
+                                    allowedAttributes: {}
+                                }
+                            )}
+                        </sub>
+                        <TagList tags={article.tags} />
+                    </span>
+                    <p>
+                        {@html sanitize(article.short ?? article.body, {
                             allowedTags: ["b", "i", "u", "em", "strong", "a"],
                             allowedAttributes: {
-                                "a": [ "href", "class" ]
+                                a: ["href", "class"]
                             }
-                        }
-                    )}
-                </p>
-                <a
-                    href={resolve(localizedHref(`/news/${article.slug}`))}
-                    class="gobtn inline-block"
-                >
-                    {m["news.more"]()}
-                </a>
-            </section>
-        {/each}
+                        })}
+                    </p>
+                    <a
+                        href={resolve(localizedHref(`/news/${article.slug}`))}
+                        class="gobtn inline-block"
+                    >
+                        {m["news.more"]()}
+                    </a>
+                </section>
+            {/each}
+        {/if}
     {/if}
 </main>
 
@@ -191,15 +254,52 @@
     @reference "../../base.css";
 
     .sect.news {
-        @apply gap-y-6 justify-items-center;
+        @apply justify-items-center gap-y-6;
 
         span {
             @apply gap-y-2;
         }
     }
 
+    .subtabs {
+        @apply mt-6 flex flex-wrap justify-center gap-3;
+    }
+
+    .chip {
+        @apply inline-flex items-center gap-2 rounded-full border border-mist-700 bg-mist-900 px-5 py-2 font-semibold text-mist-300;
+        @apply transition-colors hover:border-mainblue hover:text-white;
+
+        &.active {
+            @apply border-mainblue bg-mainblue/25 text-white;
+        }
+
+        .count {
+            @apply rounded-full bg-mist-700 px-2 py-0.5 text-xs font-bold text-white;
+        }
+    }
+
+    .sect.polls-view {
+        @apply w-full max-w-6xl gap-y-10;
+
+        .group {
+            @apply grid w-full gap-4;
+        }
+
+        h2 {
+            @apply text-3xl font-semibold;
+        }
+
+        .empty {
+            @apply text-mist-300;
+        }
+    }
+
+    .poll-grid {
+        @apply grid w-full gap-5 md:grid-cols-2;
+    }
+
     .sect.search {
-        @apply block py-4 px-4;
+        @apply block px-4 py-4;
     }
 
     .searchbar {

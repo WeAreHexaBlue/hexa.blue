@@ -89,6 +89,29 @@
 		"published": "Published by <b>{author}</b> on <i>{date}</i> at <i>{time}</i>",
 		"more": "Read more...",
 
+		"tabs": {
+			"label": "News sections",
+			"articles": "Articles",
+			"polls": "Polls"
+		},
+
+		"polls": {
+			"title": "Polls",
+			"active": "Active",
+			"finished": "Finished",
+			"from": "From",
+			"yourVote": "Your vote",
+			"votes": "{count} votes ({percent}%)",
+			"total": "{count} votes total",
+			"ends": "Ends on {date} at {time}",
+			"ended": "Ended on {date} at {time}",
+			"activeTitle": "Active Polls",
+			"finishedTitle": "Finished Polls",
+			"none": "No polls yet...",
+			"noneActive": "No active polls right now.",
+			"noneFinished": "No finished polls yet."
+		},
+
 		"search": {
 			"placeholder": "Search articles...",
 			"label": "Search news articles",
