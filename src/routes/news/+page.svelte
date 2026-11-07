@@ -122,7 +122,9 @@
                     {:else}
                         <div class="poll-grid">
                             {#each activePolls as poll (poll.id)}
-                                <PollCard {poll} showArticle />
+                                <div class="poll-cell">
+                                    <PollCard {poll} showArticle />
+                                </div>
                             {/each}
                         </div>
                     {/if}
@@ -135,7 +137,9 @@
                     {:else}
                         <div class="poll-grid">
                             {#each finishedPolls as poll (poll.id)}
-                                <PollCard {poll} showArticle />
+                                <div class="poll-cell">
+                                    <PollCard {poll} showArticle />
+                                </div>
                             {/each}
                         </div>
                     {/if}
@@ -290,12 +294,16 @@
         }
 
         .empty {
-            @apply text-mist-300;
+            @apply mx-auto text-center text-mist-300;
         }
     }
 
     .poll-grid {
-        @apply grid w-full items-start gap-5 lg:grid-cols-2;
+        @apply flex w-full flex-wrap items-start justify-center gap-5;
+    }
+
+    .poll-cell {
+        @apply w-full lg:w-[calc(50%_-_0.625rem)];
     }
 
     .sect.search {
